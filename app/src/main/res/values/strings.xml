@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Anima Calculator Ex</string>
+    <string name="attack">Attack</string>
+    <string name="roll">Roll</string>
+    <string name="damage">Damage</string>
+    <string name="edit_modifiers">Edit modifiers</string>
+    <string name="defense">Defense</string>
+    <string name="ta">TA</string>
+    <string name="defense_first">1ˢᵗ</string>
+    <string name="defense_second">2ⁿᵈ</string>
+    <string name="defense_third">3ʳᵈ</string>
+    <string name="defense_fourth">4ᵗʰ</string>
+    <string name="defense_fifth_plus">5ᵗʰ+</string>
+</resources>
