@@ -1,18 +1,18 @@
 package com.javierdelgado.anima_calculator_ex.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.createSimpleTextWatcher
+import com.javierdelgado.anima_calculator_ex.domain.CombatResultComposer
 import com.javierdelgado.anima_calculator_ex.models.Combat
-import com.javierdelgado.anima_calculator_ex.performers.DiceRoller
+import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity(), Observer {
     private val combat = Combat()
-
+    private val resultComposer by lazy { CombatResultComposer(this, combat) }
     private val modals by lazy { MainActivityModals(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,11 +36,13 @@ class MainActivity : AppCompatActivity(), Observer {
 
     // On combat changed
     override fun update(p0: Observable?, p1: Any?) {
-        calculateResult()
+        showResult()
     }
 
-    private fun calculateResult() {
-        Log.d("debug", "calculate result")
+    private fun showResult() {
+        resultComposer.composeText()
+        txtMainHeader.text = resultComposer.mainText
+        txtSecondaryHeader.text = resultComposer.secondaryText
     }
 
     private fun bindListeners() {

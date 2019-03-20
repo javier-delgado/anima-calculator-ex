@@ -67,4 +67,9 @@
     <string name="defense_modifiers">Defense modifiers</string>
     <string name="at_0">AT 0</string>
     <string name="at_">AT %d</string>
+    <string name="nothing_happens">Nothing happens</string>
+    <string name="damage_dealt_">Damage dealt: %d</string>
+    <string name="percentage_out_of_total_damage">%1$d%% out of total %2$d damage</string>
+    <string name="counterattack_with_bonus">Counter attack with %d+ bonus</string>
+    <string name="counterattack_without_bonus">Counter attack without bonus</string>
 </resources>

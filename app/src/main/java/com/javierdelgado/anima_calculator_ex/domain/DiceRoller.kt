@@ -1,4 +1,4 @@
-package com.javierdelgado.anima_calculator_ex.performers
+package com.javierdelgado.anima_calculator_ex.domain
 
 import com.javierdelgado.anima_calculator_ex.models.DiceRoll
 import com.javierdelgado.anima_calculator_ex.models.DiceRollConfig

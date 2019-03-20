@@ -12,7 +12,7 @@
         tools:context=".ui.MainActivity">
 
     <TextView
-            android:id="@+id/txtDamagePercentage"
+            android:id="@+id/txtSecondaryHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-            android:id="@+id/txtDamageDealt"
+            android:id="@+id/txtMainHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
@@ -30,7 +30,7 @@
             tools:text="Damage dealt: 50"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtDamagePercentage"/>
+            app:layout_constraintTop_toBottomOf="@id/txtSecondaryHeader"/>
 
     <TextView
             android:id="@+id/txtTitleAttack"
@@ -40,7 +40,7 @@
             android:textSize="16sp"
             android:textColor="@color/colorAttack"
             android:text="@string/attack"
-            app:layout_constraintTop_toBottomOf="@id/txtDamageDealt"
+            app:layout_constraintTop_toBottomOf="@id/txtMainHeader"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
