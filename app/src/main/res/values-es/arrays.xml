@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="AT">
+        <item>TA 0</item>
+        <item>TA 1</item>
+        <item>TA 2</item>
+        <item>TA 3</item>
+        <item>TA 4</item>
+        <item>TA 5</item>
+        <item>TA 6</item>
+        <item>TA 7</item>
+        <item>TA 8</item>
+        <item>TA 9</item>
+        <item>TA 10</item>
+        <item>TA 11</item>
+        <item>TA 12</item>
+    </string-array>
+</resources>

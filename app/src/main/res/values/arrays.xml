@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="AT">
+        <item>AT 0</item>
+        <item>AT 1</item>
+        <item>AT 2</item>
+        <item>AT 3</item>
+        <item>AT 4</item>
+        <item>AT 5</item>
+        <item>AT 6</item>
+        <item>AT 7</item>
+        <item>AT 8</item>
+        <item>AT 9</item>
+        <item>AT 10</item>
+        <item>AT 11</item>
+        <item>AT 12</item>
+    </string-array>
+
+    <string-array name="attackModifiers">
+        <item>@string/total_offensive</item>
+        <item>@string/offensive</item>
+        <item>@string/flank</item>
+        <item>@string/from_behind</item>
+        <item>@string/vision_partially_obscured</item>
+        <item>@string/vision_totally_obscured</item>
+        <item>@string/higher_ground</item>
+        <item>@string/from_ground</item>
+        <item>@string/partially_immobilized</item>
+        <item>@string/mostly_immobilized</item>
+        <item>@string/fully_immobilized</item>
+        <item>@string/put_at_weapons_point</item>
+        <item>@string/levitating</item>
+        <item>@string/flight_type_7_14</item>
+        <item>@string/flight_type_15</item>
+        <item>@string/charging</item>
+        <item>@string/drawing_weapon</item>
+        <item>@string/crowded_space</item>
+        <item>@string/small_adversary</item>
+        <item>@string/tiny_adversary</item>
+        <item>@string/fear</item>
+        <item>@string/pain</item>
+        <item>@string/extreme_pain</item>
+        <item>@string/defensive</item>
+    </string-array>
+
+    <integer-array name="attackModifierValues">
+        <item>30</item>
+        <item>10</item>
+        <item>-10</item>
+        <item>-30</item>
+        <item>-30</item>
+        <item>-100</item>
+        <item>20</item>
+        <item>-30</item>
+        <item>-20</item>
+        <item>-80</item>
+        <item>-200</item>
+        <item>-20</item>
+        <item>-20</item>
+        <item>10</item>
+        <item>15</item>
+        <item>10</item>
+        <item>-25</item>
+        <item>-40</item>
+        <item>-10</item>
+        <item>-20</item>
+        <item>-60</item>
+        <item>-40</item>
+        <item>-80</item>
+        <item>-30</item>
+    </integer-array>
+
+    <string-array name="defenseModifiers">
+        <item>@string/offensive</item>
+        <item>@string/flanked</item>
+        <item>@string/from_behind</item>
+        <item>@string/surprised</item>
+        <item>@string/vision_partially_obscured_block</item>
+        <item>@string/vision_partially_obscured_dodge</item>
+        <item>@string/vision_totally_obscured</item>
+        <item>@string/from_ground</item>
+        <item>@string/partially_immobilized_block</item>
+        <item>@string/partially_immobilized_dodge</item>
+        <item>@string/mostly_immobilized</item>
+        <item>@string/fully_immobilized</item>
+        <item>@string/put_at_weapons_point</item>
+        <item>@string/basic_seraphite</item>
+        <item>@string/arcane_seraphite</item>
+        <item>@string/basic_shephon</item>
+        <item>@string/arcane_shephon</item>
+        <item>@string/levitating_block</item>
+        <item>@string/levitating_dodge</item>
+        <item>@string/flight_type_7_14</item>
+        <item>@string/flight_15_block</item>
+        <item>@string/flight_15_dodge</item>
+        <item>@string/charging_block</item>
+        <item>@string/charging_dodge</item>
+        <item>@string/drawing_weapon</item>
+        <item>@string/crowded_space</item>
+        <item>@string/tiny_adversary_block</item>
+        <item>@string/fear</item>
+        <item>@string/pain</item>
+        <item>@string/extreme_pain</item>
+        <item>@string/defensive</item>
+        <item>@string/total_defense</item>
+        <item>@string/fire_projectiles_block</item>
+        <item>@string/fire_projectiles_b_p</item>
+        <item>@string/fire_projectiles_shield</item>
+        <item>@string/fire_projectiles_dodge</item>
+        <item>@string/thrown_projectile_block</item>
+        <item>@string/endure_hit</item>
+        <item>@string/energy_attack_block</item>
+        <item>@string/area_attack_block</item>
+        <item>@string/area_attack_dodge</item>
+    </string-array>
+
+    <integer-array name="defenseModifierValues">
+        <item>-30</item>
+        <item>-30</item>
+        <item>-80</item>
+        <item>-90</item>
+        <item>-30</item>
+        <item>-15</item>
+        <item>-80</item>
+        <item>-30</item>
+        <item>-20</item>
+        <item>-40</item>
+        <item>-80</item>
+        <item>-200</item>
+        <item>-120</item>
+        <item>-30</item>
+        <item>-50</item>
+        <item>60</item>
+        <item>100</item>
+        <item>-20</item>
+        <item>-40</item>
+        <item>10</item>
+        <item>10</item>
+        <item>20</item>
+        <item>-10</item>
+        <item>-20</item>
+        <item>-25</item>
+        <item>-40</item>
+        <item>-10</item>
+        <item>-60</item>
+        <item>-40</item>
+        <item>-80</item>
+        <item>10</item>
+        <item>30</item>
+        <item>-80</item>
+        <item>-20</item>
+        <item>-30</item>
+        <item>-30</item>
+        <item>-50</item>
+        <item>-80</item>
+        <item>-120</item>
+        <item>-120</item>
+        <item>-80</item>
+    </integer-array>
+</resources>

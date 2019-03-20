@@ -15,7 +15,8 @@ class DiceRoller(var defaultRollConfig: DiceRollConfig = DiceRollConfig()) {
 
     private fun doRoll(rollConfig: DiceRollConfig = defaultRollConfig) {
         val diceResult = (1..100).random()
-        roll.result += diceResult
+        roll.results.add(diceResult)
+        roll.finalResult += diceResult
 
         if (rollConfig.fumbleEnabled && diceResult <= rollConfig.fumbleMaxValue) {
             roll.fumbleLevel = (1..100).random()

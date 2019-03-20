@@ -1,5 +1,15 @@
 package com.javierdelgado.anima_calculator_ex
 
+import android.content.Context
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
+
 fun Int.isPalindrome(): Boolean {
     return this == this.reverse()
 }
@@ -14,4 +24,20 @@ fun Int.reverse(): Int {
         aux /= 10
     }
     return reversed
+}
+
+fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
+    return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
+}
+
+fun Context.createSimpleTextWatcher(afterTextChangedCallback: () -> Unit): TextWatcher {
+    return object : TextWatcher {
+        override fun afterTextChanged(editable: Editable?) {
+            afterTextChangedCallback()
+        }
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+    }
 }
