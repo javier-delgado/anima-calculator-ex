@@ -16,11 +16,11 @@ class DiceRoller(private var defaultRollConfig: DiceRollConfig = DiceRollConfig.
 
     private fun doRoll(rollConfig: DiceRollConfig = defaultRollConfig) {
         var diceResult = (1..100).random()
-        roll.results.add(diceResult)
-        roll.finalResult += diceResult
 
         if (rollConfig.fumbleEnabled && diceResult <= rollConfig.fumbleMaxValue) {
             roll.fumbleLevel = (1..100).random()
+            roll.results.add(diceResult)
+            roll.finalResult += diceResult
             return
         }
 
@@ -31,6 +31,9 @@ class DiceRoller(private var defaultRollConfig: DiceRollConfig = DiceRollConfig.
                 diceResult = 100
             }
         }
+
+        roll.results.add(diceResult)
+        roll.finalResult += diceResult
 
         if(rollConfig.openRollEnabled && diceResult >= rollConfig.openRollMinValue) {
             roll.openRollCount++

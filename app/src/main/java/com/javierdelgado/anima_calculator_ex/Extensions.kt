@@ -1,6 +1,7 @@
 package com.javierdelgado.anima_calculator_ex
 
 import android.content.Context
+import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -40,4 +41,8 @@ fun Context.createSimpleTextWatcher(afterTextChangedCallback: () -> Unit): TextW
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
     }
+}
+
+fun AppCompatActivity.homeAsUp(b: Boolean) {
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
 }

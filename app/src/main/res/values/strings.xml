@@ -82,4 +82,6 @@
     <string name="v_">v%s</string>
     <string name="is_fumble_if_below">Is fumble if below:</string>
     <string name="deselect_all">Deselect all</string>
+    <string name="view_log">View log</string>
+    <string name="log">Log</string>
 </resources>

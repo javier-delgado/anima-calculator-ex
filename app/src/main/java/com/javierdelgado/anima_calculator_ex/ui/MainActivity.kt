@@ -3,13 +3,16 @@ package com.javierdelgado.anima_calculator_ex.ui
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.javierdelgado.anima_calculator_ex.BuildConfig
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.createSimpleTextWatcher
 import com.javierdelgado.anima_calculator_ex.domain.CombatResultComposer
 import com.javierdelgado.anima_calculator_ex.models.Combat
 import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
+import com.javierdelgado.anima_calculator_ex.models.DiceRoll
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -79,9 +82,10 @@ class MainActivity : AppCompatActivity(), Observer {
             }
         }
 
-        btnRollAttackDice.setOnClickListener {
+        btnRollAttackDice.setOnClickListener { view ->
             val roll = DiceRoller().perform()
             edtAttackRoll.setText(roll.finalResult.toString())
+            showDiceRollSnackbar(roll, view)
         }
 
         btnRollDefenseDice.setOnClickListener {
@@ -106,6 +110,15 @@ class MainActivity : AppCompatActivity(), Observer {
                 edtAT.setText(getString(R.string.at_, ATValue))
             }
         }
+    }
+
+    private fun showDiceRollSnackbar(
+        roll: DiceRoll,
+        view: View
+    ) {
+        val show: Any = Snackbar.make(view, "TEST!", Snackbar.LENGTH_LONG)
+            .setAction(R.string.view_log) { LogActivity.start(this) }
+            .show();
     }
 
     private val attackRollTextWatcher by lazy {
