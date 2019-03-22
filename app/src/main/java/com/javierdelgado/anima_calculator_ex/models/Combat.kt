@@ -39,11 +39,11 @@ class Combat: Observable() {
         notifyObservers()
     }
 
-    private fun totalAttack(): Int {
+    fun totalAttack(): Int {
         return Math.max(selectedAttackModifiers.sumBy { it.value } + characterAttackValue + attackRollValue, 0);
     }
 
-    private fun totalDefense(): Int {
+    fun totalDefense(): Int {
         val defenseSum = selectedDefenseModifiers.sumBy { it.value } + characterDefenseValue + defenseRollValue + consecutiveDefensePenalty
         return if (characterDefenseValue + attackRollValue>= 0)
             Math.max(defenseSum, 0);

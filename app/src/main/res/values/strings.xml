@@ -28,8 +28,8 @@
     <string name="levitating">Levitating</string>
     <string name="levitating_block">Levitating (Block)</string>
     <string name="levitating_dodge">Levitating (Dodge)</string>
-    <string name="flight_type_7_14">Flight Type 7–14</string>
-    <string name="flight_type_15">Flight Type 15</string>
+    <string name="flight_type_7_14">Flight 7–14</string>
+    <string name="flight_type_15">Flight 15</string>
     <string name="charging">Charging</string>
     <string name="drawing_weapon">Drawing Weapon</string>
     <string name="crowded_space">Crowded Space</string>
@@ -63,13 +63,21 @@
     <string name="area_attack_block">Area Attack (Block)</string>
     <string name="area_attack_dodge">Area Attack (Dodge)</string>
     <string name="attack_modifiers">Attack modifiers</string>
-    <string name="ok">OK</string>
+    <string name="ok" translatable="false">OK</string>
     <string name="defense_modifiers">Defense modifiers</string>
     <string name="at_0">AT 0</string>
     <string name="at_">AT %d</string>
     <string name="nothing_happens">Nothing happens</string>
     <string name="damage_dealt_">Damage dealt: %d</string>
     <string name="percentage_out_of_total_damage">%1$d%% out of total %2$d damage</string>
-    <string name="counterattack_with_bonus">Counter attack with %d+ bonus</string>
+    <string name="counterattack_with_bonus">Counter attack with %d bonus</string>
     <string name="counterattack_without_bonus">Counter attack without bonus</string>
+    <string name="settings">Settings</string>
+    <string name="open_roll">Open roll</string>
+    <string name="allow_palindrome">Allow palindrome</string>
+    <string name="allow_open_rolls">Allow open rolls</string>
+    <string name="allow_fumbles">Allow fumbles</string>
+    <string name="open_rolls_start_with_">Open rolls start with:</string>
+    <string name="save">Save</string>
+    <string name="v_">v%s</string>
 </resources>

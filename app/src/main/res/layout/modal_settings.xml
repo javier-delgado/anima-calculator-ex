@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <CheckBox
+            android:id="@+id/chkOpenRoll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/allow_open_rolls"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <CheckBox
+            android:id="@+id/chkFumble"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="16sp"
+            android:text="@string/allow_fumbles"
+            app:layout_constraintTop_toBottomOf="@id/chkOpenRoll"/>
+
+    <CheckBox
+            android:id="@+id/chkPalindrome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="16sp"
+            android:text="@string/allow_palindrome"
+            app:layout_constraintTop_toBottomOf="@id/chkFumble"/>
+
+    <TextView
+            android:id="@+id/txtOpenRolls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/material_white"
+            android:labelFor="@id/edtOpenRollMinValue"
+            android:text="@string/open_rolls_start_with_"
+            app:layout_constraintTop_toBottomOf="@id/chkPalindrome"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+            android:id="@+id/edtOpenRollMinValue"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:digits="1234567890"
+            app:layout_constraintBottom_toBottomOf="@id/txtOpenRolls"
+            app:layout_constraintTop_toTopOf="@id/txtOpenRolls"
+            app:layout_constraintLeft_toRightOf="@id/txtOpenRolls"
+            tools:targetApi="o"
+            tools:text="90"/>
+
+    <TextView
+            android:id="@+id/txtFumbles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/material_white"
+            android:labelFor="@id/edtFumbleMaxvalue"
+            android:text="@string/open_rolls_start_with_"
+            app:layout_constraintTop_toBottomOf="@id/edtOpenRollMinValue"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+            android:id="@+id/edtFumbleMaxvalue"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:digits="1234567890"
+            app:layout_constraintBottom_toBottomOf="@id/txtFumbles"
+            app:layout_constraintTop_toTopOf="@id/txtFumbles"
+            app:layout_constraintLeft_toRightOf="@id/txtFumbles"
+            tools:targetApi="o"
+            tools:text="4"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

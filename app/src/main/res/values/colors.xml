@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">@color/material_grey900</color>
+    <color name="colorPrimaryDark">@color/material_black</color>
+    <color name="colorAccent">@color/material_deeporange600</color>
 
-    <color name="colorAttack">#D81B60</color>
-    <color name="colorDefense">#00574B</color>
+    <color name="colorAttack">@color/material_red500</color>
+    <color name="colorDefense">@color/material_blue600</color>
 
-
-    <color name="black">@color/material_black</color>
-
-    <color name="divider_grey">@color/material_grey300</color>
+    <color name="divider_grey">@color/material_grey700</color>
 </resources>

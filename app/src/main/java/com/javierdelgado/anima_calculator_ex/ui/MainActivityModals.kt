@@ -1,17 +1,21 @@
 package com.javierdelgado.anima_calculator_ex.ui
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.afollestad.materialdialogs.customview.getCustomView
 import com.afollestad.materialdialogs.list.customListAdapter
 import com.afollestad.materialdialogs.list.getListAdapter
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.javierdelgado.anima_calculator_ex.R
+import com.javierdelgado.anima_calculator_ex.domain.SettingsManager
 import com.javierdelgado.anima_calculator_ex.inflate
+import com.javierdelgado.anima_calculator_ex.models.DiceRollConfig
 import com.javierdelgado.anima_calculator_ex.models.Modifier
 
 class MainActivityModals(private val context: Context) {
@@ -48,6 +52,41 @@ class MainActivityModals(private val context: Context) {
             }
         }
     }
+
+    fun showSettings(afterSave: () -> Unit = {}) {
+        val dialog = MaterialDialog(context).show {
+            title(R.string.settings)
+            customView(R.layout.modal_settings)
+            positiveButton(R.string.save) {
+                val view = it.getCustomView()
+                val allowOpenRoll = view.findViewById<CheckBox>(R.id.chkOpenRoll).isChecked
+                val allowFumble = view.findViewById<CheckBox>(R.id.chkFumble).isChecked
+                val allowPalindrome = view.findViewById<CheckBox>(R.id.chkPalindrome).isChecked
+                val openRollMinValue = view.findViewById<EditText>(R.id.edtOpenRollMinValue).text
+                val fumbleMaxValue = view.findViewById<EditText>(R.id.edtFumbleMaxvalue).text
+                SettingsManager(context).save(
+                    allowOpenRoll,
+                    allowFumble,
+                    allowPalindrome,
+                    openRollMinValue.toString(),
+                    fumbleMaxValue.toString()
+                )
+                afterSave()
+            }
+        }
+        setupSettingsDialog(dialog)
+    }
+
+    private fun setupSettingsDialog(dialog: MaterialDialog) {
+        DiceRollConfig.loadAsync {
+            val view = dialog.getCustomView()
+            view.findViewById<CheckBox>(R.id.chkOpenRoll).isChecked = it.openRollEnabled
+            view.findViewById<CheckBox>(R.id.chkFumble).isChecked = it.fumbleEnabled
+            view.findViewById<CheckBox>(R.id.chkPalindrome).isChecked = it.palindromeEnabled
+            view.findViewById<EditText>(R.id.edtOpenRollMinValue).setText(it.openRollMinValue.toString())
+            view.findViewById<EditText>(R.id.edtFumbleMaxvalue).setText(it.fumbleMaxValue.toString())
+        }
+    }
 }
 
 class ModifiersAdapter(modifiers: List<Modifier>, selectedModifiers: List<Modifier>) : RecyclerView.Adapter<ModifierViewHolder>() {
@@ -81,7 +120,7 @@ class ModifierViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     fun bind(sModifier: SelectableModifier) {
         chkModifier.setOnCheckedChangeListener(null)
-        chkModifier.text = sModifier.modifier.toString()
+        chkModifier.text = sModifier.modifier.toSpannable(itemView.context)
         chkModifier.isChecked = sModifier.selected
         chkModifier.setOnCheckedChangeListener { _, b ->
             sModifier.selected = b }

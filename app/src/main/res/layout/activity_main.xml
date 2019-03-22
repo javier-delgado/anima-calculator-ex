@@ -1,357 +1,389 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        tools:context=".ui.MainActivity">
+        android:layout_height="match_parent">
 
-    <TextView
-            android:id="@+id/txtSecondaryHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            tools:text="70% out of 100 total damage"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-            android:id="@+id/txtMainHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:textColor="@color/black"
-            tools:text="Damage dealt: 50"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtSecondaryHeader"/>
-
-    <TextView
-            android:id="@+id/txtTitleAttack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:textSize="16sp"
-            android:textColor="@color/colorAttack"
-            android:text="@string/attack"
-            app:layout_constraintTop_toBottomOf="@id/txtMainHeader"
-            app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            tools:text="200"
-            app:layout_constraintTop_toTopOf="@id/txtTitleAttack"
-            app:layout_constraintLeft_toRightOf="@id/txtTitleAttack"/>
-
-    <LinearLayout
-            android:id="@+id/lytAttackRoll"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/txtTitleAttack"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/lytFinalAttack"
-            app:layout_constraintHorizontal_chainStyle="spread">
-
-        <TextView
-                android:id="@+id/txtLabelAttackRoll"
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:labelFor="@id/edtAttackRoll"
-                android:text="@string/roll"/>
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                tools:context=".ui.MainActivity">
 
-        <EditText
-                android:id="@+id/edtAttackRoll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:digits="0987654321"
-                android:imeOptions="actionNext"
-                android:importantForAutofill="no"
-                tools:ignore="UnusedAttribute"/>
-    </LinearLayout>
+            <TextView
+                    android:id="@+id/txtSecondaryHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    tools:text="70% out of 100 total damage"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                    android:id="@+id/txtMainHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:textColor="@color/material_white"
+                    tools:text="Damage dealt: 50"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txtSecondaryHeader"/>
+
+            <TextView
+                    android:id="@+id/txtTitleAttack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorAttack"
+                    android:text="@string/attack"
+                    app:layout_constraintTop_toBottomOf="@id/txtMainHeader"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                    android:id="@+id/txtTotalAttack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    tools:text="200"
+                    app:layout_constraintTop_toTopOf="@id/txtTitleAttack"
+                    app:layout_constraintLeft_toRightOf="@id/txtTitleAttack"/>
+
+            <LinearLayout
+                    android:id="@+id/lytAttackRoll"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/txtTitleAttack"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/lytFinalAttack"
+                    app:layout_constraintHorizontal_chainStyle="spread">
+
+                <TextView
+                        android:id="@+id/txtLabelAttackRoll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/material_white"
+                        android:labelFor="@id/edtAttackRoll"
+                        android:text="@string/roll"/>
+
+                <EditText
+                        android:id="@+id/edtAttackRoll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:digits="0987654321"
+                        android:imeOptions="actionNext"
+                        android:importantForAutofill="no"
+                        tools:ignore="UnusedAttribute"/>
+            </LinearLayout>
 
 
-    <LinearLayout
-            android:id="@+id/lytFinalAttack"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="8dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/txtTitleAttack"
-            app:layout_constraintLeft_toRightOf="@id/lytAttackRoll"
-            app:layout_constraintRight_toLeftOf="@id/lytFinalDamage"
-            app:layout_constraintHorizontal_chainStyle="spread">
+            <LinearLayout
+                    android:id="@+id/lytFinalAttack"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/txtTitleAttack"
+                    app:layout_constraintLeft_toRightOf="@id/lytAttackRoll"
+                    app:layout_constraintRight_toLeftOf="@id/lytFinalDamage"
+                    app:layout_constraintHorizontal_chainStyle="spread">
 
-        <TextView
-                android:id="@+id/txtLabelFinalAttack"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:labelFor="@id/edtFinalAttack"
-                android:text="@string/attack"/>
+                <TextView
+                        android:id="@+id/txtLabelFinalAttack"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/material_white"
+                        android:labelFor="@id/edtFinalAttack"
+                        android:text="@string/attack"/>
 
-        <EditText
-                android:id="@+id/edtFinalAttack"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:digits="0987654321"
-                android:importantForAutofill="no"
-                android:imeOptions="actionNext"
-                tools:ignore="UnusedAttribute"/>
-    </LinearLayout>
+                <EditText
+                        android:id="@+id/edtFinalAttack"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:digits="0987654321"
+                        android:importantForAutofill="no"
+                        android:imeOptions="actionNext"
+                        tools:ignore="UnusedAttribute"/>
+            </LinearLayout>
 
-    <LinearLayout
-            android:id="@+id/lytFinalDamage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="8dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/txtTitleAttack"
-            app:layout_constraintLeft_toRightOf="@id/lytFinalAttack"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintHorizontal_chainStyle="spread">
+            <LinearLayout
+                    android:id="@+id/lytFinalDamage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/txtTitleAttack"
+                    app:layout_constraintLeft_toRightOf="@id/lytFinalAttack"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread">
 
-        <TextView
-                android:id="@+id/txtLabelFinalDamage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:labelFor="@id/edtFinalDamage"
-                android:text="@string/damage"/>
+                <TextView
+                        android:id="@+id/txtLabelFinalDamage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/material_white"
+                        android:labelFor="@id/edtFinalDamage"
+                        android:text="@string/damage"/>
 
-        <EditText
-                android:id="@+id/edtFinalDamage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:digits="0987654321"
-                android:importantForAutofill="no"
-                android:imeOptions="actionNext"
-                tools:ignore="UnusedAttribute"/>
-    </LinearLayout>
+                <EditText
+                        android:id="@+id/edtFinalDamage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:digits="0987654321"
+                        android:importantForAutofill="no"
+                        android:imeOptions="actionNext"
+                        tools:ignore="UnusedAttribute"/>
+            </LinearLayout>
 
-    <Button
-            android:id="@+id/btnEditAttackModifiers"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/edit_modifiers"
-            app:layout_constraintTop_toBottomOf="@id/lytAttackRoll"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/btnRollAttackDice"/>
+            <Button
+                    android:id="@+id/btnEditAttackModifiers"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/edit_modifiers"
+                    app:layout_constraintTop_toBottomOf="@id/lytAttackRoll"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/btnRollAttackDice"/>
 
-    <ImageButton
-            android:id="@+id/btnRollAttackDice"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:contentDescription="@string/edit_modifiers"
-            android:src="@drawable/ic_d10_light"
-            app:layout_constraintTop_toTopOf="@id/btnEditAttackModifiers"
-            app:layout_constraintBottom_toBottomOf="@id/btnEditAttackModifiers"
-            app:layout_constraintLeft_toRightOf="@id/btnEditAttackModifiers"
-            app:layout_constraintRight_toRightOf="parent"/>
+            <ImageButton
+                    android:id="@+id/btnRollAttackDice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:contentDescription="@string/edit_modifiers"
+                    android:backgroundTint="@color/colorAccent"
+                    android:src="@drawable/ic_d10_light"
+                    app:layout_constraintTop_toTopOf="@id/btnEditAttackModifiers"
+                    app:layout_constraintBottom_toBottomOf="@id/btnEditAttackModifiers"
+                    app:layout_constraintLeft_toRightOf="@id/btnEditAttackModifiers"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+            <View
+                    android:id="@+id/divider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/divider_grey"
+                    app:layout_constraintTop_toBottomOf="@id/btnEditAttackModifiers"/>
+
+            <TextView
+                    android:id="@+id/txtTitleDefense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDefense"
+                    android:text="@string/defense"
+                    app:layout_constraintTop_toBottomOf="@id/divider1"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                    android:id="@+id/txtTotalDefense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    tools:text="200"
+                    app:layout_constraintTop_toTopOf="@id/txtTitleDefense"
+                    app:layout_constraintLeft_toRightOf="@id/txtTitleDefense"/>
+
+            <LinearLayout
+                    android:id="@+id/lytDefenseRoll"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/txtTitleDefense"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/lytFinalDefense"
+                    app:layout_constraintHorizontal_chainStyle="spread">
+
+                <TextView
+                        android:id="@+id/txtLabelDefenseRoll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/material_white"
+                        android:labelFor="@id/edtDefenseRoll"
+                        android:text="@string/roll"/>
+
+                <EditText
+                        android:id="@+id/edtDefenseRoll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:digits="0987654321"
+                        android:imeOptions="actionNext"
+                        android:importantForAutofill="no"
+                        tools:ignore="UnusedAttribute"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:id="@+id/lytFinalDefense"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/txtTitleDefense"
+                    app:layout_constraintLeft_toRightOf="@id/lytDefenseRoll"
+                    app:layout_constraintRight_toLeftOf="@id/lytTA"
+                    app:layout_constraintHorizontal_chainStyle="spread">
+
+                <TextView
+                        android:id="@+id/txtLabelFinalDefense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/material_white"
+                        android:labelFor="@id/edtFinalDefense"
+                        android:text="@string/defense"/>
+
+                <EditText
+                        android:id="@+id/edtFinalDefense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:digits="0987654321"
+                        android:importantForAutofill="no"
+                        android:imeOptions="actionNext"
+                        tools:ignore="UnusedAttribute"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/lytTA"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/txtTitleDefense"
+                    app:layout_constraintLeft_toRightOf="@id/lytFinalDefense"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread">
+
+                <TextView
+                        android:id="@+id/txtLabelTA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/material_white"
+                        android:labelFor="@id/edtAT"
+                        android:text="@string/at"/>
+
+                <EditText
+                        android:id="@+id/edtAT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:importantForAutofill="no"
+                        android:imeOptions="actionNext"
+                        tools:ignore="TextFields,UnusedAttribute"/>
+            </LinearLayout>
+
+            <Button
+                    android:id="@+id/btnEditDefenseModifiers"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/edit_modifiers"
+                    app:layout_constraintTop_toBottomOf="@id/lytDefenseRoll"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/btnRollDefenseDice"/>
+
+            <ImageButton
+                    android:id="@+id/btnRollDefenseDice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:contentDescription="@string/edit_modifiers"
+                    android:src="@drawable/ic_d10_light"
+                    app:layout_constraintTop_toTopOf="@id/btnEditDefenseModifiers"
+                    app:layout_constraintBottom_toBottomOf="@id/btnEditDefenseModifiers"
+                    app:layout_constraintLeft_toRightOf="@id/btnEditDefenseModifiers"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+            <RadioGroup
+                    android:id="@+id/rdGroupConsecutiveDefense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/btnEditDefenseModifiers">
+
+                <RadioButton
+                        android:id="@+id/rdConsecutiveDefense1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/defense_first"
+                        android:checked="true"/>
+
+                <RadioButton
+                        android:id="@+id/rdConsecutiveDefense2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/defense_second"/>
+
+                <RadioButton
+                        android:id="@+id/rdConsecutiveDefense3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/defense_third"/>
+
+                <RadioButton
+                        android:id="@+id/rdConsecutiveDefense4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/defense_fourth"/>
+
+                <RadioButton
+                        android:id="@+id/rdConsecutiveDefense5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/defense_fifth_plus"/>
+            </RadioGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 
     <View
-            android:id="@+id/divider1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/divider_grey"
-            app:layout_constraintTop_toBottomOf="@id/btnEditAttackModifiers"/>
-
+            android:background="@color/colorAccent"/>
 
     <TextView
-            android:id="@+id/txtTitleDefense"
+            android:id="@+id/txtVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:textSize="16sp"
-            android:textColor="@color/colorDefense"
-            android:text="@string/defense"
-            app:layout_constraintTop_toBottomOf="@id/divider1"
-            app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            tools:text="200"
-            app:layout_constraintTop_toTopOf="@id/txtTitleDefense"
-            app:layout_constraintLeft_toRightOf="@id/txtTitleDefense"/>
-
-    <LinearLayout
-            android:id="@+id/lytDefenseRoll"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/txtTitleDefense"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/lytFinalDefense"
-            app:layout_constraintHorizontal_chainStyle="spread">
-
-        <TextView
-                android:id="@+id/txtLabelDefenseRoll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:labelFor="@id/edtDefenseRoll"
-                android:text="@string/roll"/>
-
-        <EditText
-                android:id="@+id/edtDefenseRoll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:digits="0987654321"
-                android:imeOptions="actionNext"
-                android:importantForAutofill="no"
-                tools:ignore="UnusedAttribute"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-            android:id="@+id/lytFinalDefense"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="8dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/txtTitleDefense"
-            app:layout_constraintLeft_toRightOf="@id/lytDefenseRoll"
-            app:layout_constraintRight_toLeftOf="@id/lytTA"
-            app:layout_constraintHorizontal_chainStyle="spread">
-
-        <TextView
-                android:id="@+id/txtLabelFinalDefense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:labelFor="@id/edtFinalDefense"
-                android:text="@string/defense"/>
-
-        <EditText
-                android:id="@+id/edtFinalDefense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:digits="0987654321"
-                android:importantForAutofill="no"
-                android:imeOptions="actionNext"
-                tools:ignore="UnusedAttribute"/>
-    </LinearLayout>
-
-    <LinearLayout
-            android:id="@+id/lytTA"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="8dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/txtTitleDefense"
-            app:layout_constraintLeft_toRightOf="@id/lytFinalDefense"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintHorizontal_chainStyle="spread">
-
-        <TextView
-                android:id="@+id/txtLabelTA"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:labelFor="@id/edtAT"
-                android:text="@string/at"/>
-
-        <EditText
-                android:id="@+id/edtAT"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:importantForAutofill="no"
-                android:imeOptions="actionNext"
-                tools:ignore="TextFields,UnusedAttribute"/>
-    </LinearLayout>
-
-    <Button
-            android:id="@+id/btnEditDefenseModifiers"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/edit_modifiers"
-            app:layout_constraintTop_toBottomOf="@id/lytDefenseRoll"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/btnRollDefenseDice"/>
-
-    <ImageButton
-            android:id="@+id/btnRollDefenseDice"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:contentDescription="@string/edit_modifiers"
-            android:src="@drawable/ic_d10_light"
-            app:layout_constraintTop_toTopOf="@id/btnEditDefenseModifiers"
-            app:layout_constraintBottom_toBottomOf="@id/btnEditDefenseModifiers"
-            app:layout_constraintLeft_toRightOf="@id/btnEditDefenseModifiers"
-            app:layout_constraintRight_toRightOf="parent"/>
-
-    <RadioGroup
-            android:id="@+id/rdGroupConsecutiveDefense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/btnEditDefenseModifiers">
-        <RadioButton
-                android:id="@+id/rdConsecutiveDefense1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/defense_first"
-                android:checked="true"/>
-
-        <RadioButton
-                android:id="@+id/rdConsecutiveDefense2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/defense_second"/>
-
-        <RadioButton
-                android:id="@+id/rdConsecutiveDefense3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/defense_third"/>
-
-        <RadioButton
-                android:id="@+id/rdConsecutiveDefense4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/defense_fourth"/>
-
-        <RadioButton
-                android:id="@+id/rdConsecutiveDefense5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/defense_fifth_plus"/>
-    </RadioGroup>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            tools:text="v1.0"
+            android:textSize="8sp"
+            tools:ignore="SmallSp"/>
+</FrameLayout>

@@ -7,18 +7,21 @@ import com.javierdelgado.anima_calculator_ex.models.Combat
 class CombatResultComposer(private val context: Context, private val combat: Combat) {
     var mainText: String = ""
     var secondaryText: String = ""
+    var totalAttackText: String = ""
+    var totalDefenseText: String = ""
 
     fun composeText() {
+        val result = combat.result()
         when {
-            combat.result() == 0 -> {
+            result == 0 -> {
                 noCombatResult()
             }
-            combat.result() < 0 -> {
-                val counterAttackBonus = - combat.result() / 10 * 5
+            result < 0 -> {
+                val counterAttackBonus = - result / 10 * 5
                 counterAttackResult(counterAttackBonus)
             }
             else -> {
-                val absDifference: Int = combat.result() - (20 + combat.ATValue * 10)
+                val absDifference: Int = result - (20 + combat.ATValue * 10)
                 val percentage: Int = absDifference / 10 * 10
                 val damageDealt: Int = Math.ceil(percentage.toDouble() * combat.finalDamage / 100).toInt()
 
@@ -28,6 +31,8 @@ class CombatResultComposer(private val context: Context, private val combat: Com
                     defenseWinsResult()
             }
         }
+        totalAttackText = combat.totalAttack().toString()
+        totalDefenseText = combat.totalDefense().toString()
     }
 
     private fun noCombatResult() {

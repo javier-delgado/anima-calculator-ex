@@ -1,7 +1,10 @@
 package com.javierdelgado.anima_calculator_ex.ui
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.javierdelgado.anima_calculator_ex.BuildConfig
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.createSimpleTextWatcher
 import com.javierdelgado.anima_calculator_ex.domain.CombatResultComposer
@@ -18,6 +21,7 @@ class MainActivity : AppCompatActivity(), Observer {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        txtVersion.text = getString(R.string.v_, BuildConfig.VERSION_NAME)
     }
 
     override fun onResume() {
@@ -25,6 +29,7 @@ class MainActivity : AppCompatActivity(), Observer {
         bindListeners()
         bindTextWatchers()
         combat.addObserver(this)
+        showResult()
     }
 
     override fun onPause() {
@@ -32,6 +37,19 @@ class MainActivity : AppCompatActivity(), Observer {
         unbindListeners()
         unbindWatchers()
         combat.deleteObserver(this)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.menuSettings -> modals.showSettings();
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
     }
 
     // On combat changed
@@ -43,6 +61,8 @@ class MainActivity : AppCompatActivity(), Observer {
         resultComposer.composeText()
         txtMainHeader.text = resultComposer.mainText
         txtSecondaryHeader.text = resultComposer.secondaryText
+        txtTotalAttack.text = resultComposer.totalAttackText
+        txtTotalDefense.text = resultComposer.totalDefenseText
     }
 
     private fun bindListeners() {
