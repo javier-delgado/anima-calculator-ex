@@ -80,4 +80,6 @@
     <string name="open_rolls_start_with_">Open rolls start with:</string>
     <string name="save">Save</string>
     <string name="v_">v%s</string>
+    <string name="is_fumble_if_below">Is fumble if below:</string>
+    <string name="deselect_all">Deselect all</string>
 </resources>

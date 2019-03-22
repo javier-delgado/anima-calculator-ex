@@ -42,6 +42,7 @@ class CombatResultComposer(private val context: Context, private val combat: Com
 
     private fun defenseWinsResult() {
         mainText = context.getString(R.string.defensive)
+        secondaryText = ""
     }
 
     private fun attackWinsResult(percentage: Int, damageDealt: Int) {

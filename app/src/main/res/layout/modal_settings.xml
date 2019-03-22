@@ -68,7 +68,7 @@
             android:textSize="16sp"
             android:textColor="@color/material_white"
             android:labelFor="@id/edtFumbleMaxvalue"
-            android:text="@string/open_rolls_start_with_"
+            android:text="@string/is_fumble_if_below"
             app:layout_constraintTop_toBottomOf="@id/edtOpenRollMinValue"
             app:layout_constraintLeft_toLeftOf="parent"/>
 

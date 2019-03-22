@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity(), Observer {
-    private val combat = Combat()
+    private val combat: Combat = Combat()
     private val resultComposer by lazy { CombatResultComposer(this, combat) }
     private val modals by lazy { MainActivityModals(this) }
 
@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(), Observer {
         bindTextWatchers()
         combat.addObserver(this)
         showResult()
+        combat.toString()
     }
 
     override fun onPause() {

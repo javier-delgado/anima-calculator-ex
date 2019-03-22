@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.EditText
+import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
@@ -23,25 +24,11 @@ class MainActivityModals(private val context: Context) {
     private val defenseModifiers by lazy { Modifier.loadListFromResources(context, R.array.defenseModifiers, R.array.defenseModifierValues) }
 
     fun showAttackModifiers(selectedModifiers: List<Modifier>, callback: (List<Modifier>) -> Unit) {
-        MaterialDialog(context).show {
-            title(R.string.attack_modifiers)
-            customListAdapter(ModifiersAdapter(attackModifiers, selectedModifiers))
-            positiveButton(R.string.ok) { dialog ->
-                val adapter = dialog.getListAdapter() as ModifiersAdapter
-                callback(adapter.getSelectedModifiers())
-            }
-        }
+        showModifiersDialog(R.string.attack_modifiers, attackModifiers, selectedModifiers, callback)
     }
 
     fun showDefenseModifiers(selectedModifiers: List<Modifier>, callback: (List<Modifier>) -> Unit) {
-        MaterialDialog(context).show {
-            title(R.string.defense_modifiers)
-            customListAdapter(ModifiersAdapter(defenseModifiers, selectedModifiers))
-            positiveButton(R.string.ok) { dialog ->
-                val adapter = dialog.getListAdapter() as ModifiersAdapter
-                callback(adapter.getSelectedModifiers())
-            }
-        }
+        showModifiersDialog(R.string.defense_modifiers, defenseModifiers, selectedModifiers, callback)
     }
 
     fun showATSelector(callback: (Int) -> Unit) {
@@ -75,6 +62,28 @@ class MainActivityModals(private val context: Context) {
             }
         }
         setupSettingsDialog(dialog)
+    }
+
+    private fun showModifiersDialog(
+        @StringRes titleRes: Int,
+        modifiers: List<Modifier>,
+        selectedModifiers: List<Modifier>,
+        callback: (List<Modifier>) -> Unit
+    ) {
+        MaterialDialog(context).show {
+            title(titleRes)
+            noAutoDismiss()
+            customListAdapter(ModifiersAdapter(modifiers, selectedModifiers))
+            positiveButton(R.string.ok) { dialog ->
+                val adapter = dialog.getListAdapter() as ModifiersAdapter
+                callback(adapter.getSelectedModifiers())
+                dialog.dismiss()
+            }
+            negativeButton(R.string.deselect_all) { dialog ->
+                val adapter = dialog.getListAdapter() as ModifiersAdapter
+                adapter.deselectAll()
+            }
+        }
     }
 
     private fun setupSettingsDialog(dialog: MaterialDialog) {
@@ -113,6 +122,14 @@ class ModifiersAdapter(modifiers: List<Modifier>, selectedModifiers: List<Modifi
         return sModifiers.filter { it.selected }.map { it.modifier }
     }
 
+    fun deselectAll() {
+        sModifiers.forEachIndexed { index, sModifier ->
+            if (sModifier.selected) {
+                sModifier.selected = false
+                notifyItemChanged(index)
+            }
+        }
+    }
 }
 
 class ModifierViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

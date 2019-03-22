@@ -80,5 +80,6 @@
     <string name="roll">Tirada</string>
     <string name="app_name" translatable="false">Anima Calculator Ex</string>
     <string name="v_">v%s</string>
+    <string name="is_fumble_if_below">Es pifia si menor que:</string>
 
 </resources>
