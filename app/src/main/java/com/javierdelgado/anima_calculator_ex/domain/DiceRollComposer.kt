@@ -56,6 +56,7 @@ class DiceRollComposer(private val context: Context, private val roll: DiceRoll)
     }
 
     private fun setRollsList(sp: SpannableStringBuilder) {
+        if (roll.results.size < 2) return
         sp.append(" ${context.getString(R.string.your_rolls)}:")
         roll.results.forEachIndexed { idx, result ->
             sp.append(" $result")

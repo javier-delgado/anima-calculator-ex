@@ -88,6 +88,7 @@
     <string name="final_result_of">Final result of</string>
     <string name="you_fumbled_with_confirmation_level_of">You fumbled with a confirmation level of</string>
     <string name="your_rolls">Your rolls</string>
+    <string name="defense_roll">Defense roll</string>
     <plurals name="open_rolls">
         <item quantity="one">Open roll</item>
         <item quantity="other">Open rolls</item>

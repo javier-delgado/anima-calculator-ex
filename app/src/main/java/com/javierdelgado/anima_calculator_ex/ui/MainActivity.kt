@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.dbflow5.structure.save
 import com.google.android.material.snackbar.Snackbar
@@ -16,6 +17,8 @@ import com.javierdelgado.anima_calculator_ex.models.Combat
 import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
 import com.javierdelgado.anima_calculator_ex.models.DiceRoll
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.custom.async
+import org.jetbrains.anko.doAsync
 import java.util.*
 
 class MainActivity : AppCompatActivity(), Observer {
@@ -53,6 +56,7 @@ class MainActivity : AppCompatActivity(), Observer {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.menuSettings -> modals.showSettings();
+            R.id.menuLog -> LogActivity.start(this)
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -85,16 +89,11 @@ class MainActivity : AppCompatActivity(), Observer {
         }
 
         btnRollAttackDice.setOnClickListener { view ->
-            val roll = DiceRoller().perform()
-            roll.tag = getString(R.string.attack_roll)
-            edtAttackRoll.setText(roll.finalResult.toString())
-            showDiceRollSnackbar(roll, view)
-            roll.save()
+            onDiceRoll(getString(R.string.attack_roll), edtAttackRoll, view)
         }
 
-        btnRollDefenseDice.setOnClickListener {
-            val roll = DiceRoller().perform()
-            edtDefenseRoll.setText(roll.finalResult.toString())
+        btnRollDefenseDice.setOnClickListener {view ->
+            onDiceRoll(getString(R.string.defense_roll), edtDefenseRoll, view)
         }
 
         rdGroupConsecutiveDefense.setOnCheckedChangeListener { _, rdId ->
@@ -114,6 +113,14 @@ class MainActivity : AppCompatActivity(), Observer {
                 edtAT.setText(getString(R.string.at_, ATValue))
             }
         }
+    }
+
+    private fun onDiceRoll(tag: String, editText: EditText?, view: View) {
+        val roll = DiceRoller().perform()
+        roll.tag = tag
+        editText?.setText(roll.finalResult.toString())
+        showDiceRollSnackbar(roll, view)
+        doAsync { roll.save() }
     }
 
     private fun showDiceRollSnackbar(roll: DiceRoll, view: View) {
