@@ -1,5 +1,6 @@
 package com.javierdelgado.anima_calculator_ex.domain
 
+import android.util.Log
 import com.javierdelgado.anima_calculator_ex.isPalindrome
 import com.javierdelgado.anima_calculator_ex.models.DiceRoll
 import com.javierdelgado.anima_calculator_ex.models.DiceRollConfig
@@ -15,17 +16,17 @@ class DiceRoller(private var defaultRollConfig: DiceRollConfig = DiceRollConfig.
     }
 
     private fun doRoll(rollConfig: DiceRollConfig = defaultRollConfig) {
-        var diceResult = (1..100).random()
+        var diceResult = random()
 
         if (rollConfig.fumbleEnabled && diceResult <= rollConfig.fumbleMaxValue) {
-            roll.fumbleLevel = (1..100).random()
+            roll.fumbleLevel = random()
             roll.results.add(diceResult)
             roll.finalResult += diceResult
             return
         }
 
-        if (rollConfig.palindromeEnabled && diceResult.isPalindrome()) {
-            val confirmationRollValue = (1..100).random()
+        if (rollConfig.palindromeEnabled && diceResult > 9 && diceResult.isPalindrome()) {
+            val confirmationRollValue = random()
             if (confirmationRollValue.isPalindrome()) {
                 roll.confirmedPalindromeCount++
                 diceResult = 100
@@ -44,5 +45,9 @@ class DiceRoller(private var defaultRollConfig: DiceRollConfig = DiceRollConfig.
 
             doRoll(newRollConfig)
         }
+    }
+
+    private fun random(): Int {
+        return (1..100).random()
     }
 }
