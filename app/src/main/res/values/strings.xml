@@ -84,4 +84,16 @@
     <string name="deselect_all">Deselect all</string>
     <string name="view_log">View log</string>
     <string name="log">Log</string>
+    <string name="attack_roll">Attack roll</string>
+    <string name="final_result_of">Final result of</string>
+    <string name="you_fumbled_with_confirmation_level_of">You fumbled with a confirmation level of</string>
+    <string name="your_rolls">Your rolls</string>
+    <plurals name="open_rolls">
+        <item quantity="one">Open roll</item>
+        <item quantity="other">Open rolls</item>
+    </plurals>
+    <plurals name="palindromes">
+        <item quantity="one">Palindrome</item>
+        <item quantity="other">Palindromes</item>
+    </plurals>
 </resources>

@@ -4,14 +4,27 @@ import com.dbflow5.annotation.Column
 import com.dbflow5.annotation.PrimaryKey
 import com.dbflow5.annotation.Table
 import com.javierdelgado.anima_calculator_ex.AppDatabase
+import com.javierdelgado.anima_calculator_ex.utils.IntListConverter
 
 @Table(database = AppDatabase::class)
 data class DiceRoll(
-    @PrimaryKey var id: Int,
+    @PrimaryKey var id: Int = 0,
     @Column var finalResult: Int = 0,
     @Column var openRollCount: Int = 0,
-    @Column val results: MutableList<Int> = mutableListOf(),
+    @Column(typeConverter = IntListConverter::class) var results: MutableList<Int> = mutableListOf(),
     @Column var fumbleLevel: Int = 0,
     @Column var confirmedPalindromeCount: Int = 0,
     @Column var tag: String? = null
-)
+) {
+    fun didFumble(): Boolean {
+        return fumbleLevel > 0
+    }
+
+    fun didOpenRoll(): Boolean {
+        return openRollCount > 0
+    }
+
+    fun didPalindromeRoll(): Boolean {
+        return confirmedPalindromeCount > 0
+    }
+}

@@ -5,11 +5,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.dbflow5.structure.save
 import com.google.android.material.snackbar.Snackbar
 import com.javierdelgado.anima_calculator_ex.BuildConfig
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.createSimpleTextWatcher
 import com.javierdelgado.anima_calculator_ex.domain.CombatResultComposer
+import com.javierdelgado.anima_calculator_ex.domain.DiceRollComposer
 import com.javierdelgado.anima_calculator_ex.models.Combat
 import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
 import com.javierdelgado.anima_calculator_ex.models.DiceRoll
@@ -84,8 +86,10 @@ class MainActivity : AppCompatActivity(), Observer {
 
         btnRollAttackDice.setOnClickListener { view ->
             val roll = DiceRoller().perform()
+            roll.tag = getString(R.string.attack_roll)
             edtAttackRoll.setText(roll.finalResult.toString())
             showDiceRollSnackbar(roll, view)
+            roll.save()
         }
 
         btnRollDefenseDice.setOnClickListener {
@@ -112,11 +116,8 @@ class MainActivity : AppCompatActivity(), Observer {
         }
     }
 
-    private fun showDiceRollSnackbar(
-        roll: DiceRoll,
-        view: View
-    ) {
-        val show: Any = Snackbar.make(view, "TEST!", Snackbar.LENGTH_LONG)
+    private fun showDiceRollSnackbar(roll: DiceRoll, view: View) {
+        Snackbar.make(view, DiceRollComposer(this, roll).compose(), Snackbar.LENGTH_LONG)
             .setAction(R.string.view_log) { LogActivity.start(this) }
             .show();
     }
