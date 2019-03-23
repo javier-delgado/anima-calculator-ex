@@ -1,9 +1,10 @@
 package com.javierdelgado.anima_calculator_ex.models
 
-import android.util.Log
 import java.util.*
 import kotlin.properties.Delegates
 import android.R
+
+
 
 
 
@@ -26,6 +27,7 @@ class Combat: Observable() {
     var selectedDefenseModifiers: List<Modifier>  by Delegates.observable(emptyList()) { _, _, _ ->
         notifyObservers()
     }
+    // Note: the AT is used to calculate damage in CombatResultComposer, not actual defense value
     var ATValue: Int by Delegates.observable(0) { _, _, _ ->
         notifyObservers()
     }
@@ -54,7 +56,6 @@ class Combat: Observable() {
     fun result(): Int {
         return totalAttack() - totalDefense()
     }
-
 
     // Observer logic
     private val observers: MutableList<Observer> = mutableListOf<Observer>()

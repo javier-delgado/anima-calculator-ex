@@ -44,5 +44,5 @@ fun Context.createSimpleTextWatcher(afterTextChangedCallback: () -> Unit): TextW
 }
 
 fun AppCompatActivity.homeAsUp(b: Boolean) {
-    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    supportActionBar?.setDisplayHomeAsUpEnabled(b)
 }

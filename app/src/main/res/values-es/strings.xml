@@ -13,7 +13,7 @@
     <string name="charging">Cargando</string>
     <string name="charging_block">Cargando (Parada)</string>
     <string name="charging_dodge">Cargando (Esquiva)</string>
-    <string name="counterattack_with_bonus">Contraataque con %d de bonus</string>
+    <string name="counterattack_with_bonus">Contraataque con +%d de bonus</string>
     <string name="counterattack_without_bonus">Contrataque sin bonus</string>
     <string name="crowded_space">Espacio reducido</string>
     <string name="damage">Daño</string>
