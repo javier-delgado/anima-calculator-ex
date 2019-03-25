@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 fun Int.isPalindrome(): Boolean {
@@ -31,7 +32,7 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
     return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
 }
 
-fun Context.createSimpleTextWatcher(afterTextChangedCallback: () -> Unit): TextWatcher {
+fun Fragment.createSimpleTextWatcher(afterTextChangedCallback: () -> Unit): TextWatcher {
     return object : TextWatcher {
         override fun afterTextChanged(editable: Editable?) {
             afterTextChangedCallback()
