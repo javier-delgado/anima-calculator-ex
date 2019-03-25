@@ -86,7 +86,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:digits="0987654321"
+                        android:digits="0987654321+-"
                         android:imeOptions="actionNext"
                         android:importantForAutofill="no"
                         tools:ignore="UnusedAttribute"/>
@@ -118,7 +118,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:digits="0987654321"
+                        android:digits="0987654321+-"
                         android:importantForAutofill="no"
                         android:imeOptions="actionNext"
                         tools:ignore="UnusedAttribute"/>
@@ -149,7 +149,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:digits="0987654321"
+                        android:digits="0987654321+-"
                         android:importantForAutofill="no"
                         android:imeOptions="actionNext"
                         tools:ignore="UnusedAttribute"/>
@@ -232,7 +232,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:digits="0987654321"
+                        android:digits="0987654321+-"
                         android:imeOptions="actionNext"
                         android:importantForAutofill="no"
                         tools:ignore="UnusedAttribute"/>
@@ -264,7 +264,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:digits="0987654321"
+                        android:digits="0987654321+-"
                         android:importantForAutofill="no"
                         android:imeOptions="actionNext"
                         tools:ignore="UnusedAttribute"/>

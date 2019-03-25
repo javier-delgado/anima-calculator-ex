@@ -16,8 +16,8 @@ import com.javierdelgado.anima_calculator_ex.domain.DiceRollComposer
 import com.javierdelgado.anima_calculator_ex.models.Combat
 import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
 import com.javierdelgado.anima_calculator_ex.models.DiceRoll
+import com.javierdelgado.anima_calculator_ex.utils.MathEvaluator
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.custom.async
 import org.jetbrains.anko.doAsync
 import java.util.*
 
@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity(), Observer {
     private val attackRollTextWatcher by lazy {
         createSimpleTextWatcher {
             combat.attackRollValue = if (edtAttackRoll.text.isNotEmpty())
-                edtAttackRoll.text.toString().toInt()
+                MathEvaluator.evaluate(edtAttackRoll.text.toString())
             else
                 0
         }
@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity(), Observer {
     private val finalAttackTextWatcher by lazy {
         createSimpleTextWatcher {
             combat.characterAttackValue = if (edtFinalAttack.text.isNotEmpty())
-                edtFinalAttack.text.toString().toInt()
+                MathEvaluator.evaluate(edtFinalAttack.text.toString())
             else
                 0
         }
@@ -148,7 +148,7 @@ class MainActivity : AppCompatActivity(), Observer {
     private val defenseRollTextWatcher by lazy {
         createSimpleTextWatcher {
             combat.defenseRollValue = if (edtDefenseRoll.text.isNotEmpty())
-                edtDefenseRoll.text.toString().toInt()
+                MathEvaluator.evaluate(edtDefenseRoll.text.toString())
             else
                 0
         }
@@ -156,7 +156,7 @@ class MainActivity : AppCompatActivity(), Observer {
     private val finalDefenseTextWatcher by lazy {
         createSimpleTextWatcher {
             combat.characterDefenseValue = if (edtFinalDefense.text.isNotEmpty())
-                edtFinalDefense.text.toString().toInt()
+                MathEvaluator.evaluate(edtFinalDefense.text.toString())
             else
                 0
         }
@@ -164,7 +164,7 @@ class MainActivity : AppCompatActivity(), Observer {
     private val finalDamageTextWatcher by lazy {
         createSimpleTextWatcher {
             combat.finalDamage = if (edtFinalDamage.text.isNotEmpty())
-                edtFinalDamage.text.toString().toInt()
+                MathEvaluator.evaluate(edtFinalDamage.text.toString())
             else
                 0
         }

@@ -17,7 +17,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 28
         versionCode 4
-        versionName "1.1.1"
+        versionName "1.1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -53,6 +53,7 @@ dependencies {
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
     implementation "com.github.agrosner.dbflow:core:${dbflow_version}"
     implementation "com.github.agrosner.dbflow:lib:${dbflow_version}"
+    implementation 'net.objecthunter:exp4j:0.4.8'
 
     kapt "com.github.agrosner.dbflow:processor:${dbflow_version}"
 
