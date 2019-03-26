@@ -41,6 +41,44 @@
         <item>@string/pain</item>
         <item>@string/extreme_pain</item>
         <item>@string/defensive</item>
+        <item>@string/aim_neck</item>
+        <item>@string/aim_head</item>
+        <item>@string/aim_elbow</item>
+        <item>@string/aim_heart</item>
+        <item>@string/aim_groin</item>
+        <item>@string/aim_foot</item>
+        <item>@string/aim_hand</item>
+        <item>@string/aim_knee</item>
+        <item>@string/aim_abdomen</item>
+        <item>@string/aim_arm</item>
+        <item>@string/aim_thigh</item>
+        <item>@string/aim_calve</item>
+        <item>@string/aim_torso</item>
+        <item>@string/aim_eye</item>
+        <item>@string/aim_wrist</item>
+        <item>@string/aim_shoulder</item>
+        <item>@string/similar_weapon</item>
+        <item>@string/double_weapon</item>
+        <item>@string/different_weapon_or_unarmed</item>
+        <item>@string/projectile_move_faster_than_a_quarter_of_movement</item>
+        <item>@string/projectile_move_at_max_of_movement</item>
+        <item>@string/projectile_low_visibility</item>
+        <item>@string/projectile_target_has_cover</item>
+        <item>@string/projectile_change_target</item>
+        <item>@string/projectile_target_moves_faster_than_8</item>
+        <item>@string/projectile_target_moves_at_10</item>
+        <item>@string/projectile_target_moves_faster_than_10</item>
+        <item>@string/projectile_defended_on_that_assault</item>
+        <item>@string/projectile_beyond_weapon_reach</item>
+        <item>@string/projectile_big_target</item>
+        <item>@string/projectile_aim_for_a_turn</item>
+        <item>@string/projectile_aim_for_two_turns</item>
+        <item>@string/projectile_aim_for_3_turns</item>
+        <item>@string/projectile_at_point_blank</item>
+        <item>@string/disarm</item>
+        <item>@string/grab</item>
+        <item>@string/secondary_critic</item>
+
     </string-array>
 
     <integer-array name="attackModifierValues">
@@ -68,6 +106,43 @@
         <item>-40</item>
         <item>-80</item>
         <item>-30</item>
+        <item>-80</item>
+        <item>-60</item>
+        <item>-60</item>
+        <item>-60</item>
+        <item>-60</item>
+        <item>-50</item>
+        <item>-40</item>
+        <item>-40</item>
+        <item>-20</item>
+        <item>-20</item>
+        <item>-20</item>
+        <item>-10</item>
+        <item>-10</item>
+        <item>-100</item>
+        <item>-40</item>
+        <item>-30</item>
+        <item>-20</item>
+        <item>-40</item>
+        <item>-60</item>
+        <item>-10</item>
+        <item>-50</item>
+        <item>-20</item>
+        <item>-40</item>
+        <item>-10</item>
+        <item>-20</item>
+        <item>-40</item>
+        <item>-60</item>
+        <item>-40</item>
+        <item>-30</item>
+        <item>30</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>30</item>
+        <item>-40</item>
+        <item>-40</item>
+        <item>-10</item>
     </integer-array>
 
     <string-array name="defenseModifiers">
@@ -112,6 +187,7 @@
         <item>@string/energy_attack_block</item>
         <item>@string/area_attack_block</item>
         <item>@string/area_attack_dodge</item>
+        <item>@string/with_different_weapon</item>
     </string-array>
 
     <integer-array name="defenseModifierValues">
@@ -156,5 +232,6 @@
         <item>-120</item>
         <item>-120</item>
         <item>-80</item>
+        <item>-60</item>
     </integer-array>
 </resources>
