@@ -4,10 +4,6 @@ import java.util.*
 import kotlin.properties.Delegates
 import android.R
 
-
-
-
-
 class Combat: Observable() {
     // Attack properties
     var selectedAttackModifiers: List<Modifier> by Delegates.observable(emptyList()) { _, _, _ ->

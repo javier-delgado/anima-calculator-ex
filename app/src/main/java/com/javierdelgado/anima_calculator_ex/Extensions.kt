@@ -10,6 +10,10 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
+import com.javierdelgado.anima_calculator_ex.domain.DiceRollComposer
+import com.javierdelgado.anima_calculator_ex.models.DiceRoll
+import com.javierdelgado.anima_calculator_ex.ui.LogActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 fun Int.isPalindrome(): Boolean {
@@ -32,7 +36,7 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
     return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
 }
 
-fun Fragment.createSimpleTextWatcher(afterTextChangedCallback: () -> Unit): TextWatcher {
+fun createSimpleTextWatcher(afterTextChangedCallback: () -> Unit): TextWatcher {
     return object : TextWatcher {
         override fun afterTextChanged(editable: Editable?) {
             afterTextChangedCallback()
@@ -47,3 +51,10 @@ fun Fragment.createSimpleTextWatcher(afterTextChangedCallback: () -> Unit): Text
 fun AppCompatActivity.homeAsUp(b: Boolean) {
     supportActionBar?.setDisplayHomeAsUpEnabled(b)
 }
+
+fun showDiceRollSnackbar(roll: DiceRoll, view: View) {
+    Snackbar.make(view, DiceRollComposer(view.context, roll).compose(), Snackbar.LENGTH_LONG)
+        .setAction(R.string.view_log) { LogActivity.start(view.context) }
+        .show();
+}
+

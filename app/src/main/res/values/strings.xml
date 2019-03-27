@@ -140,6 +140,9 @@
     <string name="cancel">Cancel</string>
     <string name="name">Name</string>
     <string name="base_initiative">Base Initiative</string>
+    <string name="add">Add</string>
+    <string name="re_roll">Re-roll</string>
+    <string name="sort">Sort</string>
     <plurals name="open_rolls">
         <item quantity="one">Open roll</item>
         <item quantity="other">Open rolls</item>

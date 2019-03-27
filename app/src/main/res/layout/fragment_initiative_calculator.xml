@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            android:text="@string/add_character"
+            android:text="@string/add"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/btnRollForInitiative"/>
@@ -25,10 +25,22 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="@string/roll_initiative"
+            android:layout_marginEnd="4dp"
+            android:text="@string/re_roll"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/btnSort"
+            app:layout_constraintLeft_toRightOf="@id/btnAddPlayer"/>
+
+    <Button
+            android:id="@+id/btnSort"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/sort"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/btnAddPlayer"/>
+            app:layout_constraintLeft_toRightOf="@id/btnRollForInitiative"/>
+
 
     <View
             android:id="@+id/divider2"
@@ -40,11 +52,12 @@
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recCharactersInitiative"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:paddingTop="8dp"
-            android:paddingBottom="8dp"
+            android:paddingBottom="48dp"
             android:clipToPadding="false"
             app:layout_constraintTop_toBottomOf="@id/divider2"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_character_initiative"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

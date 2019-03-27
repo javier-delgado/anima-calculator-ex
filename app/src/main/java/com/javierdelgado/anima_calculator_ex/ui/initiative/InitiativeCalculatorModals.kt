@@ -1,7 +1,6 @@
 package com.javierdelgado.anima_calculator_ex.ui.initiative
 
 import android.content.Context
-import android.widget.CheckBox
 import android.widget.EditText
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
@@ -22,7 +21,7 @@ class InitiativeCalculatorModals(private val context: Context) {
                 val baseInitiativeText = view.findViewById<EditText>(R.id.edtBaseInitiative).text.toString()
 
 
-                val character = InitiativeCharacter(name = name, base = MathEvaluator.evaluate(baseInitiativeText))
+                val character = InitiativeCharacter(name, MathEvaluator.evaluate(baseInitiativeText))
                 afterSave(character)
             }
             negativeButton(R.string.cancel)

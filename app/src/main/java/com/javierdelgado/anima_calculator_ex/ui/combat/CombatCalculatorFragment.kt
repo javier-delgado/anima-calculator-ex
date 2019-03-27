@@ -5,14 +5,12 @@ import android.view.*
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.dbflow5.structure.save
-import com.google.android.material.snackbar.Snackbar
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.createSimpleTextWatcher
 import com.javierdelgado.anima_calculator_ex.domain.CombatResultComposer
-import com.javierdelgado.anima_calculator_ex.domain.DiceRollComposer
 import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
 import com.javierdelgado.anima_calculator_ex.models.Combat
-import com.javierdelgado.anima_calculator_ex.models.DiceRoll
+import com.javierdelgado.anima_calculator_ex.showDiceRollSnackbar
 import com.javierdelgado.anima_calculator_ex.ui.LogActivity
 import com.javierdelgado.anima_calculator_ex.utils.MathEvaluator
 import kotlinx.android.synthetic.main.fragment_combat_calculator.*
@@ -125,12 +123,6 @@ class CombatCalculatorFragment : Fragment(), Observer {
         editText?.setText(roll.finalResult.toString())
         showDiceRollSnackbar(roll, view)
         doAsync { roll.save() }
-    }
-
-    private fun showDiceRollSnackbar(roll: DiceRoll, view: View) {
-        Snackbar.make(view, DiceRollComposer(context!!, roll).compose(), Snackbar.LENGTH_LONG)
-            .setAction(R.string.view_log) { LogActivity.start(context!!) }
-            .show();
     }
 
     private val attackRollTextWatcher by lazy {
