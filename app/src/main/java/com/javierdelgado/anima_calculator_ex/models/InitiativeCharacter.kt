@@ -1,5 +1,11 @@
 package com.javierdelgado.anima_calculator_ex.models
 
+import android.annotation.SuppressLint
+import com.dbflow5.structure.save
+import com.javierdelgado.anima_calculator_ex.R
+import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
+import com.javierdelgado.anima_calculator_ex.showDiceRollSnackbar
+import org.jetbrains.anko.doAsync
 import java.util.*
 import kotlin.properties.Delegates
 
@@ -25,6 +31,25 @@ class InitiativeCharacter(name: String, base: Int) : Observable() {
 
     fun totalInitiative(): Int = base + roll + fumble
 
+    fun rollForInitiative(tag: String): DiceRoll {
+        val config = DiceRollConfig.loadSync()
+        config.fumbleEnabled = false
+
+        val diceRoll = DiceRoller(config).perform()
+        diceRoll.tag = tag
+        roll = diceRoll.finalResult
+        fumble = when(roll) {
+            1 -> -125
+            2 -> -100
+            3 -> -75
+            else -> 0
+        }
+
+        doAsync { diceRoll.save() }
+        return diceRoll
+    }
+
+
     // Observer logic
 
     override fun addObserver(o: Observer) {
@@ -43,4 +68,5 @@ class InitiativeCharacter(name: String, base: Int) : Observable() {
         if (observers.isEmpty()) return
         observers.forEach { observer -> observer.update(this, null) }
     }
+
 }

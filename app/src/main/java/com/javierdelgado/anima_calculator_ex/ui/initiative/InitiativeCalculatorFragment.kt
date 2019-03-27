@@ -57,9 +57,14 @@ class InitiativeCalculatorFragment : Fragment() {
                 adapter.notifyItemInserted(characters.size-1)
             }
         }
-        btnRollForInitiative.setOnClickListener {  }
+        btnRollForInitiative.setOnClickListener {
+            characters.forEach { it.rollForInitiative(getString(R.string.initiative_roll)) }
+            characters.sortByDescending { it.totalInitiative() }
+            adapter.notifyDataSetChanged()
+        }
         btnSort.setOnClickListener {
-
+            characters.sortByDescending { it.totalInitiative() }
+            adapter.notifyDataSetChanged()
         }
     }
 

@@ -1,4 +1,0 @@
-PreCommit:
-  UnitTests:
-    enabled: true
-    command: ['./gradlew', 'test']

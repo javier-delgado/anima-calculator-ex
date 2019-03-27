@@ -93,25 +93,11 @@ class CharacterInitiativeViewHolder(itemView: View) : RecyclerView.ViewHolder(it
     }
 
     private fun rollInitiative() {
-        val config = DiceRollConfig.loadSync()
-        config.fumbleEnabled = false
+        val diceRoll = character.rollForInitiative(itemView.context.getString(R.string.initiative_roll))
+        edtInitiativeRoll.setText(character.roll.toString())
+        edtFumble.setText(character.fumble.toString())
 
-        val roll = DiceRoller(config).perform()
-        roll.tag = itemView.context.getString(R.string.initiative)
-        edtInitiativeRoll.setText(roll.finalResult.toString())
-        calculateInitiativeFumble(roll)
-
-        showDiceRollSnackbar(roll, itemView)
-        doAsync { roll.save() }
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun calculateInitiativeFumble(roll: DiceRoll) {
-        when(roll.finalResult) {
-            1 -> edtFumble.setText("-125")
-            2 -> edtFumble.setText("-100")
-            3 -> edtFumble.setText("-75")
-        }
+        showDiceRollSnackbar(diceRoll, itemView)
     }
 
     private fun bindWatchers() {
