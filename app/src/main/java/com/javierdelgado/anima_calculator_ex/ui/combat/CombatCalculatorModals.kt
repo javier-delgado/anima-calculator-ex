@@ -1,4 +1,4 @@
-package com.javierdelgado.anima_calculator_ex.ui
+package com.javierdelgado.anima_calculator_ex.ui.combat
 
 import android.content.Context
 import android.view.View
@@ -19,7 +19,7 @@ import com.javierdelgado.anima_calculator_ex.inflate
 import com.javierdelgado.anima_calculator_ex.models.DiceRollConfig
 import com.javierdelgado.anima_calculator_ex.models.Modifier
 
-class MainActivityModals(private val context: Context) {
+class CombatCalculatorModals(private val context: Context) {
     private val attackModifiers by lazy { Modifier.loadListFromResources(context, R.array.attackModifiers, R.array.attackModifierValues) }
     private val defenseModifiers by lazy { Modifier.loadListFromResources(context, R.array.defenseModifiers, R.array.defenseModifierValues) }
 
@@ -73,7 +73,12 @@ class MainActivityModals(private val context: Context) {
         MaterialDialog(context).show {
             title(titleRes)
             noAutoDismiss()
-            customListAdapter(ModifiersAdapter(modifiers, selectedModifiers))
+            customListAdapter(
+                ModifiersAdapter(
+                    modifiers,
+                    selectedModifiers
+                )
+            )
             positiveButton(R.string.ok) { dialog ->
                 val adapter = dialog.getListAdapter() as ModifiersAdapter
                 callback(adapter.getSelectedModifiers())
@@ -102,7 +107,12 @@ class ModifiersAdapter(modifiers: List<Modifier>, selectedModifiers: List<Modifi
     private var sModifiers: List<SelectableModifier>
 
     init {
-        sModifiers = modifiers.map { modifier -> SelectableModifier(modifier, selectedModifiers.contains(modifier)) }
+        sModifiers = modifiers.map { modifier ->
+            SelectableModifier(
+                modifier,
+                selectedModifiers.contains(modifier)
+            )
+        }
     }
 
     override fun getItemCount(): Int {

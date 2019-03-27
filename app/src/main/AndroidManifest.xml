@@ -22,7 +22,8 @@
         </activity>
         <activity
                 android:name=".ui.LogActivity"
-                android:label="@string/log" />
+                android:label="@string/log"
+                android:screenOrientation="portrait" />
     </application>
 
 </manifest>

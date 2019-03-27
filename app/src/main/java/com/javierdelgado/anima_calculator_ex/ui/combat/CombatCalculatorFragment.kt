@@ -1,4 +1,4 @@
-package com.javierdelgado.anima_calculator_ex.ui
+package com.javierdelgado.anima_calculator_ex.ui.combat
 
 import android.os.Bundle
 import android.view.*
@@ -6,7 +6,6 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.dbflow5.structure.save
 import com.google.android.material.snackbar.Snackbar
-import com.javierdelgado.anima_calculator_ex.BuildConfig
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.createSimpleTextWatcher
 import com.javierdelgado.anima_calculator_ex.domain.CombatResultComposer
@@ -14,8 +13,8 @@ import com.javierdelgado.anima_calculator_ex.domain.DiceRollComposer
 import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
 import com.javierdelgado.anima_calculator_ex.models.Combat
 import com.javierdelgado.anima_calculator_ex.models.DiceRoll
+import com.javierdelgado.anima_calculator_ex.ui.LogActivity
 import com.javierdelgado.anima_calculator_ex.utils.MathEvaluator
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_combat_calculator.*
 import org.jetbrains.anko.doAsync
 import java.util.*
@@ -23,7 +22,7 @@ import java.util.*
 class CombatCalculatorFragment : Fragment(), Observer {
     private val combat: Combat = Combat()
     private val resultComposer by lazy { CombatResultComposer(context!!, combat) }
-    private val modals by lazy { MainActivityModals(context!!) }
+    private val modals by lazy { CombatCalculatorModals(context!!) }
 
     companion object {
         fun newInstance(): CombatCalculatorFragment {
@@ -36,11 +35,6 @@ class CombatCalculatorFragment : Fragment(), Observer {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_combat_calculator, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        txtVersion.text = getString(R.string.v_, BuildConfig.VERSION_NAME)
     }
 
     override fun onResume() {
