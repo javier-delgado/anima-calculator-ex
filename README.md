@@ -2,6 +2,10 @@
 
 This project is based off the original [Anima Calculator](https://github.com/MiguelAngelLV/Anima-Calculator). I took the core logic from it and refactored it into a 100% kotlin app.
 
+### Download
+
+https://play.google.com/store/apps/details?id=com.javierdelgado.anima_calculator_ex
+
 ### Features
 
 - Combat calculator
@@ -11,7 +15,6 @@ This project is based off the original [Anima Calculator](https://github.com/Mig
 
 ### TODO
 
-- Add some missing combat modifiers
 - Allow calculating critic hits more easily
 - Add a feature to calculate initiative for the whole party
 
