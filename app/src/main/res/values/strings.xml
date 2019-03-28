@@ -144,6 +144,9 @@
     <string name="re_roll">Re-roll</string>
     <string name="sort">Sort</string>
     <string name="initiative_roll">Initiative Roll</string>
+    <string name="roll_initiative_confirm">Roll for initiative? (Previous rolls will be lost)</string>
+    <string name="delete_character_confirmation">Delete character?</string>
+    <string name="delete">Delete</string>
     <plurals name="open_rolls">
         <item quantity="one">Open roll</item>
         <item quantity="other">Open rolls</item>

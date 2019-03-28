@@ -7,7 +7,9 @@ import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.models.InitiativeCharacter
+import com.javierdelgado.anima_calculator_ex.showSoftKeyboard
 import com.javierdelgado.anima_calculator_ex.utils.MathEvaluator
+
 
 class InitiativeCalculatorModals(private val context: Context) {
 
@@ -26,5 +28,13 @@ class InitiativeCalculatorModals(private val context: Context) {
             }
             negativeButton(R.string.cancel)
         }
+        setupDialog(dialog)
+    }
+
+    private fun setupDialog(dialog: MaterialDialog) {
+        val view = dialog.getCustomView()
+        val edtName = view.findViewById<EditText>(R.id.edtName)
+        edtName.requestFocus()
+        showSoftKeyboard(view.context)
     }
 }

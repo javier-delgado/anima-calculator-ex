@@ -6,23 +6,20 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.constraintlayout.widget.Group
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.dbflow5.structure.save
+import com.afollestad.materialdialogs.MaterialDialog
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.createSimpleTextWatcher
-import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
 import com.javierdelgado.anima_calculator_ex.inflate
-import com.javierdelgado.anima_calculator_ex.models.DiceRoll
-import com.javierdelgado.anima_calculator_ex.models.DiceRollConfig
 import com.javierdelgado.anima_calculator_ex.models.InitiativeCharacter
 import com.javierdelgado.anima_calculator_ex.showDiceRollSnackbar
 import com.javierdelgado.anima_calculator_ex.utils.MathEvaluator
-import org.jetbrains.anko.doAsync
 import java.util.*
 
 
-class CharactersInitiativeAdapter(private val characters: List<InitiativeCharacter>) :
+class CharactersInitiativeAdapter(private val characters: MutableList<InitiativeCharacter>) :
     RecyclerView.Adapter<CharacterInitiativeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterInitiativeViewHolder {
         val inflatedView = parent.inflate(R.layout.item_character_initiative, false)
@@ -34,7 +31,10 @@ class CharactersInitiativeAdapter(private val characters: List<InitiativeCharact
     }
 
     override fun onBindViewHolder(holder: CharacterInitiativeViewHolder, position: Int) {
-        holder.bind(characters.get(position))
+        holder.bind(characters[position]) { character ->
+            characters.remove(character)
+            notifyDataSetChanged()
+        }
     }
 
     override fun onViewDetachedFromWindow(holder: CharacterInitiativeViewHolder) {
@@ -45,6 +45,10 @@ class CharactersInitiativeAdapter(private val characters: List<InitiativeCharact
     override fun onViewAttachedToWindow(holder: CharacterInitiativeViewHolder) {
         super.onViewAttachedToWindow(holder)
         holder.onAttach()
+    }
+
+    fun sort() {
+        characters.sortByDescending { it.totalInitiative() }
     }
 }
 
@@ -57,14 +61,19 @@ class CharacterInitiativeViewHolder(itemView: View) : RecyclerView.ViewHolder(it
     private val edtInitiativeRoll by lazy { itemView.findViewById<EditText>(R.id.edtInitiativeRoll) }
     private val edtFumble by lazy { itemView.findViewById<EditText>(R.id.edtFumble) }
     private val btnRollInitiativeDice by lazy { itemView.findViewById<ImageButton>(R.id.btnRollInitiativeDice) }
+    private val groupInitiativeSettings by lazy { itemView.findViewById<Group>(R.id.groupInitiativeSettings) }
 
     private lateinit var character: InitiativeCharacter
+    private var deleteCallback: (InitiativeCharacter) -> Unit = {}
 
-    fun bind(char: InitiativeCharacter) {
+    fun bind(char: InitiativeCharacter, onCharacterDelete: (InitiativeCharacter) -> Unit) {
         character = char
+        deleteCallback = onCharacterDelete
         edtBaseInitiative.setText(character.base.toString())
         edtInitiativeRoll.setText(character.roll.toString())
         edtFumble.setText(character.fumble.toString())
+        updateFormVisibility()
+
         updateUI()
         bindButtons()
         bindWatchers()
@@ -90,6 +99,28 @@ class CharacterInitiativeViewHolder(itemView: View) : RecyclerView.ViewHolder(it
         btnRollInitiativeDice.setOnClickListener {
             rollInitiative()
         }
+        lytInitiativeHeader.setOnClickListener {
+            character.dataVisible = !character.dataVisible
+            updateFormVisibility()
+        }
+        lytInitiativeHeader.setOnLongClickListener {
+            showDeleteDialog()
+        }
+    }
+
+    private fun showDeleteDialog(): Boolean {
+        MaterialDialog(itemView.context).show {
+            message(R.string.delete_character_confirmation)
+            positiveButton(R.string.delete) {
+                deleteCallback(character)
+            }
+            negativeButton(R.string.cancel)
+        }
+        return true
+    }
+
+    private fun updateFormVisibility() {
+        groupInitiativeSettings.visibility = if(character.dataVisible) View.VISIBLE else View.GONE
     }
 
     private fun rollInitiative() {

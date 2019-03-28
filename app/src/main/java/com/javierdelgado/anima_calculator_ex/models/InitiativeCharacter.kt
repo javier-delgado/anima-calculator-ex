@@ -1,10 +1,7 @@
 package com.javierdelgado.anima_calculator_ex.models
 
-import android.annotation.SuppressLint
 import com.dbflow5.structure.save
-import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
-import com.javierdelgado.anima_calculator_ex.showDiceRollSnackbar
 import org.jetbrains.anko.doAsync
 import java.util.*
 import kotlin.properties.Delegates
@@ -23,6 +20,7 @@ class InitiativeCharacter(name: String, base: Int) : Observable() {
     var fumble: Int by Delegates.observable(0) { _, _, _ ->
         notifyObservers()
     }
+    var dataVisible: Boolean = false
 
     init {
         this.name = name

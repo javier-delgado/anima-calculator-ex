@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.afollestad.materialdialogs.MaterialDialog
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.models.InitiativeCharacter
 import kotlinx.android.synthetic.main.fragment_initiative_calculator.*
@@ -58,12 +59,18 @@ class InitiativeCalculatorFragment : Fragment() {
             }
         }
         btnRollForInitiative.setOnClickListener {
-            characters.forEach { it.rollForInitiative(getString(R.string.initiative_roll)) }
-            characters.sortByDescending { it.totalInitiative() }
-            adapter.notifyDataSetChanged()
+            MaterialDialog(context!!).show {
+                message(R.string.roll_initiative_confirm)
+                positiveButton(R.string.roll) {
+                    characters.forEach { it.rollForInitiative(getString(R.string.initiative_roll)) }
+                    adapter.sort()
+                    adapter.notifyDataSetChanged()
+                }
+                negativeButton(R.string.cancel)
+            }
         }
         btnSort.setOnClickListener {
-            characters.sortByDescending { it.totalInitiative() }
+            adapter.sort()
             adapter.notifyDataSetChanged()
         }
     }
