@@ -16,6 +16,7 @@ import com.javierdelgado.anima_calculator_ex.inflate
 import com.javierdelgado.anima_calculator_ex.models.InitiativeCharacter
 import com.javierdelgado.anima_calculator_ex.showDiceRollSnackbar
 import com.javierdelgado.anima_calculator_ex.utils.MathEvaluator
+import com.raizlabs.android.dbflow.kotlinextensions.delete
 import java.util.*
 
 
@@ -32,6 +33,7 @@ class CharactersInitiativeAdapter(private val characters: MutableList<Initiative
 
     override fun onBindViewHolder(holder: CharacterInitiativeViewHolder, position: Int) {
         holder.bind(characters[position]) { character ->
+            character.delete()
             characters.remove(character)
             notifyDataSetChanged()
         }

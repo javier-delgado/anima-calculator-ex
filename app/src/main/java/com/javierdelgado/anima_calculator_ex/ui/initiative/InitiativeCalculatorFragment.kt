@@ -10,11 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.models.InitiativeCharacter
+import com.javierdelgado.anima_calculator_ex.models.Party
+import com.raizlabs.android.dbflow.kotlinextensions.save
 import kotlinx.android.synthetic.main.fragment_initiative_calculator.*
+import org.jetbrains.anko.doAsync
 
 class InitiativeCalculatorFragment : Fragment() {
     private val modals by lazy { InitiativeCalculatorModals(context!!) }
-    private val characters = mutableListOf<InitiativeCharacter>()
+    private lateinit var party: Party
+    private lateinit var characters: MutableList<InitiativeCharacter>
     private val adapter by lazy { CharactersInitiativeAdapter(characters) }
 
     companion object {
@@ -37,6 +41,8 @@ class InitiativeCalculatorFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        party = Party.quickSaveParty()
+        characters = party.characters?.toMutableList() ?: mutableListOf()
         setupCharacterList()
     }
 
@@ -48,10 +54,21 @@ class InitiativeCalculatorFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         unbindListeners()
+        quickSave()
+    }
+
+    private fun quickSave() {
+        doAsync {
+            Party.quickSaveParty().apply {
+                characters = this@InitiativeCalculatorFragment.characters
+                save()
+            }
+        }
     }
 
     private fun setupCharacterList() {
         recCharactersInitiative.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        adapter.sort()
         recCharactersInitiative.adapter = adapter
     }
 
@@ -59,8 +76,9 @@ class InitiativeCalculatorFragment : Fragment() {
     private fun bindListeners() {
         btnAddPlayer.setOnClickListener {
             modals.showNewCharacterForm { character ->
+                character.party = party
                 characters.add(character)
-                adapter.notifyItemInserted(characters.size-1)
+                adapter.notifyItemInserted(characters.size - 1)
             }
         }
         btnRollForInitiative.setOnClickListener {

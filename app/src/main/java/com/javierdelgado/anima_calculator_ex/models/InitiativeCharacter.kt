@@ -2,15 +2,10 @@ package com.javierdelgado.anima_calculator_ex.models
 
 import com.javierdelgado.anima_calculator_ex.AppDatabase
 import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
-import com.raizlabs.android.dbflow.annotation.Column
-import com.raizlabs.android.dbflow.annotation.ForeignKey
-import com.raizlabs.android.dbflow.annotation.PrimaryKey
-import com.raizlabs.android.dbflow.annotation.Table
+import com.raizlabs.android.dbflow.annotation.*
 import com.raizlabs.android.dbflow.kotlinextensions.save
 import org.jetbrains.anko.doAsync
 import java.util.*
-import kotlin.properties.Delegates
-
 
 
 @Table(database = AppDatabase::class, useBooleanGetterSetters = false)
@@ -52,7 +47,7 @@ class InitiativeCharacter(name: String, base: Int) : Observable() {
     @Column
     var enemy: Boolean = false
 
-    @ForeignKey(saveForeignKeyModel = false)
+    @ForeignKey(stubbedRelationship = true)
     var party: Party? = null
 
     var dataVisible: Boolean = false
