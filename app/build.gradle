@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 ext.anko_version='0.10.8'
-def dbflow_version = "5.0.0-alpha1"
+def dbflow_version = "4.2.4"
 
 android {
     compileSdkVersion 28
@@ -51,11 +51,12 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:2.1.0'
     implementation 'io.paperdb:paperdb:2.6'
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
-    implementation "com.github.agrosner.dbflow:core:${dbflow_version}"
-    implementation "com.github.agrosner.dbflow:lib:${dbflow_version}"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
+    implementation "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:${dbflow_version}"
     implementation 'net.objecthunter:exp4j:0.4.8'
 
-    kapt "com.github.agrosner.dbflow:processor:${dbflow_version}"
+    kapt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'androidx.test:core:1.1.0'

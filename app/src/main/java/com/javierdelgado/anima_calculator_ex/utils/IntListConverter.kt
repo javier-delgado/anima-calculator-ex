@@ -1,6 +1,7 @@
 package com.javierdelgado.anima_calculator_ex.utils
 
-import com.dbflow5.converter.TypeConverter
+import com.raizlabs.android.dbflow.converter.TypeConverter
+
 
 class IntListConverter : TypeConverter<String, MutableList<Int>>() {
     private val separator = ","

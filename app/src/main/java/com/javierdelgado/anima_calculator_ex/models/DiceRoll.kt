@@ -1,10 +1,10 @@
 package com.javierdelgado.anima_calculator_ex.models
 
-import com.dbflow5.annotation.Column
-import com.dbflow5.annotation.PrimaryKey
-import com.dbflow5.annotation.Table
 import com.javierdelgado.anima_calculator_ex.AppDatabase
 import com.javierdelgado.anima_calculator_ex.utils.IntListConverter
+import com.raizlabs.android.dbflow.annotation.Column
+import com.raizlabs.android.dbflow.annotation.PrimaryKey
+import com.raizlabs.android.dbflow.annotation.Table
 import java.util.*
 
 @Table(database = AppDatabase::class)

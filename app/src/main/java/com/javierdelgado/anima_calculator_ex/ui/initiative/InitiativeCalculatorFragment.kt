@@ -30,6 +30,11 @@ class InitiativeCalculatorFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_initiative_calculator, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupCharacterList()

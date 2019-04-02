@@ -1,12 +1,11 @@
 package com.javierdelgado.anima_calculator_ex
 
-import com.dbflow5.annotation.Database
-import com.dbflow5.config.DBFlowDatabase
+import com.raizlabs.android.dbflow.annotation.Database
 
 @Database(version = AppDatabase.VERSION)
-abstract class AppDatabase: DBFlowDatabase() {
+abstract class AppDatabase() {
     companion object {
-        const val NAME = "AppDatabase"
+        const val NAME = "anima_calc_db"
         const val VERSION = 1
     }
 }

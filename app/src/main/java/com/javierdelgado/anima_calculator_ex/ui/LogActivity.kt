@@ -9,15 +9,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dbflow5.query.list
-import com.dbflow5.query.select
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.domain.DiceRollComposer
 import com.javierdelgado.anima_calculator_ex.homeAsUp
 import com.javierdelgado.anima_calculator_ex.inflate
 import com.javierdelgado.anima_calculator_ex.models.DiceRoll
-import com.javierdelgado.anima_calculator_ex.models.DiceRoll_Table
 import com.javierdelgado.anima_calculator_ex.models.DiceRoll_Table.updatedAt
+import com.raizlabs.android.dbflow.kotlinextensions.*
 import kotlinx.android.synthetic.main.activity_log.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread

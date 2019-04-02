@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.*
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import com.dbflow5.structure.save
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.createSimpleTextWatcher
 import com.javierdelgado.anima_calculator_ex.domain.CombatResultComposer
@@ -13,6 +12,7 @@ import com.javierdelgado.anima_calculator_ex.models.Combat
 import com.javierdelgado.anima_calculator_ex.showDiceRollSnackbar
 import com.javierdelgado.anima_calculator_ex.ui.LogActivity
 import com.javierdelgado.anima_calculator_ex.utils.MathEvaluator
+import com.raizlabs.android.dbflow.kotlinextensions.save
 import kotlinx.android.synthetic.main.fragment_combat_calculator.*
 import org.jetbrains.anko.doAsync
 import java.util.*
@@ -33,6 +33,11 @@ class CombatCalculatorFragment : Fragment(), Observer {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_combat_calculator, container, false)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onResume() {

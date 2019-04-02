@@ -1,31 +1,69 @@
 package com.javierdelgado.anima_calculator_ex.models
 
-import com.dbflow5.structure.save
+import com.javierdelgado.anima_calculator_ex.AppDatabase
 import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
+import com.raizlabs.android.dbflow.annotation.Column
+import com.raizlabs.android.dbflow.annotation.ForeignKey
+import com.raizlabs.android.dbflow.annotation.PrimaryKey
+import com.raizlabs.android.dbflow.annotation.Table
+import com.raizlabs.android.dbflow.kotlinextensions.save
 import org.jetbrains.anko.doAsync
 import java.util.*
 import kotlin.properties.Delegates
 
+
+
+@Table(database = AppDatabase::class, useBooleanGetterSetters = false)
 class InitiativeCharacter(name: String, base: Int) : Observable() {
-    private val observers: MutableList<Observer> = mutableListOf<Observer>()
-    var name: String by Delegates.observable("") { _, _, _ ->
-        notifyObservers()
-    }
-    var base: Int by Delegates.observable(0) { _, _, _ ->
-        notifyObservers()
-    }
-    var roll: Int by Delegates.observable(0) { _, _, _ ->
-        notifyObservers()
-    }
-    var fumble: Int by Delegates.observable(0) { _, _, _ ->
-        notifyObservers()
-    }
+    @PrimaryKey(autoincrement = true)
+    var id: Int = 0
+
+    @Column
+    var name: String = ""
+        set(value) {
+            field = value
+            notifyObservers()
+        }
+
+    @Column
+    var base: Int = 0
+        set(value) {
+            field = value
+            notifyObservers()
+        }
+
+
+    @Column
+    var roll: Int = 0
+        set(value) {
+            field = value
+            notifyObservers()
+        }
+
+
+    @Column
+    var fumble: Int = 0
+        set(value) {
+            field = value
+            notifyObservers()
+        }
+
+
+    @Column
+    var enemy: Boolean = false
+
+    @ForeignKey(saveForeignKeyModel = false)
+    var party: Party? = null
+
     var dataVisible: Boolean = false
+    private val observers: MutableList<Observer> = mutableListOf<Observer>()
 
     init {
         this.name = name
         this.base = base
     }
+
+    constructor() : this("", 0)
 
     fun totalInitiative(): Int = base + roll + fumble
 
