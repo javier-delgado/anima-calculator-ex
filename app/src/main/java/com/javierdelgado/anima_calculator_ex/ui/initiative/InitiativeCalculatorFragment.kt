@@ -1,24 +1,22 @@
 package com.javierdelgado.anima_calculator_ex.ui.initiative
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.javierdelgado.anima_calculator_ex.R
-import com.javierdelgado.anima_calculator_ex.models.InitiativeCharacter
 import com.javierdelgado.anima_calculator_ex.models.Party
+import com.javierdelgado.anima_calculator_ex.snackbar
 import com.raizlabs.android.dbflow.kotlinextensions.save
 import kotlinx.android.synthetic.main.fragment_initiative_calculator.*
-import org.jetbrains.anko.doAsync
 
 class InitiativeCalculatorFragment : Fragment() {
     private val modals by lazy { InitiativeCalculatorModals(context!!) }
-    private lateinit var party: Party
-    private lateinit var characters: MutableList<InitiativeCharacter>
+    private val characters by lazy {
+        Party.loadQuickSaveParty().characters?.toMutableList() ?: mutableListOf()
+    }
     private val adapter by lazy { CharactersInitiativeAdapter(characters) }
 
     companion object {
@@ -41,9 +39,30 @@ class InitiativeCalculatorFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        party = Party.quickSaveParty()
-        characters = party.characters?.toMutableList() ?: mutableListOf()
         setupCharacterList()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.initiative_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menuSaveParty -> modals.showSavePartyForm { name ->
+                saveNewParty(name)
+            }
+            R.id.menuLoadParty -> modals.showLoadParty { party ->
+                loadParty(party)
+            }
+            R.id.menuNewParty -> modals.showConfirmClear {
+                clearAll()
+            }
+            R.id.menuDeleteParty -> modals.showDeleteParty {
+
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
     }
 
     override fun onResume() {
@@ -58,12 +77,7 @@ class InitiativeCalculatorFragment : Fragment() {
     }
 
     private fun quickSave() {
-        doAsync {
-            Party.quickSaveParty().apply {
-                characters = this@InitiativeCalculatorFragment.characters
-                save()
-            }
-        }
+        Party(characters).apply { quickSave() }
     }
 
     private fun setupCharacterList() {
@@ -72,11 +86,30 @@ class InitiativeCalculatorFragment : Fragment() {
         recCharactersInitiative.adapter = adapter
     }
 
+    private fun saveNewParty(name: String) {
+        Party().apply {
+            this@InitiativeCalculatorFragment.characters.forEach { it.party = this }
+            this.name = name
+            this.characters = this@InitiativeCalculatorFragment.characters
+            save()
+        }
+        view?.snackbar(R.string.party_saved)
+    }
+
+    private fun clearAll() {
+        characters.clear()
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun loadParty(party: Party) {
+        characters.clear()
+        characters.addAll(party.characters?.toMutableList() ?: mutableListOf())
+        adapter.notifyDataSetChanged()
+    }
 
     private fun bindListeners() {
         btnAddPlayer.setOnClickListener {
             modals.showNewCharacterForm { character ->
-                character.party = party
                 characters.add(character)
                 adapter.notifyItemInserted(characters.size - 1)
             }

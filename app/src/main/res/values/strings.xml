@@ -147,6 +147,15 @@
     <string name="roll_initiative_confirm">Roll for initiative? (Previous rolls will be lost)</string>
     <string name="delete_character_confirmation">Delete character?</string>
     <string name="delete">Delete</string>
+    <string name="save_party">Save party</string>
+    <string name="load_party">Load party</string>
+    <string name="new_party">New party</string>
+    <string name="party_name">Party name</string>
+    <string name="party_saved">Party saved</string>
+    <string name="clear_party_confirm">Any unsaved characters will be lost. Continue?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="delete_party">Delete party</string>
     <plurals name="open_rolls">
         <item quantity="one">Open roll</item>
         <item quantity="other">Open rolls</item>

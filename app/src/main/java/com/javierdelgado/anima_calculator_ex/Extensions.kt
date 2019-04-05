@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
@@ -57,6 +58,10 @@ fun showDiceRollSnackbar(roll: DiceRoll, view: View) {
     Snackbar.make(view, DiceRollComposer(view.context, roll).compose(), Snackbar.LENGTH_LONG)
         .setAction(R.string.view_log) { LogActivity.start(view.context) }
         .show();
+}
+
+fun View.snackbar(@StringRes res: Int) {
+    Snackbar.make(this, res, Snackbar.LENGTH_LONG).show();
 }
 
 fun showSoftKeyboard(context: Context) {

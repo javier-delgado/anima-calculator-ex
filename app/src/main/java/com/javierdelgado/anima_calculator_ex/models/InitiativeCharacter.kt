@@ -11,6 +11,7 @@ import java.util.*
 @Table(database = AppDatabase::class, useBooleanGetterSetters = false)
 class InitiativeCharacter(name: String, base: Int) : Observable() {
     @PrimaryKey(autoincrement = true)
+    @Transient
     var id: Int = 0
 
     @Column
@@ -48,10 +49,14 @@ class InitiativeCharacter(name: String, base: Int) : Observable() {
     var enemy: Boolean = false
 
     @ForeignKey(stubbedRelationship = true)
+    @Transient
     var party: Party? = null
 
+    @Transient
     var dataVisible: Boolean = false
-    private val observers: MutableList<Observer> = mutableListOf<Observer>()
+
+    @Transient
+    private val observers: MutableList<Observer> = mutableListOf()
 
     init {
         this.name = name
