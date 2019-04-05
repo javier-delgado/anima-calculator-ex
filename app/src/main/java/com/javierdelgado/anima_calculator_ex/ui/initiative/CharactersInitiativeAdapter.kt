@@ -3,6 +3,7 @@ package com.javierdelgado.anima_calculator_ex.ui.initiative
 import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
@@ -61,6 +62,7 @@ class CharacterInitiativeViewHolder(itemView: View) : RecyclerView.ViewHolder(it
     private val lytInitiativeHeader by lazy { itemView.findViewById<ViewGroup>(R.id.lytInitiativeHeader) }
     private val edtBaseInitiative by lazy { itemView.findViewById<EditText>(R.id.edtBaseInitiative) }
     private val edtInitiativeRoll by lazy { itemView.findViewById<EditText>(R.id.edtInitiativeRoll) }
+    private val chkIsEnemy by lazy { itemView.findViewById<CheckBox>(R.id.chkIsEnemy) }
     private val edtFumble by lazy { itemView.findViewById<EditText>(R.id.edtFumble) }
     private val btnRollInitiativeDice by lazy { itemView.findViewById<ImageButton>(R.id.btnRollInitiativeDice) }
     private val groupInitiativeSettings by lazy { itemView.findViewById<Group>(R.id.groupInitiativeSettings) }
@@ -74,6 +76,7 @@ class CharacterInitiativeViewHolder(itemView: View) : RecyclerView.ViewHolder(it
         edtBaseInitiative.setText(character.base.toString())
         edtInitiativeRoll.setText(character.roll.toString())
         edtFumble.setText(character.fumble.toString())
+        chkIsEnemy.isChecked = character.enemy
         updateFormVisibility()
 
         updateUI()
@@ -137,6 +140,9 @@ class CharacterInitiativeViewHolder(itemView: View) : RecyclerView.ViewHolder(it
         edtBaseInitiative.addTextChangedListener(baseInitiativeTextWatcher)
         edtInitiativeRoll.addTextChangedListener(initiativeRollTextWatcher)
         edtFumble.addTextChangedListener(fumbleTextWatcher)
+        chkIsEnemy.setOnCheckedChangeListener { _, b ->
+            character.enemy = b
+        }
     }
 
     // When character data changes

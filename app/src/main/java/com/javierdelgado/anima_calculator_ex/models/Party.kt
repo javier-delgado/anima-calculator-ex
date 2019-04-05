@@ -5,9 +5,7 @@ import com.raizlabs.android.dbflow.annotation.*
 import com.raizlabs.android.dbflow.annotation.OneToMany
 import com.raizlabs.android.dbflow.kotlinextensions.oneToMany
 import com.raizlabs.android.dbflow.kotlinextensions.select
-import com.raizlabs.android.dbflow.kotlinextensions.where
 import io.paperdb.Paper
-import org.jetbrains.anko.doAsync
 
 
 @Table(database = AppDatabase::class)
@@ -22,9 +20,8 @@ class Party(characters: MutableList<InitiativeCharacter> = mutableListOf()) {
 
     @get:OneToMany(methods = [OneToMany.Method.ALL])
     var characters by oneToMany {
-        select.from(InitiativeCharacter::class.java) where (InitiativeCharacter_Table.party_id.eq(
-            this.id
-        ))
+        select.from(InitiativeCharacter::class.java)
+            .where(InitiativeCharacter_Table.party_id.eq(this.id), InitiativeCharacter_Table.enemy.notEq(true))
     }
 
     companion object {
@@ -41,6 +38,10 @@ class Party(characters: MutableList<InitiativeCharacter> = mutableListOf()) {
 
     fun quickSave() {
         Paper.book().write(QUICK_SAVE_KEY, this)
+    }
+
+    fun persisted(): Boolean {
+        return id > 0
     }
 
 }

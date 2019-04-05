@@ -65,4 +65,25 @@
                 tools:ignore="HardcodedText,UnusedAttribute"/>
     </LinearLayout>
 
+    <CheckBox
+            android:id="@+id/chkIsEnemy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/is_enemy"
+            app:layout_constraintTop_toBottomOf="@id/lytBaseInitiative"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+            android:id="@+id/txtEnemiesExplanation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/enemies_explanation"
+            android:textSize="12sp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintLeft_toRightOf="@id/chkIsEnemy"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/chkIsEnemy"
+            app:layout_constraintTop_toTopOf="@id/chkIsEnemy"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

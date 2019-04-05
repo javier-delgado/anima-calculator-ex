@@ -1,6 +1,7 @@
 package com.javierdelgado.anima_calculator_ex.ui.initiative
 
 import android.content.Context
+import android.widget.CheckBox
 import android.widget.EditText
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
@@ -27,9 +28,9 @@ class InitiativeCalculatorModals(private val context: Context) {
                 val view = it.getCustomView()
                 val name = view.findViewById<EditText>(R.id.edtName).text.toString()
                 val baseInitiativeText = view.findViewById<EditText>(R.id.edtBaseInitiative).text.toString()
+                val isEnemy = view.findViewById<CheckBox>(R.id.chkIsEnemy).isChecked
 
-
-                val character = InitiativeCharacter(name, MathEvaluator.evaluate(baseInitiativeText))
+                val character = InitiativeCharacter(name, MathEvaluator.evaluate(baseInitiativeText), isEnemy)
                 afterSave(character)
             }
             negativeButton(R.string.cancel)
@@ -44,9 +45,9 @@ class InitiativeCalculatorModals(private val context: Context) {
         showSoftKeyboard(view.context)
     }
 
-    fun showSavePartyForm(onSave: (text: String) -> Unit) {
+    fun showSavePartyForm(previousName: String = "", onSave: (text: String) -> Unit) {
         MaterialDialog(context).show {
-            input(hintRes = R.string.party_name) { _, text ->
+            input(hintRes = R.string.party_name, prefill = previousName) { _, text ->
                 onSave(text.toString())
             }
             positiveButton(R.string.save)
@@ -66,6 +67,16 @@ class InitiativeCalculatorModals(private val context: Context) {
     fun showConfirmClear(onConfirm: () -> Unit) {
         MaterialDialog(context).show {
             message(R.string.clear_party_confirm)
+            positiveButton(R.string.yes) {
+                onConfirm()
+            }
+            negativeButton(R.string.no)
+        }
+    }
+
+    fun showDeleteParty(onConfirm: () -> Unit) {
+        MaterialDialog(context).show {
+            message(R.string.delete_party_confirm)
             positiveButton(R.string.yes) {
                 onConfirm()
             }

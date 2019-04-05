@@ -156,6 +156,9 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="delete_party">Delete party</string>
+    <string name="delete_party_confirm">Are you sure you want to delete the current party?</string>
+    <string name="is_enemy">Is enemy</string>
+    <string name="enemies_explanation">(Enemies are not persisted when the party is saved)</string>
     <plurals name="open_rolls">
         <item quantity="one">Open roll</item>
         <item quantity="other">Open rolls</item>

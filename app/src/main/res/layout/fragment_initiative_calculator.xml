@@ -42,12 +42,25 @@
             app:layout_constraintLeft_toRightOf="@id/btnRollForInitiative"/>
 
 
+
+    <TextView
+            android:id="@+id/txtPartyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/material_white"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/btnAddPlayer"
+            tools:visibility="visible"
+            tools:text="Anima party"/>
+
     <View
-            android:id="@+id/divider2"
+            android:id="@+id/divider3"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginTop="4dp"
             android:background="@color/divider_grey"
-            app:layout_constraintTop_toBottomOf="@id/btnAddPlayer"/>
+            app:layout_constraintTop_toBottomOf="@id/txtPartyName"/>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recCharactersInitiative"
@@ -56,7 +69,7 @@
             android:paddingTop="8dp"
             android:paddingBottom="48dp"
             android:clipToPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/divider2"
+            app:layout_constraintTop_toBottomOf="@id/divider3"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_character_initiative"/>
 

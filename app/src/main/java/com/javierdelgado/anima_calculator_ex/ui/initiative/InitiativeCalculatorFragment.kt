@@ -7,16 +7,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.javierdelgado.anima_calculator_ex.R
+import com.javierdelgado.anima_calculator_ex.models.InitiativeCharacter
 import com.javierdelgado.anima_calculator_ex.models.Party
 import com.javierdelgado.anima_calculator_ex.snackbar
+import com.raizlabs.android.dbflow.kotlinextensions.delete
 import com.raizlabs.android.dbflow.kotlinextensions.save
 import kotlinx.android.synthetic.main.fragment_initiative_calculator.*
 
 class InitiativeCalculatorFragment : Fragment() {
     private val modals by lazy { InitiativeCalculatorModals(context!!) }
-    private val characters by lazy {
-        Party.loadQuickSaveParty().characters?.toMutableList() ?: mutableListOf()
-    }
+    private var loadedParty: Party? = null // This keeps the persisted party (if it is persisted)
+    private lateinit var characters: MutableList<InitiativeCharacter>
     private val adapter by lazy { CharactersInitiativeAdapter(characters) }
 
     companion object {
@@ -39,6 +40,15 @@ class InitiativeCalculatorFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val quickSavedParty = Party.loadQuickSaveParty()
+        characters = quickSavedParty.characters?.toMutableList() ?: mutableListOf()
+        if (quickSavedParty.persisted()) {
+            loadedParty = quickSavedParty
+            txtPartyName.apply {
+                text = quickSavedParty.name
+                visibility = View.VISIBLE
+            }
+        }
         setupCharacterList()
     }
 
@@ -48,7 +58,7 @@ class InitiativeCalculatorFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.menuSaveParty -> modals.showSavePartyForm { name ->
+            R.id.menuSaveParty -> modals.showSavePartyForm(loadedParty?.name ?: "") { name ->
                 saveNewParty(name)
             }
             R.id.menuLoadParty -> modals.showLoadParty { party ->
@@ -58,7 +68,7 @@ class InitiativeCalculatorFragment : Fragment() {
                 clearAll()
             }
             R.id.menuDeleteParty -> modals.showDeleteParty {
-
+                deleteLoadedParty()
             }
             else -> return super.onOptionsItemSelected(item)
         }
@@ -77,7 +87,11 @@ class InitiativeCalculatorFragment : Fragment() {
     }
 
     private fun quickSave() {
-        Party(characters).apply { quickSave() }
+        Party(characters).apply {
+            id = loadedParty?.id ?: 0
+            name = loadedParty?.name ?: ""
+            quickSave()
+        }
     }
 
     private fun setupCharacterList() {
@@ -87,11 +101,15 @@ class InitiativeCalculatorFragment : Fragment() {
     }
 
     private fun saveNewParty(name: String) {
-        Party().apply {
+        loadedParty = Party().apply {
             this@InitiativeCalculatorFragment.characters.forEach { it.party = this }
             this.name = name
             this.characters = this@InitiativeCalculatorFragment.characters
             save()
+        }
+        txtPartyName.apply {
+            text = name
+            visibility = View.VISIBLE
         }
         view?.snackbar(R.string.party_saved)
     }
@@ -99,12 +117,24 @@ class InitiativeCalculatorFragment : Fragment() {
     private fun clearAll() {
         characters.clear()
         adapter.notifyDataSetChanged()
+        loadedParty = null
+        txtPartyName.visibility = View.GONE
     }
 
     private fun loadParty(party: Party) {
+        loadedParty = party
         characters.clear()
         characters.addAll(party.characters?.toMutableList() ?: mutableListOf())
         adapter.notifyDataSetChanged()
+        txtPartyName.apply {
+            text = party.name
+            visibility = View.VISIBLE
+        }
+    }
+
+    private fun deleteLoadedParty() {
+        loadedParty?.delete()
+        clearAll()
     }
 
     private fun bindListeners() {

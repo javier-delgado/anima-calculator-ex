@@ -9,7 +9,7 @@ import java.util.*
 
 
 @Table(database = AppDatabase::class, useBooleanGetterSetters = false)
-class InitiativeCharacter(name: String, base: Int) : Observable() {
+class InitiativeCharacter(name: String, base: Int, enemy: Boolean) : Observable() {
     @PrimaryKey(autoincrement = true)
     @Transient
     var id: Int = 0
@@ -61,9 +61,10 @@ class InitiativeCharacter(name: String, base: Int) : Observable() {
     init {
         this.name = name
         this.base = base
+        this.enemy = enemy
     }
 
-    constructor() : this("", 0)
+    constructor() : this("", 0, false)
 
     fun totalInitiative(): Int = base + roll + fumble
 
