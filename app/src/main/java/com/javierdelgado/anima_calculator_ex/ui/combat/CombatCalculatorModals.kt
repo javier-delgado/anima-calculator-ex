@@ -40,30 +40,6 @@ class CombatCalculatorModals(private val context: Context) {
         }
     }
 
-    fun showSettings(afterSave: () -> Unit = {}) {
-        val dialog = MaterialDialog(context).show {
-            title(R.string.settings)
-            customView(R.layout.modal_settings)
-            positiveButton(R.string.save) {
-                val view = it.getCustomView()
-                val allowOpenRoll = view.findViewById<CheckBox>(R.id.chkOpenRoll).isChecked
-                val allowFumble = view.findViewById<CheckBox>(R.id.chkFumble).isChecked
-                val allowPalindrome = view.findViewById<CheckBox>(R.id.chkPalindrome).isChecked
-                val openRollMinValue = view.findViewById<EditText>(R.id.edtOpenRollMinValue).text
-                val fumbleMaxValue = view.findViewById<EditText>(R.id.edtFumbleMaxvalue).text
-                SettingsManager(context).save(
-                    allowOpenRoll,
-                    allowFumble,
-                    allowPalindrome,
-                    openRollMinValue.toString(),
-                    fumbleMaxValue.toString()
-                )
-                afterSave()
-            }
-        }
-        setupSettingsDialog(dialog)
-    }
-
     private fun showModifiersDialog(
         @StringRes titleRes: Int,
         modifiers: List<Modifier>,
@@ -91,16 +67,6 @@ class CombatCalculatorModals(private val context: Context) {
         }
     }
 
-    private fun setupSettingsDialog(dialog: MaterialDialog) {
-        DiceRollConfig.loadAsync {
-            val view = dialog.getCustomView()
-            view.findViewById<CheckBox>(R.id.chkOpenRoll).isChecked = it.openRollEnabled
-            view.findViewById<CheckBox>(R.id.chkFumble).isChecked = it.fumbleEnabled
-            view.findViewById<CheckBox>(R.id.chkPalindrome).isChecked = it.palindromeEnabled
-            view.findViewById<EditText>(R.id.edtOpenRollMinValue).setText(it.openRollMinValue.toString())
-            view.findViewById<EditText>(R.id.edtFumbleMaxvalue).setText(it.fumbleMaxValue.toString())
-        }
-    }
 }
 
 class ModifiersAdapter(modifiers: List<Modifier>, selectedModifiers: List<Modifier>) : RecyclerView.Adapter<ModifierViewHolder>() {

@@ -56,19 +56,6 @@ class CombatCalculatorFragment : Fragment(), Observer {
         combat.deleteObserver(this)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.main_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.menuSettings -> modals.showSettings();
-            R.id.menuLog -> LogActivity.start(context!!)
-            else -> return super.onOptionsItemSelected(item)
-        }
-        return true
-    }
-
     // On combat changed
     override fun update(p0: Observable?, p1: Any?) {
         showResult()

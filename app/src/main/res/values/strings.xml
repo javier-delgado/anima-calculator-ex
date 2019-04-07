@@ -144,7 +144,7 @@
     <string name="re_roll">Re-roll</string>
     <string name="sort">Sort</string>
     <string name="initiative_roll">Initiative Roll</string>
-    <string name="roll_initiative_confirm">Roll for initiative? (Previous rolls will be lost)</string>
+    <string name="roll_initiative_confirm">Roll for initiative for all?</string>
     <string name="delete_character_confirmation">Delete character?</string>
     <string name="delete">Delete</string>
     <string name="save_party">Save party</string>
@@ -158,7 +158,7 @@
     <string name="delete_party">Delete party</string>
     <string name="delete_party_confirm">Are you sure you want to delete the current party?</string>
     <string name="is_enemy">Is enemy</string>
-    <string name="enemies_explanation">(Enemies are not persisted when the party is saved)</string>
+    <string name="enemies_explanation">Enemies are not persisted when the party is saved</string>
     <plurals name="open_rolls">
         <item quantity="one">Open roll</item>
         <item quantity="other">Open rolls</item>

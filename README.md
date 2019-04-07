@@ -16,7 +16,6 @@ https://play.google.com/store/apps/details?id=com.javierdelgado.anima_calculator
 ### TODO
 
 - Allow calculating critic hits more easily
-- Add a feature to calculate initiative for the whole party
 
 ### License
 
