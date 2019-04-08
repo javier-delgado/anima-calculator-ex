@@ -16,13 +16,15 @@ import com.javierdelgado.anima_calculator_ex.utils.MathEvaluator
 import com.raizlabs.android.dbflow.kotlinextensions.save
 import kotlinx.android.synthetic.main.activity_critical_hit.*
 import org.jetbrains.anko.doAsync
+import kotlin.math.ceil
 import kotlin.properties.Delegates
 
-class CriticalHitActivity: AppCompatActivity() {
+class CriticalHitActivity : AppCompatActivity() {
     private var damageCaused: Int by Delegates.observable(0) { _, _, _ -> recalculateCritical() }
     private var criticalHitRoll: Int by Delegates.observable(0) { _, _, _ -> recalculateCritical() }
     private var physicalResistance: Int by Delegates.observable(0) { _, _, _ -> recalculateCritical() }
-    private var rollResistance : Int by Delegates.observable(0) { _, _, _ -> recalculateCritical() }
+    private var rollResistance: Int by Delegates.observable(0) { _, _, _ -> recalculateCritical() }
+    private var hasDamageResistance: Boolean by Delegates.observable(false) { _, _, _ -> recalculateCritical() }
     private val rollConfig: DiceRollConfig = DiceRollConfig(openRollEnabled = false, fumbleEnabled = false)
 
     companion object {
@@ -41,7 +43,7 @@ class CriticalHitActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_critical_hit)
         damageCaused = intent.getIntExtra(DAMAGE_CAUSED_EXTRA, 0)
-        if(damageCaused > 0) edtDamageCaused.setText(damageCaused.toString())
+        if (damageCaused > 0) edtDamageCaused.setText(damageCaused.toString())
         homeAsUp(true)
         setupButtons()
     }
@@ -62,31 +64,33 @@ class CriticalHitActivity: AppCompatActivity() {
     }
 
     private fun recalculateCritical() {
+        val physicalRes = physicalResistance + rollResistance
+        val critLevel = calculateCriticLevel(damageCaused + criticalHitRoll)
+
+        txtTotalResistance.text = getString(R.string.total_phys_res, physicalRes)
+        txtCritLevel.text = getString(R.string.crit_level, critLevel)
+
         if (rollResistance == 100) {
             txtMainHeader.text = getString(R.string.defender_rolled_a_natural_100)
             txtSecondaryHeader.text = getString(R.string.defender_endures_critical)
             return
         }
 
-        val tempCriticLevel = damageCaused + criticalHitRoll
-        val physicalRes = physicalResistance + rollResistance
-
-        val critLevel = calculateCriticLevel(tempCriticLevel)
 
         if (physicalRes >= critLevel) {
             txtMainHeader.text = ""
             txtSecondaryHeader.text = getString(R.string.defender_endures_critical)
         } else {
-            txtMainHeader.text = getString(R.string.crit_level, critLevel)
+            txtMainHeader.text = getString(R.string.difference_, critLevel - physicalRes)
             txtSecondaryHeader.text = getString(R.string.attacker_critical_hits)
         }
     }
 
     private fun calculateCriticLevel(tempCriticLevel: Int): Int {
-        return if ( tempCriticLevel > 200) {
-            200 + Math.ceil((tempCriticLevel - 200) / 2.toDouble()).toInt()
-        } else {
-            tempCriticLevel
+        return when {
+            hasDamageResistance -> ceil(tempCriticLevel/2.toDouble()).toInt()
+            tempCriticLevel > 200 -> 200 + ceil((tempCriticLevel - 200) / 2.toDouble()).toInt()
+            else -> tempCriticLevel
         }
     }
 
@@ -112,6 +116,7 @@ class CriticalHitActivity: AppCompatActivity() {
         edtCriticRoll.addTextChangedListener(criticRollTextWatcher)
         edtPhysicalResistance.addTextChangedListener(physicalResistanceTextWatcher)
         edtRollResistance.addTextChangedListener(rollResistanceTextWatcher)
+        chkWithDamageResistance.setOnCheckedChangeListener { _, b -> hasDamageResistance = b }
     }
 
     private fun unbindTextWatchers() {
@@ -119,6 +124,7 @@ class CriticalHitActivity: AppCompatActivity() {
         edtCriticRoll.removeTextChangedListener(criticRollTextWatcher)
         edtPhysicalResistance.removeTextChangedListener(physicalResistanceTextWatcher)
         edtRollResistance.removeTextChangedListener(rollResistanceTextWatcher)
+        chkWithDamageResistance.setOnCheckedChangeListener(null)
     }
 
     private val damageCausedTextWatcher by lazy {

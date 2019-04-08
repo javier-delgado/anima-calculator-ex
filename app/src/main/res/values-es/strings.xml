@@ -180,4 +180,7 @@
     <string name="critical_hit_roll">Tirada de crítico</string>
     <string name="defender_rolled_a_natural_100">El defensor tiro un 100 natural</string>
     <string name="phys_res_roll">Tirada de res. fís.</string>
+    <string name="has_damage_resistance">Tiene acumulación de daño</string>
+    <string name="difference_">Diferencia: %d</string>
+    <string name="total_phys_res">Res. Fís. Total: %d</string>
 </resources>

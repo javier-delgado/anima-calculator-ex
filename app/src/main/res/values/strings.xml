@@ -168,10 +168,13 @@
     <string name="defender">Defender</string>
     <string name="defender_endures_critical">Defender endures the critical hit</string>
     <string name="attacker_critical_hits">Attacker deals a critical hit</string>
-    <string name="crit_level">Critical hit level: %d</string>
+    <string name="crit_level">Crit level: %d</string>
     <string name="critical_hit_roll">Critical hit roll</string>
     <string name="defender_rolled_a_natural_100">Defender rolled a natural 100</string>
     <string name="phys_res_roll">Phys Res roll</string>
+    <string name="has_damage_resistance">Has damage resistance</string>
+    <string name="difference_">Difference: %d</string>
+    <string name="total_phys_res">Total phys. res.: %d</string>
     <plurals name="open_rolls">
         <item quantity="one">Open roll</item>
         <item quantity="other">Open rolls</item>

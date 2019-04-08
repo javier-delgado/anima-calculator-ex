@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:textSize="22sp"
             android:textColor="@color/material_white"
-            tools:text="Critical hit level: 87"
+            tools:text="Difference: 87"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtSecondaryHeader"/>
@@ -38,6 +38,16 @@
             android:text="@string/attacker"
             app:layout_constraintTop_toBottomOf="@id/txtMainHeader"
             app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+            android:id="@+id/txtCritLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:textSize="12sp"
+            tools:text="@string/crit_level"
+            app:layout_constraintBottom_toBottomOf="@id/txtAttacker"
+            app:layout_constraintLeft_toRightOf="@id/txtAttacker"/>
 
     <LinearLayout
             android:id="@+id/lytDamageCaused"
@@ -120,6 +130,16 @@
             app:layout_constraintTop_toBottomOf="@id/lytDamageCaused"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
+    <TextView
+            android:id="@+id/txtTotalResistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:textSize="12sp"
+            tools:text="@string/total_phys_res"
+            app:layout_constraintBottom_toBottomOf="@id/txtDefender"
+            app:layout_constraintLeft_toRightOf="@id/txtDefender"/>
+
     <LinearLayout
             android:id="@+id/lytPhysicalResistance"
             android:layout_width="0dp"
@@ -188,4 +208,13 @@
             app:layout_constraintLeft_toRightOf="@id/lytResistanceRoll"
             app:layout_constraintRight_toRightOf="parent"
             tools:ignore="UnusedAttribute"/>
+    
+    <CheckBox
+            android:id="@+id/chkWithDamageResistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/has_damage_resistance"
+            app:layout_constraintTop_toBottomOf="@id/lytPhysicalResistance"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
