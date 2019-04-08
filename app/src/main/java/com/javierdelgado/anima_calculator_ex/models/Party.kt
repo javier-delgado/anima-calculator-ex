@@ -20,8 +20,9 @@ class Party(characters: MutableList<InitiativeCharacter> = mutableListOf()) {
 
     @get:OneToMany(methods = [OneToMany.Method.ALL])
     var characters by oneToMany {
+        val auxId = if (this@Party != null) this.id else -1 // Hack to make DBFlow and PaperDB work
         select.from(InitiativeCharacter::class.java)
-            .where(InitiativeCharacter_Table.party_id.eq(this.id), InitiativeCharacter_Table.enemy.notEq(true))
+            .where(InitiativeCharacter_Table.party_id.eq(auxId), InitiativeCharacter_Table.enemy.notEq(true))
     }
 
     companion object {
