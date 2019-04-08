@@ -9,13 +9,11 @@ https://play.google.com/store/apps/details?id=com.javierdelgado.anima_calculator
 ### Features
 
 - Combat calculator
+- Critical hit calculator
 - Includes a lot of stat modifiers
 - Automatic dice rolling, allowing for fumbles and open rolls
 - Dice roll log
-
-### TODO
-
-- Allow calculating critic hits more easily
+- Combat initiative keeper
 
 ### License
 

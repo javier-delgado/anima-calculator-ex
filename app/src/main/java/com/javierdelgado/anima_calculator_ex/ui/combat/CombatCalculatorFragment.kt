@@ -10,7 +10,7 @@ import com.javierdelgado.anima_calculator_ex.domain.CombatResultComposer
 import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
 import com.javierdelgado.anima_calculator_ex.models.Combat
 import com.javierdelgado.anima_calculator_ex.showDiceRollSnackbar
-import com.javierdelgado.anima_calculator_ex.ui.LogActivity
+import com.javierdelgado.anima_calculator_ex.ui.CriticalHitActivity
 import com.javierdelgado.anima_calculator_ex.utils.MathEvaluator
 import com.raizlabs.android.dbflow.kotlinextensions.save
 import kotlinx.android.synthetic.main.fragment_combat_calculator.*
@@ -54,6 +54,18 @@ class CombatCalculatorFragment : Fragment(), Observer {
         unbindListeners()
         unbindWatchers()
         combat.deleteObserver(this)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.combat_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menuCriticalHit -> CriticalHitActivity.start(context!!, combat.calculateDamageDealt())
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
     }
 
     // On combat changed
@@ -151,7 +163,7 @@ class CombatCalculatorFragment : Fragment(), Observer {
     }
     private val finalDamageTextWatcher by lazy {
         createSimpleTextWatcher {
-            combat.finalDamage = if (edtFinalDamage.text.isNotEmpty())
+            combat.characterDamage = if (edtFinalDamage.text.isNotEmpty())
                 MathEvaluator.evaluate(edtFinalDamage.text.toString())
             else
                 0

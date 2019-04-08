@@ -167,4 +167,17 @@
     <string name="delete_party_confirm">¿Estás seguro que quieres eliminar la party actual?</string>
     <string name="is_enemy">Es enemigo</string>
     <string name="enemies_explanation">Los enemigos no se guardan junto con el resto de la party</string>
+    <string name="do_roll">Tirar</string>
+    <string name="critical_hit">Crítico</string>
+    <string name="close">Cerrar</string>
+    <string name="roll_critic_level">Tirar nivel de crítico</string>
+    <string name="base_phys_res">Res. Fís. base</string>
+    <string name="attacker">Atacante</string>
+    <string name="defender">Defensor</string>
+    <string name="defender_endures_critical">El defensor aguanta el golpe crítico</string>
+    <string name="attacker_critical_hits">El atacante hace crítico</string>
+    <string name="crit_level">Nivel de crítico: %d</string>
+    <string name="critical_hit_roll">Tirada de crítico</string>
+    <string name="defender_rolled_a_natural_100">El defensor tiro un 100 natural</string>
+    <string name="phys_res_roll">Tirada de res. fís.</string>
 </resources>

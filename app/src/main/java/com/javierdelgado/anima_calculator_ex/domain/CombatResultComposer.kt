@@ -21,9 +21,8 @@ class CombatResultComposer(private val context: Context, private val combat: Com
                 counterAttackResult(counterAttackBonus)
             }
             else -> {
-                val absDifference: Int = result - (20 + combat.ATValue * 10)
-                val percentage: Int = absDifference / 10 * 10
-                val damageDealt: Int = Math.ceil(percentage.toDouble() * combat.finalDamage / 100).toInt()
+                val percentage: Int = combat.calculateDamagePercentage()
+                val damageDealt: Int = combat.calculateDamageDealt()
 
                 if (percentage > 0)
                     attackWinsResult(percentage, damageDealt)
@@ -47,7 +46,7 @@ class CombatResultComposer(private val context: Context, private val combat: Com
 
     private fun attackWinsResult(percentage: Int, damageDealt: Int) {
         mainText = context.getString(R.string.damage_dealt_, damageDealt)
-        secondaryText = context.getString(R.string.percentage_out_of_total_damage, percentage, combat.finalDamage)
+        secondaryText = context.getString(R.string.percentage_out_of_total_damage, percentage, combat.characterDamage)
     }
 
     private fun counterAttackResult(counterAttackBonus: Int) {

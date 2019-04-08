@@ -15,7 +15,7 @@ class Combat: Observable() {
     var characterAttackValue: Int by Delegates.observable(0) { _, _, _ ->
         notifyObservers()
     }
-    var finalDamage: Int by Delegates.observable(0) { _, _, _ ->
+    var characterDamage: Int by Delegates.observable(0) { _, _, _ ->
         notifyObservers()
     }
 
@@ -53,6 +53,15 @@ class Combat: Observable() {
         return totalAttack() - totalDefense()
     }
 
+    fun calculateDamageDealt(): Int {
+        return Math.ceil(calculateDamagePercentage().toDouble() * characterDamage / 100).toInt()
+    }
+
+    fun calculateDamagePercentage(): Int {
+        val absDifference: Int = result() - (20 + ATValue * 10)
+        return absDifference / 10 * 10
+    }
+
     // Observer logic
     private val observers: MutableList<Observer> = mutableListOf<Observer>()
 
@@ -71,4 +80,5 @@ class Combat: Observable() {
     override fun notifyObservers() {
         observers.forEach { observer -> observer.update(this, null) }
     }
+
 }

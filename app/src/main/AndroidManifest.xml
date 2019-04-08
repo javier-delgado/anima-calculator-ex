@@ -21,8 +21,12 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".ui.LogActivity"
-                android:label="@string/log"
+            android:name=".ui.LogActivity"
+            android:label="@string/log"
+            android:screenOrientation="portrait" />
+        <activity
+                android:name=".ui.CriticalHitActivity"
+                android:label="@string/critical_hit"
                 android:screenOrientation="portrait" />
     </application>
 

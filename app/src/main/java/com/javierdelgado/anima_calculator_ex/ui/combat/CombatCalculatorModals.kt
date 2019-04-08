@@ -4,19 +4,15 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.EditText
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
-import com.afollestad.materialdialogs.customview.getCustomView
 import com.afollestad.materialdialogs.list.customListAdapter
 import com.afollestad.materialdialogs.list.getListAdapter
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.javierdelgado.anima_calculator_ex.R
-import com.javierdelgado.anima_calculator_ex.domain.SettingsManager
 import com.javierdelgado.anima_calculator_ex.inflate
-import com.javierdelgado.anima_calculator_ex.models.DiceRollConfig
 import com.javierdelgado.anima_calculator_ex.models.Modifier
 
 class CombatCalculatorModals(private val context: Context) {
@@ -66,7 +62,6 @@ class CombatCalculatorModals(private val context: Context) {
             }
         }
     }
-
 }
 
 class ModifiersAdapter(modifiers: List<Modifier>, selectedModifiers: List<Modifier>) : RecyclerView.Adapter<ModifierViewHolder>() {

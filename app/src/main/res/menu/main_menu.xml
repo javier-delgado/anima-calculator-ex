@@ -7,12 +7,14 @@
             android:id="@+id/menuLog"
             android:title="@string/log"
             android:icon="@drawable/ic_list_light"
-            app:showAsAction="always"
+            app:showAsAction="ifRoom"
+            android:orderInCategory="2"
             tools:ignore="AlwaysShowAction"/>
 
     <item
             android:id="@+id/menuSettings"
             android:title="@string/settings"
             android:icon="@drawable/ic_gear_light"
-            app:showAsAction="always"/>
+            android:orderInCategory="3"
+            app:showAsAction="ifRoom"/>
 </menu>

@@ -12,7 +12,7 @@ class CombatTest {
         combat.attackRollValue = 60
         combat.characterAttackValue = 150
         combat.selectedAttackModifiers = mutableListOf(Modifier("TestMod1", 20), Modifier("TestMod2", 10))
-        combat.finalDamage = 90
+        combat.characterDamage = 90
         combat.defenseRollValue = 80
         combat.characterDefenseValue = 120
         combat.consecutiveDefensePenalty = -30

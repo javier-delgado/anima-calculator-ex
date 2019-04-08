@@ -147,7 +147,7 @@ class InitiativeCalculatorFragment : Fragment() {
         btnRollForInitiative.setOnClickListener {
             MaterialDialog(context!!).show {
                 message(R.string.roll_initiative_confirm)
-                positiveButton(R.string.roll) {
+                positiveButton(R.string.do_roll) {
                     characters.forEach { it.rollForInitiative(getString(R.string.initiative_roll)) }
                     adapter.sort()
                     adapter.notifyDataSetChanged()

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+    <TextView
+            android:id="@+id/txtSecondaryHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            tools:text="Defender receives a critical hit"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+            android:id="@+id/txtMainHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/material_white"
+            tools:text="Critical hit level: 87"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtSecondaryHeader"/>
+
+    <TextView
+            android:id="@+id/txtAttacker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorAttack"
+            android:text="@string/attacker"
+            app:layout_constraintTop_toBottomOf="@id/txtMainHeader"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <LinearLayout
+            android:id="@+id/lytDamageCaused"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/txtAttacker"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/lytCriticRoll">
+
+        <TextView
+                android:id="@+id/txtLabelDamageCaused"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/material_white"
+                android:labelFor="@id/edtDamageCaused"
+                android:text="@string/damage"/>
+
+        <EditText
+                android:id="@+id/edtDamageCaused"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:digits="0987654321+-"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                tools:ignore="UnusedAttribute"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/lytCriticRoll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="@id/lytDamageCaused"
+            app:layout_constraintLeft_toRightOf="@id/lytDamageCaused"
+            app:layout_constraintRight_toLeftOf="@id/btnRollCritic">
+
+        <TextView
+                android:id="@+id/txtLabelCriticRoll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/material_white"
+                android:labelFor="@id/edtCriticRoll"
+                android:text="@string/roll"/>
+
+        <EditText
+                android:id="@+id/edtCriticRoll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:digits="0987654321+-"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                tools:ignore="UnusedAttribute"/>
+    </LinearLayout>
+
+    <ImageButton
+            android:id="@+id/btnRollCritic"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:contentDescription="@string/roll_critic_level"
+            android:backgroundTint="@color/colorAccent"
+            android:src="@drawable/ic_d10_light"
+            app:layout_constraintBottom_toBottomOf="@id/lytDamageCaused"
+            app:layout_constraintLeft_toRightOf="@id/lytCriticRoll"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:ignore="UnusedAttribute"/>
+
+
+    <TextView
+            android:id="@+id/txtDefender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/colorDefense"
+            android:text="@string/defender"
+            app:layout_constraintTop_toBottomOf="@id/lytDamageCaused"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <LinearLayout
+            android:id="@+id/lytPhysicalResistance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/txtDefender"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/lytResistanceRoll">
+
+        <TextView
+                android:id="@+id/txtLabelPhysicalResistance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/material_white"
+                android:labelFor="@id/edtPhysicalResistance"
+                android:text="@string/base_phys_res"/>
+
+        <EditText
+                android:id="@+id/edtPhysicalResistance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:digits="0987654321+-"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                tools:ignore="UnusedAttribute"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/lytResistanceRoll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="@id/lytPhysicalResistance"
+            app:layout_constraintLeft_toRightOf="@id/lytPhysicalResistance"
+            app:layout_constraintRight_toLeftOf="@id/btnRollResistance">
+
+        <TextView
+                android:id="@+id/txtLabelResistanceRoll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/material_white"
+                android:labelFor="@id/edtRollResistance"
+                android:text="@string/roll"/>
+
+        <EditText
+                android:id="@+id/edtRollResistance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:digits="0987654321+-"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                tools:ignore="UnusedAttribute"/>
+    </LinearLayout>
+
+    <ImageButton
+            android:id="@+id/btnRollResistance"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:contentDescription="@string/roll_critic_level"
+            android:backgroundTint="@color/colorAccent"
+            android:src="@drawable/ic_d10_light"
+            app:layout_constraintBottom_toBottomOf="@id/lytPhysicalResistance"
+            app:layout_constraintLeft_toRightOf="@id/lytResistanceRoll"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:ignore="UnusedAttribute"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

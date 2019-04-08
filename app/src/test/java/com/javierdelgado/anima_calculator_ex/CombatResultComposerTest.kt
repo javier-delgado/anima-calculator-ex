@@ -81,7 +81,7 @@ class CombatResultComposerTest {
         mockkObject(combat)
         every { combat.totalAttack() } returns 130
         every { combat.totalDefense() } returns 90
-        every { combat.finalDamage } returns 90
+        every { combat.characterDamage } returns 90
 
         val composer = CombatResultComposer(context, combat)
         composer.composeText()

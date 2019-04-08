@@ -42,7 +42,6 @@
             app:layout_constraintLeft_toRightOf="@id/btnRollForInitiative"/>
 
 
-
     <TextView
             android:id="@+id/txtPartyName"
             android:layout_width="match_parent"
