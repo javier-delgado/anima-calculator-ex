@@ -30,6 +30,7 @@ class LogActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log)
+        setSupportActionBar(toolbar)
         homeAsUp(true)
 
         doAsync {

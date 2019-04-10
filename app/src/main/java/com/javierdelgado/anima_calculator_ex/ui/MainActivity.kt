@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
 
         viewPager.adapter = MainPagerAdapter(this, supportFragmentManager)
         txtVersion.text = getString(R.string.v_, BuildConfig.VERSION_NAME)

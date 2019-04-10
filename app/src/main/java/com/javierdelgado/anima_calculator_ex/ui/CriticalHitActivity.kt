@@ -42,6 +42,7 @@ class CriticalHitActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_critical_hit)
+        setSupportActionBar(toolbar)
         damageCaused = intent.getIntExtra(DAMAGE_CAUSED_EXTRA, 0)
         if (damageCaused > 0) edtDamageCaused.setText(damageCaused.toString())
         homeAsUp(true)
