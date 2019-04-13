@@ -80,5 +80,4 @@ class Combat: Observable() {
     override fun notifyObservers() {
         observers.forEach { observer -> observer.update(this, null) }
     }
-
 }

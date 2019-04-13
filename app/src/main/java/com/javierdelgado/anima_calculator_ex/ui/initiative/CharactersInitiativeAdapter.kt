@@ -97,7 +97,7 @@ class CharacterInitiativeViewHolder(itemView: View) : RecyclerView.ViewHolder(it
         txtCharacterName.text = character.name
         txtPosition.text = "${adapterPosition + 1}."
         txtInitiative.text = character.totalInitiative().toString()
-        lytInitiativeHeader.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.material_grey600))
+        lytInitiativeHeader.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.initiative_header_2))
     }
 
     private fun bindButtons() {

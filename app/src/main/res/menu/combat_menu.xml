@@ -7,4 +7,10 @@
             android:icon="@drawable/ic_explosion"
             android:orderInCategory="1"
             app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/menuClear"
+            android:title="@string/clear_combat"
+            android:orderInCategory="9"
+            app:showAsAction="never"/>
 </menu>

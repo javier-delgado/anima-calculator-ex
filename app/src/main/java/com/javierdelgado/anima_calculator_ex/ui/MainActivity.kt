@@ -27,9 +27,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        setTitle(R.string.main_activity_name)
 
         viewPager.adapter = MainPagerAdapter(this, supportFragmentManager)
-        txtVersion.text = getString(R.string.v_, BuildConfig.VERSION_NAME)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

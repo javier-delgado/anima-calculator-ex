@@ -4,10 +4,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
         tools:context=".ui.MainActivity">
 
     <Button
@@ -15,6 +13,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
+            android:layout_marginStart="16dp"
             android:text="@string/add"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -36,6 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/sort"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -46,6 +46,8 @@
             android:id="@+id/txtPartyName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:textSize="18sp"
             android:textColor="@color/material_black"
             android:visibility="gone"
@@ -58,6 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="4dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:background="@color/divider"
             app:layout_constraintTop_toBottomOf="@id/txtPartyName"/>
 
@@ -66,10 +70,33 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:paddingTop="8dp"
-            android:paddingBottom="48dp"
+            android:paddingBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="36dp"
             android:clipToPadding="false"
             app:layout_constraintTop_toBottomOf="@id/divider3"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_character_initiative"/>
 
+    <View
+            android:id="@+id/bgBottom"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="1"/>
+
+    <TextView
+            android:id="@+id/txtVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/material_black"
+            app:layout_constraintLeft_toLeftOf="@id/bgBottom"
+            app:layout_constraintBottom_toBottomOf="@id/bgBottom"
+            tools:text="v1.0"
+            android:textSize="8sp"
+            tools:ignore="SmallSp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

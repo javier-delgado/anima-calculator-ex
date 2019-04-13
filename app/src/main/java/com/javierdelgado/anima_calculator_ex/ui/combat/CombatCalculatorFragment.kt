@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import com.javierdelgado.anima_calculator_ex.BuildConfig
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.createSimpleTextWatcher
 import com.javierdelgado.anima_calculator_ex.domain.CombatResultComposer
@@ -40,6 +41,11 @@ class CombatCalculatorFragment : Fragment(), Observer {
         setHasOptionsMenu(true)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        txtVersion.text = getString(R.string.v_, BuildConfig.VERSION_NAME)
+    }
+
     override fun onResume() {
         super.onResume()
         bindListeners()
@@ -63,9 +69,23 @@ class CombatCalculatorFragment : Fragment(), Observer {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.menuCriticalHit -> CriticalHitActivity.start(context!!, combat.calculateDamageDealt())
+            R.id.menuClear -> clearAll()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
+    }
+
+    private fun clearAll() {
+        combat.selectedDefenseModifiers = emptyList()
+        combat.selectedAttackModifiers = emptyList()
+        combat.ATValue = 0
+        rdConsecutiveDefense1.isChecked = true
+        edtAttackRoll.setText("")
+        edtFinalAttack.setText("")
+        edtFinalDamage.setText("")
+        edtDefenseRoll.setText("")
+        edtFinalDefense.setText("")
+        edtAT.setText("")
     }
 
     // On combat changed

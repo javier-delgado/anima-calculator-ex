@@ -15,14 +15,14 @@
             android:layout_height="wrap_content"
             android:padding="4dp"
             app:layout_constraintTop_toTopOf="parent"
-            tools:background="@color/material_grey600">
+            tools:background="@color/initiative_header">
 
         <TextView
                 android:id="@+id/txtPosition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
-                android:textColor="@color/material_white"
+                android:textColor="@color/material_black"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 tools:text="10."/>
@@ -31,7 +31,7 @@
                 android:id="@+id/txtCharacterName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/material_white"
+                android:textColor="@color/material_black"
                 android:layout_weight="1"
                 android:lines="1"
                 android:ellipsize="end"
@@ -70,7 +70,7 @@
                 android:id="@+id/txtLabelInitiativeRoll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/material_white"
+                android:textColor="@color/material_black"
                 android:labelFor="@id/edtInitiativeRoll"
                 android:text="@string/roll"/>
 
@@ -100,7 +100,7 @@
                 android:id="@+id/txtLabelBaseInitiative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/material_white"
+                android:textColor="@color/material_black"
                 android:labelFor="@id/edtBaseInitiative"
                 android:text="@string/base"/>
 
@@ -130,7 +130,7 @@
                 android:id="@+id/txtLabelFumble"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/material_white"
+                android:textColor="@color/material_black"
                 android:labelFor="@id/edtFumble"
                 android:text="@string/fumble"/>
 

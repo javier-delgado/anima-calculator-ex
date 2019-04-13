@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
+import com.javierdelgado.anima_calculator_ex.BuildConfig
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.models.InitiativeCharacter
 import com.javierdelgado.anima_calculator_ex.models.Party
@@ -40,6 +41,7 @@ class InitiativeCalculatorFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        txtVersion.text = getString(R.string.v_, BuildConfig.VERSION_NAME)
         val quickSavedParty = Party.loadQuickSaveParty()
         characters = quickSavedParty.characters?.toMutableList() ?: mutableListOf()
         if (quickSavedParty.persisted()) {
@@ -96,6 +98,7 @@ class InitiativeCalculatorFragment : Fragment() {
 
     private fun setupCharacterList() {
         recCharactersInitiative.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        recCharactersInitiative.isNestedScrollingEnabled = false
         adapter.sort()
         recCharactersInitiative.adapter = adapter
     }

@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">@color/material_black</color>
     <color name="colorAccent">@color/title_red</color>
 
+    <color name="initiative_header">#FCE2CB</color>
+    <color name="initiative_header_2">#E0D6B1</color>
+
     <color name="text_primary">#222222</color>
 
     <color name="toolbar_orange">#BA4C17</color>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="main_activity_name">Calculator Ex</string>
     <string name="attack">Ataque</string>
     <string name="allow_fumbles">Permitir pifias</string>
     <string name="allow_open_rolls">Permitir tiradas abiertas</string>
@@ -78,7 +79,7 @@
     <string name="vision_totally_obscured">Ceguera absoluta</string>
     <string name="total_offensive">A la ofensiva</string>
     <string name="roll">Tirada</string>
-    <string name="app_name">Anima Calculator Ex</string>
+    <string name="app_name">Ánima Calculator Ex</string>
     <string name="v_">v%s</string>
     <string name="is_fumble_if_below">Es pifia si menor que:</string>
     <string name="deselect_all">Deseleccionar todo</string>
@@ -183,4 +184,5 @@
     <string name="has_damage_resistance">Tiene acumulación de daño</string>
     <string name="difference_">Diferencia: %d</string>
     <string name="total_phys_res">Res. Fís. Total: %d</string>
+    <string name="clear_combat">Limpiar</string>
 </resources>
