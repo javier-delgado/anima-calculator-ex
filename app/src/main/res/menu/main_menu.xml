@@ -8,7 +8,7 @@
             android:title="@string/log"
             android:icon="@drawable/ic_list_light"
             app:showAsAction="ifRoom"
-            android:orderInCategory="2"
+            android:orderInCategory="1"
             tools:ignore="AlwaysShowAction"/>
 
     <item

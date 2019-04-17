@@ -5,7 +5,7 @@
             android:id="@+id/menuCriticalHit"
             android:title="@string/critical_hit"
             android:icon="@drawable/ic_explosion"
-            android:orderInCategory="1"
+            android:orderInCategory="2"
             app:showAsAction="ifRoom"/>
 
     <item

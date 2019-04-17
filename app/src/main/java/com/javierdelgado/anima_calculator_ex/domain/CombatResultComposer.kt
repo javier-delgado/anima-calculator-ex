@@ -1,14 +1,20 @@
 package com.javierdelgado.anima_calculator_ex.domain
 
 import android.content.Context
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.TypefaceSpan
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.models.Combat
+import com.javierdelgado.anima_calculator_ex.models.Modifier
 
 class CombatResultComposer(private val context: Context, private val combat: Combat) {
     var mainText: String = ""
     var secondaryText: String = ""
     var totalAttackText: String = ""
     var totalDefenseText: String = ""
+    var totalAttackModifierText: SpannableString = SpannableString("")
+    var totalDefenseModifierText: SpannableString = SpannableString("")
 
     fun composeText() {
         val result = combat.result()
@@ -32,6 +38,27 @@ class CombatResultComposer(private val context: Context, private val combat: Com
         }
         totalAttackText = combat.totalAttack().toString()
         totalDefenseText = combat.totalDefense().toString()
+
+
+        totalAttackModifierText = composeModifiersText(combat.selectedAttackModifiers)
+        totalDefenseModifierText = composeModifiersText(combat.selectedDefenseModifiers)
+    }
+
+    private fun composeModifiersText(modifiers: List<Modifier>): SpannableString {
+        val base = context.getString(R.string.edit_modifiers)
+        val modifier = calculateModifier(modifiers)
+        val sp = SpannableString("$base $modifier")
+        sp.setSpan(TypefaceSpan("sans-serif-light"), base.length+1, sp.length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+        return sp
+    }
+
+    private fun calculateModifier(modifiers: List<Modifier>): String {
+        val result = modifiers.sumBy { it.value }
+        return when {
+            result > 0 -> "+$result"
+            result < 0 -> result.toString()
+            else -> ""
+        }
     }
 
     private fun noCombatResult() {

@@ -99,6 +99,8 @@ class CombatCalculatorFragment : Fragment(), Observer {
         txtSecondaryHeader.text = resultComposer.secondaryText
         txtTotalAttack.text = resultComposer.totalAttackText
         txtTotalDefense.text = resultComposer.totalDefenseText
+        btnEditAttackModifiers.text = resultComposer.totalAttackModifierText
+        btnEditDefenseModifiers.text = resultComposer.totalDefenseModifierText
     }
 
     private fun bindListeners() {
