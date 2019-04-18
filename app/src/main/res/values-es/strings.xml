@@ -185,4 +185,6 @@
     <string name="difference_">Diferencia: %d</string>
     <string name="total_phys_res">Res. Fís. Total: %d</string>
     <string name="clear_combat">Limpiar</string>
+    <string name="undo">Deshacer</string>
+    <string name="initiative_rolled">¡Iniciativa calculada!</string>
 </resources>

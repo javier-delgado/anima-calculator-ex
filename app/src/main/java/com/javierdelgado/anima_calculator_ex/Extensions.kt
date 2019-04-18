@@ -57,7 +57,7 @@ fun AppCompatActivity.homeAsUp(b: Boolean) {
 fun showDiceRollSnackbar(roll: DiceRoll, view: View) {
     Snackbar.make(view, DiceRollComposer(view.context, roll).compose(), Snackbar.LENGTH_LONG)
         .setAction(R.string.view_log) { LogActivity.start(view.context) }
-        .show();
+        .show()
 }
 
 fun View.snackbar(@StringRes res: Int) {

@@ -5,7 +5,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.snackbar.Snackbar
 import com.javierdelgado.anima_calculator_ex.BuildConfig
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.models.InitiativeCharacter
@@ -19,6 +19,7 @@ class InitiativeCalculatorFragment : Fragment() {
     private val modals by lazy { InitiativeCalculatorModals(context!!) }
     private var loadedParty: Party? = null // This keeps the persisted party (if it is persisted)
     private lateinit var characters: MutableList<InitiativeCharacter>
+    private var charactersCopyForUndo: List<InitiativeCharacter>? = null
     private val adapter by lazy { CharactersInitiativeAdapter(characters) }
 
     companion object {
@@ -148,20 +149,33 @@ class InitiativeCalculatorFragment : Fragment() {
             }
         }
         btnRollForInitiative.setOnClickListener {
-            MaterialDialog(context!!).show {
-                message(R.string.roll_initiative_confirm)
-                positiveButton(R.string.do_roll) {
-                    characters.forEach { it.rollForInitiative(getString(R.string.initiative_roll)) }
-                    adapter.sort()
-                    adapter.notifyDataSetChanged()
-                }
-                negativeButton(R.string.cancel)
-            }
+            rollInitiativeForAll()
         }
         btnSort.setOnClickListener {
             adapter.sort()
             adapter.notifyDataSetChanged()
         }
+    }
+
+    private fun rollInitiativeForAll() {
+        charactersCopyForUndo = characters.map { it.copy() }
+        characters.forEach { it.rollForInitiative(getString(R.string.initiative_roll)) }
+        adapter.sort()
+        adapter.notifyDataSetChanged()
+        showUndoSnackBar()
+    }
+
+    private fun showUndoSnackBar() {
+        Snackbar.make(view!!, R.string.initiative_rolled, Snackbar.LENGTH_LONG)
+            .setAction(R.string.undo) {
+                charactersCopyForUndo?.let {
+                    characters.clear()
+                    characters.addAll(it)
+                    adapter.sort()
+                    adapter.notifyDataSetChanged()
+                }
+            }
+            .show()
     }
 
     private fun unbindListeners() {

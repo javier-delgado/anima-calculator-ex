@@ -177,6 +177,8 @@
     <string name="difference_">Difference: %d</string>
     <string name="total_phys_res">Total phys. res.: %d</string>
     <string name="clear_combat">Clear</string>
+    <string name="initiative_rolled">Initiative rolled!</string>
+    <string name="undo">Undo</string>
     <plurals name="open_rolls">
         <item quantity="one">Open roll</item>
         <item quantity="other">Open rolls</item>

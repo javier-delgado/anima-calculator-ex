@@ -56,7 +56,7 @@ class InitiativeCharacter(name: String, base: Int, enemy: Boolean) : Observable(
     var dataVisible: Boolean = false
 
     @Transient
-    private val observers: MutableList<Observer> = mutableListOf()
+    private var observers: MutableList<Observer> = mutableListOf()
 
     init {
         this.name = name
@@ -86,6 +86,19 @@ class InitiativeCharacter(name: String, base: Int, enemy: Boolean) : Observable(
         return diceRoll
     }
 
+    fun copy(): InitiativeCharacter {
+        return InitiativeCharacter().apply {
+            id = this@InitiativeCharacter.id
+            name = this@InitiativeCharacter.name
+            base = this@InitiativeCharacter.base
+            roll = this@InitiativeCharacter.roll
+            fumble = this@InitiativeCharacter.fumble
+            enemy = this@InitiativeCharacter.enemy
+            party = this@InitiativeCharacter.party
+            dataVisible = this@InitiativeCharacter.dataVisible
+            observers = this@InitiativeCharacter.observers
+        }
+    }
 
     // Observer logic
 
@@ -105,5 +118,4 @@ class InitiativeCharacter(name: String, base: Int, enemy: Boolean) : Observable(
         if (observers.isEmpty()) return
         observers.forEach { observer -> observer.update(this, null) }
     }
-
 }
