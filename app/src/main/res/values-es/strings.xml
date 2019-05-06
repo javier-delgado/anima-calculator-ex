@@ -189,4 +189,6 @@
     <string name="initiative_rolled">¡Iniciativa calculada!</string>
     <string name="surprised_by_">- Es sorprendido por %s</string>
     <string name="surprises_">- Sorprende a %s</string>
+    <string name="uroboros">Uroboros</string>
+    <string name="uroboros_explanation">Sorprende con 100 en lugar de 150</string>
 </resources>

@@ -29,8 +29,9 @@ class InitiativeCalculatorModals(private val context: Context) {
                 val name = view.findViewById<EditText>(R.id.edtName).text.toString()
                 val baseInitiativeText = view.findViewById<EditText>(R.id.edtBaseInitiative).text.toString()
                 val isEnemy = view.findViewById<CheckBox>(R.id.chkIsEnemy).isChecked
+                val uroboros = view.findViewById<CheckBox>(R.id.chkUroboros).isChecked
 
-                val character = InitiativeCharacter(name, MathEvaluator.evaluate(baseInitiativeText), isEnemy)
+                val character = InitiativeCharacter(name, MathEvaluator.evaluate(baseInitiativeText), isEnemy, uroboros)
                 afterSave(character)
             }
             negativeButton(R.string.cancel)

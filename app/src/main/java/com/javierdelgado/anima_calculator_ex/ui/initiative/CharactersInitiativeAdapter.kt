@@ -64,6 +64,7 @@ class CharacterInitiativeViewHolder(itemView: View) : RecyclerView.ViewHolder(it
     private val edtBaseInitiative by lazy { itemView.findViewById<EditText>(R.id.edtBaseInitiative) }
     private val edtInitiativeRoll by lazy { itemView.findViewById<EditText>(R.id.edtInitiativeRoll) }
     private val chkIsEnemy by lazy { itemView.findViewById<CheckBox>(R.id.chkIsEnemy) }
+    private val chkUroboros by lazy { itemView.findViewById<CheckBox>(R.id.chkUroboros) }
     private val edtFumble by lazy { itemView.findViewById<EditText>(R.id.edtFumble) }
     private val btnRollInitiativeDice by lazy { itemView.findViewById<ImageButton>(R.id.btnRollInitiativeDice) }
     private val groupInitiativeSettings by lazy { itemView.findViewById<Group>(R.id.groupInitiativeSettings) }
@@ -82,6 +83,7 @@ class CharacterInitiativeViewHolder(itemView: View) : RecyclerView.ViewHolder(it
         edtInitiativeRoll.setText(character.roll.toString())
         edtFumble.setText(character.fumble.toString())
         chkIsEnemy.isChecked = character.enemy
+        chkUroboros.isChecked = character.uroboros
         updateFormVisibility()
 
         updateUI()
@@ -178,6 +180,9 @@ class CharacterInitiativeViewHolder(itemView: View) : RecyclerView.ViewHolder(it
         edtFumble.addTextChangedListener(fumbleTextWatcher)
         chkIsEnemy.setOnCheckedChangeListener { _, b ->
             character.enemy = b
+        }
+        chkUroboros.setOnCheckedChangeListener { _, b ->
+            character.uroboros = b
         }
     }
 

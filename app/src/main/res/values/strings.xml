@@ -181,6 +181,8 @@
     <string name="undo">Undo</string>
     <string name="surprises_">- Surprises %s</string>
     <string name="surprised_by_">- Is surprised by %s</string>
+    <string name="uroboros">Uroboros</string>
+    <string name="uroboros_explanation">Surprises with 100 instead of 150</string>
     <plurals name="open_rolls">
         <item quantity="one">Open roll</item>
         <item quantity="other">Open rolls</item>

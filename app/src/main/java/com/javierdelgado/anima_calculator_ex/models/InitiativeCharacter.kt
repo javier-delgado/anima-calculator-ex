@@ -1,5 +1,6 @@
 package com.javierdelgado.anima_calculator_ex.models
 
+import android.util.Log
 import com.javierdelgado.anima_calculator_ex.AppDatabase
 import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
 import com.raizlabs.android.dbflow.annotation.*
@@ -9,7 +10,7 @@ import java.util.*
 
 
 @Table(database = AppDatabase::class, useBooleanGetterSetters = false)
-class InitiativeCharacter(name: String, base: Int, enemy: Boolean) : Observable() {
+class InitiativeCharacter(name: String, base: Int, enemy: Boolean, uroboros: Boolean) : Observable() {
     @PrimaryKey(autoincrement = true)
     @Transient
     var id: Int = 0
@@ -48,6 +49,13 @@ class InitiativeCharacter(name: String, base: Int, enemy: Boolean) : Observable(
     @Column
     var enemy: Boolean = false
 
+    @Column
+    var uroboros: Boolean = false
+        set(value) {
+            field = value
+            notifyObservers()
+        }
+
     @ForeignKey(stubbedRelationship = true)
     @Transient
     var party: Party? = null
@@ -62,9 +70,10 @@ class InitiativeCharacter(name: String, base: Int, enemy: Boolean) : Observable(
         this.name = name
         this.base = base
         this.enemy = enemy
+        this.uroboros = uroboros
     }
 
-    constructor() : this("", 0, false)
+    constructor() : this("", 0, false, false)
 
     fun totalInitiative(): Int = base + roll + fumble
 
@@ -105,7 +114,11 @@ class InitiativeCharacter(name: String, base: Int, enemy: Boolean) : Observable(
     }
 
     fun surprises(others: List<InitiativeCharacter>): List<InitiativeCharacter> {
-        return others.filter { this@InitiativeCharacter.totalInitiative() - it.totalInitiative() > 150 }
+        return others.filter { this@InitiativeCharacter.totalInitiative() - it.totalInitiative() > surprisesWithValue() }
+    }
+
+    private fun surprisesWithValue(): Int {
+        return if(uroboros) 100 else 150
     }
 
     // Observer logic

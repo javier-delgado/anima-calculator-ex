@@ -64,7 +64,7 @@
             android:id="@+id/groupInitiativeSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="lytInitiativeRoll,lytBaseInitiative,lytFumble,btnRollInitiativeDice,chkIsEnemy,txtSurpriseCharacters"/>
+            app:constraint_referenced_ids="lytInitiativeRoll,lytBaseInitiative,lytFumble,btnRollInitiativeDice,chkIsEnemy,chkUroboros,txtSurpriseCharacters"/>
 
     <LinearLayout
             android:id="@+id/lytInitiativeRoll"
@@ -176,6 +176,16 @@
             android:text="@string/is_enemy"
             app:layout_constraintTop_toBottomOf="@id/lytBaseInitiative"
             app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <CheckBox
+            android:id="@+id/chkUroboros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/uroboros"
+            app:layout_constraintTop_toTopOf="@id/chkIsEnemy"
+            app:layout_constraintBottom_toBottomOf="@id/chkIsEnemy"
+            app:layout_constraintLeft_toRightOf="@id/chkIsEnemy"/>
 
     <TextView
             android:id="@+id/txtSurpriseCharacters"
