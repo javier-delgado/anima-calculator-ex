@@ -37,6 +37,17 @@
                 android:ellipsize="end"
                 tools:text="Dramak"/>
 
+        <ImageView
+                android:id="@+id/imgSurprise"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:padding="2dp"
+                android:tint="@color/colorSurprise"
+                android:src="@drawable/ic_up_arrow"
+                android:visibility="gone"
+                tools:ignore="ContentDescription"
+                tools:visibility="visible"/>
+
         <TextView
                 android:id="@+id/txtInitiative"
                 android:layout_width="48dp"
@@ -53,7 +64,7 @@
             android:id="@+id/groupInitiativeSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="lytInitiativeRoll,lytBaseInitiative,lytFumble,btnRollInitiativeDice, chkIsEnemy"/>
+            app:constraint_referenced_ids="lytInitiativeRoll,lytBaseInitiative,lytFumble,btnRollInitiativeDice,chkIsEnemy,txtSurpriseCharacters"/>
 
     <LinearLayout
             android:id="@+id/lytInitiativeRoll"
@@ -165,5 +176,19 @@
             android:text="@string/is_enemy"
             app:layout_constraintTop_toBottomOf="@id/lytBaseInitiative"
             app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+            android:id="@+id/txtSurpriseCharacters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:background="@drawable/bg_surprise"
+            app:layout_constraintTop_toBottomOf="@id/chkIsEnemy"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textColor="@color/material_black"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="- Surprises by Dramak\n- Is surprised by Urim"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

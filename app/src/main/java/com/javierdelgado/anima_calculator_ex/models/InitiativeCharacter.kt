@@ -100,6 +100,14 @@ class InitiativeCharacter(name: String, base: Int, enemy: Boolean) : Observable(
         }
     }
 
+    fun isSurprisedBy(others: List<InitiativeCharacter>): List<InitiativeCharacter> {
+        return others.filter { it.totalInitiative() - this@InitiativeCharacter.totalInitiative() > 150 }
+    }
+
+    fun surprises(others: List<InitiativeCharacter>): List<InitiativeCharacter> {
+        return others.filter { this@InitiativeCharacter.totalInitiative() - it.totalInitiative() > 150 }
+    }
+
     // Observer logic
 
     override fun addObserver(o: Observer) {
@@ -118,4 +126,5 @@ class InitiativeCharacter(name: String, base: Int, enemy: Boolean) : Observable(
         if (observers.isEmpty()) return
         observers.forEach { observer -> observer.update(this, null) }
     }
+
 }

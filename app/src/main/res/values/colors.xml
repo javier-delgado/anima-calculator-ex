@@ -18,5 +18,8 @@
     <color name="colorAttack">@color/title_red</color>
     <color name="colorDefense">@color/title_blue</color>
 
+    <color name="colorSurprise">@color/material_green700</color>
+    <color name="colorSurprised">@color/material_deeporange800</color>
+
     <color name="divider">#2F366A</color>
 </resources>

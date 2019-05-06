@@ -179,6 +179,8 @@
     <string name="clear_combat">Clear</string>
     <string name="initiative_rolled">Initiative rolled!</string>
     <string name="undo">Undo</string>
+    <string name="surprises_">- Surprises %s</string>
+    <string name="surprised_by_">- Is surprised by %s</string>
     <plurals name="open_rolls">
         <item quantity="one">Open roll</item>
         <item quantity="other">Open rolls</item>

@@ -1,12 +1,13 @@
 package com.javierdelgado.anima_calculator_ex.ui.initiative
 
 import android.annotation.SuppressLint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.Group
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -33,7 +34,7 @@ class CharactersInitiativeAdapter(private val characters: MutableList<Initiative
     }
 
     override fun onBindViewHolder(holder: CharacterInitiativeViewHolder, position: Int) {
-        holder.bind(characters[position]) { character ->
+        holder.bind(characters, position) { character ->
             character.delete()
             characters.remove(character)
             notifyDataSetChanged()
@@ -66,12 +67,16 @@ class CharacterInitiativeViewHolder(itemView: View) : RecyclerView.ViewHolder(it
     private val edtFumble by lazy { itemView.findViewById<EditText>(R.id.edtFumble) }
     private val btnRollInitiativeDice by lazy { itemView.findViewById<ImageButton>(R.id.btnRollInitiativeDice) }
     private val groupInitiativeSettings by lazy { itemView.findViewById<Group>(R.id.groupInitiativeSettings) }
+    private val txtSurpriseCharacters by lazy { itemView.findViewById<TextView>(R.id.txtSurpriseCharacters) }
+    private val imgSurprise by lazy { itemView.findViewById<ImageView>(R.id.imgSurprise) }
 
+    private lateinit var others: List<InitiativeCharacter>
     private lateinit var character: InitiativeCharacter
     private var deleteCallback: (InitiativeCharacter) -> Unit = {}
 
-    fun bind(char: InitiativeCharacter, onCharacterDelete: (InitiativeCharacter) -> Unit) {
-        character = char
+    fun bind(characters: MutableList<InitiativeCharacter>, position: Int, onCharacterDelete: (InitiativeCharacter) -> Unit) {
+        character = characters[position]
+        others = characters.filterIndexed { index, _-> position != index }
         deleteCallback = onCharacterDelete
         edtBaseInitiative.setText(character.base.toString())
         edtInitiativeRoll.setText(character.roll.toString())
@@ -98,6 +103,37 @@ class CharacterInitiativeViewHolder(itemView: View) : RecyclerView.ViewHolder(it
         txtPosition.text = "${adapterPosition + 1}."
         txtInitiative.text = character.totalInitiative().toString()
         lytInitiativeHeader.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.initiative_header_2))
+        setSurprisedCharactersText()
+    }
+
+    private fun setSurprisedCharactersText() {
+        val surprisedBy = character.isSurprisedBy(others)
+        val surprises = character.surprises(others)
+
+        if (surprisedBy.isEmpty() && surprises.isEmpty()) {
+            txtSurpriseCharacters.text = ""
+            imgSurprise.visibility = View.GONE
+        } else {
+            txtSurpriseCharacters.visibility = View.VISIBLE
+            if (surprises.any()) {
+                setSurpriseIcon(R.drawable.ic_up_arrow, R.color.colorSurprise)
+            } else {
+                setSurpriseIcon(R.drawable.ic_down_arrow, R.color.colorSurprised)
+            }
+
+            val text = StringBuilder()
+            surprises.forEach { text.append(itemView.context.getString(R.string.surprises_, it.name)).append("\n") }
+            surprisedBy.forEach { text.append(itemView.context.getString(R.string.surprised_by_, it.name)).append("\n") }
+            txtSurpriseCharacters.text = text.trim()
+        }
+
+    }
+
+    private fun setSurpriseIcon(@DrawableRes resource: Int, @ColorRes colorRes: Int) {
+        val drw = ContextCompat.getDrawable(itemView.context, resource)
+        drw?.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(itemView.context, colorRes), PorterDuff.Mode.SRC_IN)
+        imgSurprise.setImageDrawable(drw)
+        imgSurprise.visibility = View.VISIBLE
     }
 
     private fun bindButtons() {
