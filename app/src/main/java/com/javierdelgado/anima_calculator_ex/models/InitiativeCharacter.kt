@@ -1,6 +1,5 @@
 package com.javierdelgado.anima_calculator_ex.models
 
-import android.util.Log
 import com.javierdelgado.anima_calculator_ex.AppDatabase
 import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
 import com.raizlabs.android.dbflow.annotation.*
