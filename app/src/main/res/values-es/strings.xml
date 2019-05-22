@@ -191,4 +191,9 @@
     <string name="surprises_">- Sorprende a %s</string>
     <string name="uroboros">Uroboros</string>
     <string name="uroboros_explanation">Sorprende con 100 en lugar de 150</string>
+    <string name="fatigue_0_points_left">Fatiga: 0 puntos restantes</string>
+    <string name="fatigue_1_points_left">Fatiga: 1 punto restante</string>
+    <string name="fatigue_2_points_left">Fatiga: 2 puntos restantes</string>
+    <string name="fatigue_3_points_left">Fatiga: 3 puntos restantes</string>
+    <string name="fatigue_4_points_left">Fatiga: 4 puntos restantes</string>
 </resources>

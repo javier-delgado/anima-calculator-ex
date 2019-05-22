@@ -78,7 +78,11 @@
         <item>@string/disarm</item>
         <item>@string/grab</item>
         <item>@string/secondary_critic</item>
-
+        <item>@string/fatigue_4_points_left</item>
+        <item>@string/fatigue_3_points_left</item>
+        <item>@string/fatigue_2_points_left</item>
+        <item>@string/fatigue_1_points_left</item>
+        <item>@string/fatigue_0_points_left</item>
     </string-array>
 
     <integer-array name="attackModifierValues">
@@ -143,6 +147,11 @@
         <item>-40</item>
         <item>-40</item>
         <item>-10</item>
+        <item>-10</item>
+        <item>-20</item>
+        <item>-40</item>
+        <item>-80</item>
+        <item>-120</item>
     </integer-array>
 
     <string-array name="defenseModifiers">
@@ -188,6 +197,11 @@
         <item>@string/area_attack_block</item>
         <item>@string/area_attack_dodge</item>
         <item>@string/with_different_weapon</item>
+        <item>@string/fatigue_4_points_left</item>
+        <item>@string/fatigue_3_points_left</item>
+        <item>@string/fatigue_2_points_left</item>
+        <item>@string/fatigue_1_points_left</item>
+        <item>@string/fatigue_0_points_left</item>
     </string-array>
 
     <integer-array name="defenseModifierValues">
@@ -233,5 +247,10 @@
         <item>-120</item>
         <item>-80</item>
         <item>-60</item>
+        <item>-10</item>
+        <item>-20</item>
+        <item>-40</item>
+        <item>-80</item>
+        <item>-120</item>
     </integer-array>
 </resources>

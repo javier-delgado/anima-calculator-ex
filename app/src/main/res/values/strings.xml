@@ -183,6 +183,11 @@
     <string name="surprised_by_">- Is surprised by %s</string>
     <string name="uroboros">Uroboros</string>
     <string name="uroboros_explanation">Surprises with 100 instead of 150</string>
+    <string name="fatigue_0_points_left">Fatigue: 0 points left</string>
+    <string name="fatigue_1_points_left">Fatigue: 1 point left</string>
+    <string name="fatigue_2_points_left">Fatigue: 2 points left</string>
+    <string name="fatigue_3_points_left">Fatigue: 3 points left</string>
+    <string name="fatigue_4_points_left">Fatigue: 4 points left</string>
     <plurals name="open_rolls">
         <item quantity="one">Open roll</item>
         <item quantity="other">Open rolls</item>
