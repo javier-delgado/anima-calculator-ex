@@ -7,3 +7,4 @@
 /captures
 .externalNativeBuild
 /secrets/*
+fastlane/report.xml
