@@ -188,6 +188,8 @@
     <string name="fatigue_2_points_left">Fatigue: 2 points left</string>
     <string name="fatigue_3_points_left">Fatigue: 3 points left</string>
     <string name="fatigue_4_points_left">Fatigue: 4 points left</string>
+    <string name="fumble_level_">fumble lvl: %d</string>
+    <string name="fumble_lvl">Fumble lvl</string>
     <plurals name="open_rolls">
         <item quantity="one">Open roll</item>
         <item quantity="other">Open rolls</item>

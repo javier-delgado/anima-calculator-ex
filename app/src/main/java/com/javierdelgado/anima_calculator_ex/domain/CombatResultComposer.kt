@@ -18,13 +18,21 @@ class CombatResultComposer(private val context: Context, private val combat: Com
 
     fun composeText() {
         val result = combat.result()
+        val attackerFumbled = combat.attackerFumbled()
+        val defenderFumbled = combat.defenderFumbled()
         when {
-            result == 0 -> {
+            result == 0 || (attackerFumbled && defenderFumbled) -> {
                 noCombatResult()
             }
-            result < 0 -> {
+            (result < 0 || attackerFumbled) && !defenderFumbled  -> {
                 val counterAttackBonus = - result / 10 * 5
-                counterAttackResult(counterAttackBonus)
+                counterAttackResult(
+                    when {
+                        counterAttackBonus > 150 -> 150
+                        counterAttackBonus < 0 -> 0
+                        else -> counterAttackBonus
+                    }
+                )
             }
             else -> {
                 val percentage: Int = combat.calculateDamagePercentage()
@@ -36,12 +44,25 @@ class CombatResultComposer(private val context: Context, private val combat: Com
                     defenseWinsResult()
             }
         }
-        totalAttackText = combat.totalAttack().toString()
-        totalDefenseText = combat.totalDefense().toString()
-
-
+        totalAttackText = composeTotalAttack()
+        totalDefenseText = composeTotalDefense()
         totalAttackModifierText = composeModifiersText(combat.selectedAttackModifiers)
         totalDefenseModifierText = composeModifiersText(combat.selectedDefenseModifiers)
+    }
+
+    private fun composeTotalAttack(): String {
+        return if(combat.attackerFumbled())
+            "${combat.totalAttack()} (${context.getString(R.string.fumble_level_, combat.attackerFumbleLevel)})"
+        else
+            combat.totalAttack().toString()
+    }
+
+    private fun composeTotalDefense(): String {
+        return if(combat.defenderFumbled())
+
+            "${combat.totalDefense()} (${context.getString(R.string.fumble_level_, combat.defenderFumbleLevel)})"
+        else
+            combat.totalDefense().toString()
     }
 
     private fun composeModifiersText(modifiers: List<Modifier>): SpannableString {

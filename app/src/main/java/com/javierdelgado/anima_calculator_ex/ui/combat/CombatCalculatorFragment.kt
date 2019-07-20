@@ -81,9 +81,11 @@ class CombatCalculatorFragment : Fragment(), Observer {
         combat.ATValue = 0
         rdConsecutiveDefense1.isChecked = true
         edtAttackRoll.setText("")
+        edtAttackFumbleLevel.setText("")
         edtFinalAttack.setText("")
         edtFinalDamage.setText("")
         edtDefenseRoll.setText("")
+        edtDefenseFumbleLevel.setText("")
         edtFinalDefense.setText("")
         edtAT.setText("")
     }
@@ -117,11 +119,11 @@ class CombatCalculatorFragment : Fragment(), Observer {
         }
 
         btnRollAttackDice.setOnClickListener { view ->
-            onDiceRoll(getString(R.string.attack_roll), edtAttackRoll, view)
+            onDiceRoll(getString(R.string.attack_roll), edtAttackRoll, edtAttackFumbleLevel, view)
         }
 
         btnRollDefenseDice.setOnClickListener { view ->
-            onDiceRoll(getString(R.string.defense_roll), edtDefenseRoll, view)
+            onDiceRoll(getString(R.string.defense_roll), edtDefenseRoll, edtDefenseFumbleLevel, view)
         }
 
         rdGroupConsecutiveDefense.setOnCheckedChangeListener { _, rdId ->
@@ -143,10 +145,11 @@ class CombatCalculatorFragment : Fragment(), Observer {
         }
     }
 
-    private fun onDiceRoll(tag: String, editText: EditText?, view: View) {
+    private fun onDiceRoll(tag: String, editText: EditText, fumbleEditText: EditText, view: View) {
         val roll = DiceRoller().perform()
         roll.tag = tag
-        editText?.setText(roll.finalResult.toString())
+        editText.setText(roll.finalResult.toString())
+        fumbleEditText.setText(if(roll.fumbleLevel != 0) roll.fumbleLevel.toString() else "")
         showDiceRollSnackbar(roll, view)
         doAsync { roll.save() }
     }
@@ -155,6 +158,14 @@ class CombatCalculatorFragment : Fragment(), Observer {
         createSimpleTextWatcher {
             combat.attackRollValue = if (edtAttackRoll.text.isNotEmpty())
                 MathEvaluator.evaluate(edtAttackRoll.text.toString())
+            else
+                0
+        }
+    }
+    private val attackFumbleLevelTextWatcher by lazy {
+        createSimpleTextWatcher {
+            combat.attackerFumbleLevel = if (edtAttackFumbleLevel.text.isNotEmpty())
+                MathEvaluator.evaluate(edtAttackFumbleLevel.text.toString())
             else
                 0
         }
@@ -171,6 +182,14 @@ class CombatCalculatorFragment : Fragment(), Observer {
         createSimpleTextWatcher {
             combat.defenseRollValue = if (edtDefenseRoll.text.isNotEmpty())
                 MathEvaluator.evaluate(edtDefenseRoll.text.toString())
+            else
+                0
+        }
+    }
+    private val defenseFumbleLevelTextWatcher by lazy {
+        createSimpleTextWatcher {
+            combat.defenderFumbleLevel = if (edtDefenseFumbleLevel.text.isNotEmpty())
+                MathEvaluator.evaluate(edtDefenseFumbleLevel.text.toString())
             else
                 0
         }
@@ -194,8 +213,10 @@ class CombatCalculatorFragment : Fragment(), Observer {
 
     private fun bindTextWatchers() {
         edtAttackRoll.addTextChangedListener(attackRollTextWatcher)
+        edtAttackFumbleLevel.addTextChangedListener(attackFumbleLevelTextWatcher)
         edtFinalAttack.addTextChangedListener(finalAttackTextWatcher)
         edtDefenseRoll.addTextChangedListener(defenseRollTextWatcher)
+        edtDefenseFumbleLevel.addTextChangedListener(defenseFumbleLevelTextWatcher)
         edtFinalDefense.addTextChangedListener(finalDefenseTextWatcher)
         edtFinalDamage.addTextChangedListener(finalDamageTextWatcher)
     }
@@ -211,8 +232,10 @@ class CombatCalculatorFragment : Fragment(), Observer {
 
     private fun unbindWatchers() {
         edtAttackRoll.removeTextChangedListener(attackRollTextWatcher)
+        edtAttackFumbleLevel.removeTextChangedListener(attackFumbleLevelTextWatcher)
         edtFinalAttack.removeTextChangedListener(finalAttackTextWatcher)
         edtDefenseRoll.removeTextChangedListener(defenseRollTextWatcher)
+        edtDefenseFumbleLevel.removeTextChangedListener(defenseFumbleLevelTextWatcher)
         edtFinalDefense.removeTextChangedListener(finalDefenseTextWatcher)
         edtFinalDamage.removeTextChangedListener(finalDamageTextWatcher)
     }

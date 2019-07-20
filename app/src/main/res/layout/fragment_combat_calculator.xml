@@ -68,7 +68,7 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@id/txtTitleAttack"
                 app:layout_constraintLeft_toLeftOf="@id/txtTitleAttack"
-                app:layout_constraintRight_toLeftOf="@id/lytFinalAttack"
+                app:layout_constraintRight_toLeftOf="@id/lytAttackFumbleLevel"
                 app:layout_constraintHorizontal_chainStyle="spread">
 
             <TextView
@@ -90,6 +90,35 @@
                     tools:ignore="UnusedAttribute"/>
         </LinearLayout>
 
+        <LinearLayout
+                android:id="@+id/lytAttackFumbleLevel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="@id/lytAttackRoll"
+                app:layout_constraintLeft_toRightOf="@id/lytAttackRoll"
+                app:layout_constraintRight_toRightOf="@id/lytFinalAttack"
+                app:layout_constraintHorizontal_chainStyle="spread">
+
+            <TextView
+                    android:id="@+id/txtLabelAttackFumbleLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_primary"
+                    android:labelFor="@id/edtAttackFumbleLevel"
+                    android:text="@string/fumble_lvl"/>
+
+            <EditText
+                    android:id="@+id/edtAttackFumbleLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:digits="0987654321+-"
+                    android:importantForAutofill="no"
+                    android:imeOptions="actionNext"
+                    tools:ignore="UnusedAttribute"/>
+        </LinearLayout>
 
         <LinearLayout
                 android:id="@+id/lytFinalAttack"
@@ -98,7 +127,7 @@
                 android:layout_marginStart="8dp"
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="@id/lytAttackRoll"
-                app:layout_constraintLeft_toRightOf="@id/lytAttackRoll"
+                app:layout_constraintLeft_toRightOf="@id/lytAttackFumbleLevel"
                 app:layout_constraintRight_toLeftOf="@id/lytFinalDamage"
                 app:layout_constraintHorizontal_chainStyle="spread">
 
@@ -108,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_primary"
                     android:labelFor="@id/edtFinalAttack"
-                    android:text="@string/attack"/>
+                    android:text="@string/base"/>
 
             <EditText
                     android:id="@+id/edtFinalAttack"
@@ -134,12 +163,12 @@
                 app:layout_constraintHorizontal_chainStyle="spread">
 
             <TextView
-                    android:id="@+id/txtLabelFinalDamage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_primary"
-                    android:labelFor="@id/edtFinalDamage"
-                    android:text="@string/damage"/>
+                android:id="@+id/txtLabelFinalDamage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
+                android:labelFor="@id/edtFinalDamage"
+                android:text="@string/damage"/>
 
             <EditText
                     android:id="@+id/edtFinalDamage"
@@ -219,7 +248,7 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@id/txtTitleDefense"
                 app:layout_constraintLeft_toLeftOf="@id/txtTitleDefense"
-                app:layout_constraintRight_toLeftOf="@id/lytFinalDefense"
+                app:layout_constraintRight_toLeftOf="@id/lytDefenseFumbleLevel"
                 app:layout_constraintHorizontal_chainStyle="spread">
 
             <TextView
@@ -241,6 +270,35 @@
                     tools:ignore="UnusedAttribute"/>
         </LinearLayout>
 
+        <LinearLayout
+                android:id="@+id/lytDefenseFumbleLevel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="@id/lytDefenseRoll"
+                app:layout_constraintLeft_toRightOf="@id/lytDefenseRoll"
+                app:layout_constraintRight_toRightOf="@id/lytFinalDefense"
+                app:layout_constraintHorizontal_chainStyle="spread">
+
+            <TextView
+                    android:id="@+id/txtLabelDefenseFumbleLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_primary"
+                    android:labelFor="@id/edtDefenseFumbleLevel"
+                    android:text="@string/fumble_lvl"/>
+
+            <EditText
+                    android:id="@+id/edtDefenseFumbleLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:digits="0987654321+-"
+                    android:importantForAutofill="no"
+                    android:imeOptions="actionNext"
+                    tools:ignore="UnusedAttribute"/>
+        </LinearLayout>
 
         <LinearLayout
                 android:id="@+id/lytFinalDefense"
@@ -250,7 +308,7 @@
                 android:layout_marginStart="8dp"
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@id/txtTitleDefense"
-                app:layout_constraintLeft_toRightOf="@id/lytDefenseRoll"
+                app:layout_constraintLeft_toRightOf="@id/lytDefenseFumbleLevel"
                 app:layout_constraintRight_toLeftOf="@id/lytTA"
                 app:layout_constraintHorizontal_chainStyle="spread">
 
@@ -260,7 +318,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_primary"
                     android:labelFor="@id/edtFinalDefense"
-                    android:text="@string/defense"/>
+                    android:text="@string/base"/>
 
             <EditText
                     android:id="@+id/edtFinalDefense"

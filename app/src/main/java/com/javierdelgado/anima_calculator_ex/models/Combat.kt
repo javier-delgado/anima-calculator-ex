@@ -2,7 +2,8 @@ package com.javierdelgado.anima_calculator_ex.models
 
 import java.util.*
 import kotlin.properties.Delegates
-import android.R
+import kotlin.math.ceil
+import kotlin.math.max
 
 class Combat: Observable() {
     // Attack properties
@@ -16,6 +17,10 @@ class Combat: Observable() {
         notifyObservers()
     }
     var characterDamage: Int by Delegates.observable(0) { _, _, _ ->
+        notifyObservers()
+    }
+
+    var attackerFumbleLevel: Int by Delegates.observable(0) { _, _, _ ->
         notifyObservers()
     }
 
@@ -37,14 +42,28 @@ class Combat: Observable() {
         notifyObservers()
     }
 
+    var defenderFumbleLevel: Int by Delegates.observable(0) { _, _, _ ->
+        notifyObservers()
+    }
+
+
+    fun attackerFumbled(): Boolean {
+        return attackerFumbleLevel > 0
+    }
+
+    fun defenderFumbled(): Boolean {
+        return defenderFumbleLevel > 0
+    }
+
     fun totalAttack(): Int {
-        return Math.max(selectedAttackModifiers.sumBy { it.value } + characterAttackValue + attackRollValue, 0);
+        return max(selectedAttackModifiers.sumBy { it.value } + characterAttackValue + attackRollValue, 0);
     }
 
     fun totalDefense(): Int {
-        val defenseSum = selectedDefenseModifiers.sumBy { it.value } + characterDefenseValue + defenseRollValue + consecutiveDefensePenalty
+        var defenseSum = selectedDefenseModifiers.sumBy { it.value } + characterDefenseValue + defenseRollValue + consecutiveDefensePenalty
+        if (defenderFumbled()) defenseSum -= defenderFumbleLevel
         return if (characterDefenseValue + attackRollValue>= 0)
-            Math.max(defenseSum, 0);
+            max(defenseSum, 0);
         else
             defenseSum
     }
@@ -54,7 +73,7 @@ class Combat: Observable() {
     }
 
     fun calculateDamageDealt(): Int {
-        return Math.ceil(calculateDamagePercentage().toDouble() * characterDamage / 100).toInt()
+        return ceil(calculateDamagePercentage().toDouble() * characterDamage / 100).toInt()
     }
 
     fun calculateDamagePercentage(): Int {

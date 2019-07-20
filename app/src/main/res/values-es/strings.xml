@@ -77,7 +77,7 @@
     <string name="vision_partially_obscured_block">Ceguera parcial (Parada)</string>
     <string name="vision_partially_obscured_dodge">Ceguera parcial (Esquiva)</string>
     <string name="vision_totally_obscured">Ceguera absoluta</string>
-    <string name="total_offensive">A la ofensiva</string>
+    <string name="total_offensive">Ofensiva total</string>
     <string name="roll">Tirada</string>
     <string name="app_name">Ánima Calculator Ex</string>
     <string name="v_">v%s</string>
@@ -196,4 +196,7 @@
     <string name="fatigue_2_points_left">Fatiga: 2 puntos restantes</string>
     <string name="fatigue_3_points_left">Fatiga: 3 puntos restantes</string>
     <string name="fatigue_4_points_left">Fatiga: 4 puntos restantes</string>
+    <string name="fumble_level_">nvl pifia: %d</string>
+    <string name="fumble_lvl">Nvl pifia</string>
+
 </resources>
