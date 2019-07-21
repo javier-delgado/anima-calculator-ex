@@ -21,10 +21,13 @@ class CombatResultComposer(private val context: Context, private val combat: Com
         val attackerFumbled = combat.attackerFumbled()
         val defenderFumbled = combat.defenderFumbled()
         when {
+            attackerFumbled && !defenderFumbled -> {
+                counterAttackResult(combat.attackerFumbleLevel)
+            }
             result == 0 || (attackerFumbled && defenderFumbled) -> {
                 noCombatResult()
             }
-            (result < 0 || attackerFumbled) && !defenderFumbled  -> {
+            result < 0 && !defenderFumbled && !attackerFumbled -> {
                 val counterAttackBonus = - result / 10 * 5
                 counterAttackResult(
                     when {
