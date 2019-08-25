@@ -127,7 +127,7 @@
     <string name="projectile_at_point_blank">Projectile: At point-blank</string>
     <string name="disarm">Disarm</string>
     <string name="grab">Grab</string>
-    <string name="secondary_critic">Secondary critic</string>
+    <string name="secondary_critic">Secondary crit</string>
     <string name="combat">Combat</string>
     <string name="initiative">Initiative</string>
     <string name="add_player">Add player</string>
@@ -163,8 +163,8 @@
     <string name="do_roll">Roll</string>
     <string name="critical_hit">Critical hit</string>
     <string name="close">Close</string>
-    <string name="roll_critic_level">Roll critic level</string>
-    <string name="base_phys_res">Base Phys. Res.</string>
+    <string name="roll_critic_level">Roll crit level</string>
+    <string name="base_phys_res">Base PhR</string>
     <string name="attacker">Attacker</string>
     <string name="defender">Defender</string>
     <string name="defender_endures_critical">Defender endures the critical hit</string>
@@ -172,10 +172,10 @@
     <string name="crit_level">Crit level: %d</string>
     <string name="critical_hit_roll">Critical hit roll</string>
     <string name="defender_rolled_a_natural_100">Defender rolled a natural 100</string>
-    <string name="phys_res_roll">Phys Res roll</string>
+    <string name="phys_res_roll">PhR roll</string>
     <string name="has_damage_resistance">Has damage resistance</string>
     <string name="difference_">Difference: %d</string>
-    <string name="total_phys_res">Total phys. res.: %d</string>
+    <string name="total_phys_res">Total PhR: %d</string>
     <string name="clear_combat">Clear</string>
     <string name="initiative_rolled">Initiative rolled!</string>
     <string name="undo">Undo</string>
@@ -190,6 +190,8 @@
     <string name="fatigue_4_points_left">Fatigue: 4 points left</string>
     <string name="fumble_level_">fumble lvl: %d</string>
     <string name="fumble_lvl">Fumble lvl</string>
+    <string name="desktop_version">Desktop version</string>
+    <string name="desktop_version_explanation">The Desktop version for Anima Calculator Ex is available at <a href="https://anima-calculator.com/">https://anima-calculator.com/</a></string>
     <plurals name="open_rolls">
         <item quantity="one">Open roll</item>
         <item quantity="other">Open rolls</item>

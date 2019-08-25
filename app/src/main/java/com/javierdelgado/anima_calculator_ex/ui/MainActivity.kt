@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
-import com.javierdelgado.anima_calculator_ex.BuildConfig
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.domain.SettingsManager
 import com.javierdelgado.anima_calculator_ex.models.DiceRollConfig
@@ -21,15 +20,26 @@ import com.javierdelgado.anima_calculator_ex.ui.combat.CombatCalculatorFragment
 import com.javierdelgado.anima_calculator_ex.ui.initiative.InitiativeCalculatorFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.RuntimeException
+import android.content.Intent
+import android.content.SharedPreferences
+import android.net.Uri
+import android.preference.PreferenceManager
+
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        const val TAG_DESKTOP_VERSION_DIALOG_READ = "TAG_DESKTOP_VERSION_DIALOG_READ"
+    }
+
+    private val sp: SharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(this) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         setTitle(R.string.main_activity_name)
-
         viewPager.adapter = MainPagerAdapter(this, supportFragmentManager)
+        if(shouldShowDesktopVersionDialog()) showDesktopVersionDialog()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -42,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         when (item?.itemId) {
             R.id.menuSettings -> showSettings();
             R.id.menuLog -> LogActivity.start(this)
+            R.id.menuDesktopVersion -> showDesktopVersionDialog();
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -81,6 +92,19 @@ class MainActivity : AppCompatActivity() {
             view.findViewById<EditText>(R.id.edtOpenRollMinValue).setText(it.openRollMinValue.toString())
             view.findViewById<EditText>(R.id.edtFumbleMaxvalue).setText(it.fumbleMaxValue.toString())
         }
+    }
+
+    private fun shouldShowDesktopVersionDialog(): Boolean {
+        return !sp.getBoolean(TAG_DESKTOP_VERSION_DIALOG_READ, false)
+    }
+
+    private fun showDesktopVersionDialog() {
+        MaterialDialog(this).show {
+            title(R.string.desktop_version)
+            message(R.string.desktop_version_explanation) { html() }
+            negativeButton(R.string.close)
+        }
+        sp.edit().putBoolean(TAG_DESKTOP_VERSION_DIALOG_READ, true).apply()
     }
 }
 

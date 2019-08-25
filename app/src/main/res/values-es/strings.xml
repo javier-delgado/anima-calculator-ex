@@ -198,5 +198,7 @@
     <string name="fatigue_4_points_left">Fatiga: 4 puntos restantes</string>
     <string name="fumble_level_">nvl pifia: %d</string>
     <string name="fumble_lvl">Nvl pifia</string>
+    <string name="desktop_version">Versión de escritorio</string>
+    <string name="desktop_version_explanation">La versión de escritorio de Anima Calculator Ex está disponible en <a href="https://anima-calculator.com/">https://anima-calculator.com/</a></string>
 
 </resources>

@@ -17,4 +17,10 @@
             android:icon="@drawable/ic_gear_light"
             android:orderInCategory="3"
             app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/menuDesktopVersion"
+            android:title="@string/desktop_version"
+            android:orderInCategory="10"
+            app:showAsAction="never"/>
 </menu>
