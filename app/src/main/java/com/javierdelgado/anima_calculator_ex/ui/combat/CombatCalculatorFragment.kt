@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.javierdelgado.anima_calculator_ex.BuildConfig
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.createSimpleTextWatcher
+import com.javierdelgado.anima_calculator_ex.databinding.FragmentCombatCalculatorBinding
 import com.javierdelgado.anima_calculator_ex.domain.CombatResultComposer
 import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
 import com.javierdelgado.anima_calculator_ex.models.Combat
@@ -14,14 +15,15 @@ import com.javierdelgado.anima_calculator_ex.showDiceRollSnackbar
 import com.javierdelgado.anima_calculator_ex.ui.CriticalHitActivity
 import com.javierdelgado.anima_calculator_ex.utils.MathEvaluator
 import com.raizlabs.android.dbflow.kotlinextensions.save
-import kotlinx.android.synthetic.main.fragment_combat_calculator.*
 import org.jetbrains.anko.doAsync
 import java.util.*
 
 class CombatCalculatorFragment : Fragment(), Observer {
     private val combat: Combat = Combat()
-    private val resultComposer by lazy { CombatResultComposer(context!!, combat) }
-    private val modals by lazy { CombatCalculatorModals(context!!) }
+    private val resultComposer by lazy { CombatResultComposer(requireContext(), combat) }
+    private val modals by lazy { CombatCalculatorModals(requireContext()) }
+    private var _binding: FragmentCombatCalculatorBinding? = null
+    private val binding get() = _binding!!
 
     companion object {
         fun newInstance(): CombatCalculatorFragment {
@@ -33,7 +35,8 @@ class CombatCalculatorFragment : Fragment(), Observer {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_combat_calculator, container, false)
+        _binding = FragmentCombatCalculatorBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,9 +44,9 @@ class CombatCalculatorFragment : Fragment(), Observer {
         setHasOptionsMenu(true)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        txtVersion.text = getString(R.string.v_, BuildConfig.VERSION_NAME)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.txtVersion.text = getString(R.string.v_, BuildConfig.VERSION_NAME)
     }
 
     override fun onResume() {
@@ -62,13 +65,13 @@ class CombatCalculatorFragment : Fragment(), Observer {
         combat.deleteObserver(this)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.combat_menu, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.combat_menu, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
-            R.id.menuCriticalHit -> CriticalHitActivity.start(context!!, combat.calculateDamageDealt())
+            R.id.menuCriticalHit -> CriticalHitActivity.start(requireContext(), combat.calculateDamageDealt())
             R.id.menuClear -> clearAll()
             else -> return super.onOptionsItemSelected(item)
         }
@@ -79,54 +82,55 @@ class CombatCalculatorFragment : Fragment(), Observer {
         combat.selectedDefenseModifiers = emptyList()
         combat.selectedAttackModifiers = emptyList()
         combat.ATValue = 0
-        rdConsecutiveDefense1.isChecked = true
-        edtAttackRoll.setText("")
-        edtAttackFumbleLevel.setText("")
-        edtFinalAttack.setText("")
-        edtFinalDamage.setText("")
-        edtDefenseRoll.setText("")
-        edtDefenseFumbleLevel.setText("")
-        edtFinalDefense.setText("")
-        edtAT.setText("")
+        binding.rdConsecutiveDefense1.isChecked = true
+        binding.edtAttackRoll.setText("")
+        binding.edtAttackFumbleLevel.setText("")
+        binding.edtFinalAttack.setText("")
+        binding.edtFinalDamage.setText("")
+        binding.edtDefenseRoll.setText("")
+        binding.edtDefenseFumbleLevel.setText("")
+        binding.edtFinalDefense.setText("")
+        binding.edtAT.setText("")
     }
 
     // On combat changed
+    @Deprecated("Deprecated in Java")
     override fun update(p0: Observable?, p1: Any?) {
         showResult()
     }
 
     private fun showResult() {
         resultComposer.composeText()
-        txtMainHeader.text = resultComposer.mainText
-        txtSecondaryHeader.text = resultComposer.secondaryText
-        txtTotalAttack.text = resultComposer.totalAttackText
-        txtTotalDefense.text = resultComposer.totalDefenseText
-        btnEditAttackModifiers.text = resultComposer.totalAttackModifierText
-        btnEditDefenseModifiers.text = resultComposer.totalDefenseModifierText
+        binding.txtMainHeader.text = resultComposer.mainText
+        binding.txtSecondaryHeader.text = resultComposer.secondaryText
+        binding.txtTotalAttack.text = resultComposer.totalAttackText
+        binding.txtTotalDefense.text = resultComposer.totalDefenseText
+        binding.btnEditAttackModifiers.text = resultComposer.totalAttackModifierText
+        binding.btnEditDefenseModifiers.text = resultComposer.totalDefenseModifierText
     }
 
     private fun bindListeners() {
-        btnEditAttackModifiers.setOnClickListener {
+        binding.btnEditAttackModifiers.setOnClickListener {
             modals.showAttackModifiers(combat.selectedAttackModifiers) { newAttackModifiers ->
                 combat.selectedAttackModifiers = newAttackModifiers
             }
         }
 
-        btnEditDefenseModifiers.setOnClickListener {
+        binding.btnEditDefenseModifiers.setOnClickListener {
             modals.showDefenseModifiers(combat.selectedDefenseModifiers) { newDefenseModifiers ->
                 combat.selectedDefenseModifiers = newDefenseModifiers
             }
         }
 
-        btnRollAttackDice.setOnClickListener { view ->
-            onDiceRoll(getString(R.string.attack_roll), edtAttackRoll, edtAttackFumbleLevel, view)
+        binding.btnRollAttackDice.setOnClickListener { view ->
+            onDiceRoll(getString(R.string.attack_roll), binding.edtAttackRoll, binding.edtAttackFumbleLevel, view)
         }
 
-        btnRollDefenseDice.setOnClickListener { view ->
-            onDiceRoll(getString(R.string.defense_roll), edtDefenseRoll, edtDefenseFumbleLevel, view)
+        binding.btnRollDefenseDice.setOnClickListener { view ->
+            onDiceRoll(getString(R.string.defense_roll), binding.edtDefenseRoll, binding.edtDefenseFumbleLevel, view)
         }
 
-        rdGroupConsecutiveDefense.setOnCheckedChangeListener { _, rdId ->
+        binding.rdGroupConsecutiveDefense.setOnCheckedChangeListener { _, rdId ->
             combat.consecutiveDefensePenalty = when (rdId) {
                 R.id.rdConsecutiveDefense1 -> 0
                 R.id.rdConsecutiveDefense2 -> -30
@@ -137,10 +141,10 @@ class CombatCalculatorFragment : Fragment(), Observer {
             }
         }
 
-        edtAT.setOnClickListener {
+        binding.edtAT.setOnClickListener {
             modals.showATSelector { ATValue ->
                 combat.ATValue = ATValue
-                edtAT.setText(getString(R.string.at_, ATValue))
+                binding.edtAT.setText(getString(R.string.at_, ATValue))
             }
         }
     }
@@ -156,88 +160,88 @@ class CombatCalculatorFragment : Fragment(), Observer {
 
     private val attackRollTextWatcher by lazy {
         createSimpleTextWatcher {
-            combat.attackRollValue = if (edtAttackRoll.text.isNotEmpty())
-                MathEvaluator.evaluate(edtAttackRoll.text.toString())
+            combat.attackRollValue = if (binding.edtAttackRoll.text.isNotEmpty())
+                MathEvaluator.evaluate(binding.edtAttackRoll.text.toString())
             else
                 0
         }
     }
     private val attackFumbleLevelTextWatcher by lazy {
         createSimpleTextWatcher {
-            combat.attackerFumbleLevel = if (edtAttackFumbleLevel.text.isNotEmpty())
-                MathEvaluator.evaluate(edtAttackFumbleLevel.text.toString())
+            combat.attackerFumbleLevel = if (binding.edtAttackFumbleLevel.text.isNotEmpty())
+                MathEvaluator.evaluate(binding.edtAttackFumbleLevel.text.toString())
             else
                 0
         }
     }
     private val finalAttackTextWatcher by lazy {
         createSimpleTextWatcher {
-            combat.characterAttackValue = if (edtFinalAttack.text.isNotEmpty())
-                MathEvaluator.evaluate(edtFinalAttack.text.toString())
+            combat.characterAttackValue = if (binding.edtFinalAttack.text.isNotEmpty())
+                MathEvaluator.evaluate(binding.edtFinalAttack.text.toString())
             else
                 0
         }
     }
     private val defenseRollTextWatcher by lazy {
         createSimpleTextWatcher {
-            combat.defenseRollValue = if (edtDefenseRoll.text.isNotEmpty())
-                MathEvaluator.evaluate(edtDefenseRoll.text.toString())
+            combat.defenseRollValue = if (binding.edtDefenseRoll.text.isNotEmpty())
+                MathEvaluator.evaluate(binding.edtDefenseRoll.text.toString())
             else
                 0
         }
     }
     private val defenseFumbleLevelTextWatcher by lazy {
         createSimpleTextWatcher {
-            combat.defenderFumbleLevel = if (edtDefenseFumbleLevel.text.isNotEmpty())
-                MathEvaluator.evaluate(edtDefenseFumbleLevel.text.toString())
+            combat.defenderFumbleLevel = if (binding.edtDefenseFumbleLevel.text.isNotEmpty())
+                MathEvaluator.evaluate(binding.edtDefenseFumbleLevel.text.toString())
             else
                 0
         }
     }
     private val finalDefenseTextWatcher by lazy {
         createSimpleTextWatcher {
-            combat.characterDefenseValue = if (edtFinalDefense.text.isNotEmpty())
-                MathEvaluator.evaluate(edtFinalDefense.text.toString())
+            combat.characterDefenseValue = if (binding.edtFinalDefense.text.isNotEmpty())
+                MathEvaluator.evaluate(binding.edtFinalDefense.text.toString())
             else
                 0
         }
     }
     private val finalDamageTextWatcher by lazy {
         createSimpleTextWatcher {
-            combat.characterDamage = if (edtFinalDamage.text.isNotEmpty())
-                MathEvaluator.evaluate(edtFinalDamage.text.toString())
+            combat.characterDamage = if (binding.edtFinalDamage.text.isNotEmpty())
+                MathEvaluator.evaluate(binding.edtFinalDamage.text.toString())
             else
                 0
         }
     }
 
     private fun bindTextWatchers() {
-        edtAttackRoll.addTextChangedListener(attackRollTextWatcher)
-        edtAttackFumbleLevel.addTextChangedListener(attackFumbleLevelTextWatcher)
-        edtFinalAttack.addTextChangedListener(finalAttackTextWatcher)
-        edtDefenseRoll.addTextChangedListener(defenseRollTextWatcher)
-        edtDefenseFumbleLevel.addTextChangedListener(defenseFumbleLevelTextWatcher)
-        edtFinalDefense.addTextChangedListener(finalDefenseTextWatcher)
-        edtFinalDamage.addTextChangedListener(finalDamageTextWatcher)
+        binding.edtAttackRoll.addTextChangedListener(attackRollTextWatcher)
+        binding.edtAttackFumbleLevel.addTextChangedListener(attackFumbleLevelTextWatcher)
+        binding.edtFinalAttack.addTextChangedListener(finalAttackTextWatcher)
+        binding.edtDefenseRoll.addTextChangedListener(defenseRollTextWatcher)
+        binding.edtDefenseFumbleLevel.addTextChangedListener(defenseFumbleLevelTextWatcher)
+        binding.edtFinalDefense.addTextChangedListener(finalDefenseTextWatcher)
+        binding.edtFinalDamage.addTextChangedListener(finalDamageTextWatcher)
     }
 
     private fun unbindListeners() {
-        btnEditAttackModifiers.setOnClickListener(null)
-        btnEditDefenseModifiers.setOnClickListener(null)
-        btnRollAttackDice.setOnClickListener(null)
-        btnRollDefenseDice.setOnClickListener(null)
-        rdGroupConsecutiveDefense.setOnClickListener(null)
-        edtAT.setOnClickListener(null)
+        binding.btnEditAttackModifiers.setOnClickListener(null)
+        binding.btnEditDefenseModifiers.setOnClickListener(null)
+        binding.btnRollAttackDice.setOnClickListener(null)
+        binding.btnRollDefenseDice.setOnClickListener(null)
+        binding.rdGroupConsecutiveDefense.setOnClickListener(null)
+        binding.edtAT.setOnClickListener(null)
     }
 
     private fun unbindWatchers() {
-        edtAttackRoll.removeTextChangedListener(attackRollTextWatcher)
-        edtAttackFumbleLevel.removeTextChangedListener(attackFumbleLevelTextWatcher)
-        edtFinalAttack.removeTextChangedListener(finalAttackTextWatcher)
-        edtDefenseRoll.removeTextChangedListener(defenseRollTextWatcher)
-        edtDefenseFumbleLevel.removeTextChangedListener(defenseFumbleLevelTextWatcher)
-        edtFinalDefense.removeTextChangedListener(finalDefenseTextWatcher)
-        edtFinalDamage.removeTextChangedListener(finalDamageTextWatcher)
+        binding.edtAttackRoll.removeTextChangedListener(attackRollTextWatcher)
+        binding.edtAttackFumbleLevel.removeTextChangedListener(attackFumbleLevelTextWatcher)
+        binding.edtFinalAttack.removeTextChangedListener(finalAttackTextWatcher)
+        binding.edtDefenseRoll.removeTextChangedListener(defenseRollTextWatcher)
+        binding.edtDefenseFumbleLevel.removeTextChangedListener(defenseFumbleLevelTextWatcher)
+        binding.edtFinalDefense.removeTextChangedListener(finalDefenseTextWatcher)
+        binding.edtFinalDamage.removeTextChangedListener(finalDamageTextWatcher)
     }
 
 }

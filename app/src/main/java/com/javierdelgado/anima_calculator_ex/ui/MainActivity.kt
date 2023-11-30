@@ -18,12 +18,10 @@ import com.javierdelgado.anima_calculator_ex.domain.SettingsManager
 import com.javierdelgado.anima_calculator_ex.models.DiceRollConfig
 import com.javierdelgado.anima_calculator_ex.ui.combat.CombatCalculatorFragment
 import com.javierdelgado.anima_calculator_ex.ui.initiative.InitiativeCalculatorFragment
-import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.RuntimeException
-import android.content.Intent
 import android.content.SharedPreferences
-import android.net.Uri
 import android.preference.PreferenceManager
+import com.javierdelgado.anima_calculator_ex.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,14 +29,16 @@ class MainActivity : AppCompatActivity() {
         const val TAG_DESKTOP_VERSION_DIALOG_READ = "TAG_DESKTOP_VERSION_DIALOG_READ"
     }
 
+    private lateinit var binding: ActivityMainBinding
     private val sp: SharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         setTitle(R.string.main_activity_name)
-        viewPager.adapter = MainPagerAdapter(this, supportFragmentManager)
+        binding.viewPager.adapter = MainPagerAdapter(this, supportFragmentManager)
         if(shouldShowDesktopVersionDialog()) showDesktopVersionDialog()
     }
 
@@ -47,9 +47,8 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.menuSettings -> showSettings();
             R.id.menuLog -> LogActivity.start(this)
             R.id.menuDesktopVersion -> showDesktopVersionDialog();
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun showSettings(afterSave: () -> Unit = {}) {
+    private fun showSettings(afterSave: () -> Unit = {}) {
         val dialog = MaterialDialog(this).show {
             title(R.string.settings)
             customView(R.layout.modal_settings)

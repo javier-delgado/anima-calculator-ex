@@ -8,13 +8,13 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.javierdelgado.anima_calculator_ex.R
 import com.javierdelgado.anima_calculator_ex.createSimpleTextWatcher
+import com.javierdelgado.anima_calculator_ex.databinding.ActivityCriticalHitBinding
 import com.javierdelgado.anima_calculator_ex.domain.DiceRoller
 import com.javierdelgado.anima_calculator_ex.homeAsUp
 import com.javierdelgado.anima_calculator_ex.models.DiceRollConfig
 import com.javierdelgado.anima_calculator_ex.showDiceRollSnackbar
 import com.javierdelgado.anima_calculator_ex.utils.MathEvaluator
 import com.raizlabs.android.dbflow.kotlinextensions.save
-import kotlinx.android.synthetic.main.activity_critical_hit.*
 import org.jetbrains.anko.doAsync
 import kotlin.math.ceil
 import kotlin.properties.Delegates
@@ -26,6 +26,7 @@ class CriticalHitActivity : AppCompatActivity() {
     private var rollResistance: Int by Delegates.observable(0) { _, _, _ -> recalculateCritical() }
     private var hasDamageResistance: Boolean by Delegates.observable(false) { _, _, _ -> recalculateCritical() }
     private val rollConfig: DiceRollConfig = DiceRollConfig(openRollEnabled = false, fumbleEnabled = false)
+    private lateinit var binding: ActivityCriticalHitBinding
 
     companion object {
         private const val DAMAGE_CAUSED_EXTRA = "damage_caused"
@@ -41,10 +42,11 @@ class CriticalHitActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_critical_hit)
-        setSupportActionBar(toolbar)
+        binding = ActivityCriticalHitBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         damageCaused = intent.getIntExtra(DAMAGE_CAUSED_EXTRA, 0)
-        if (damageCaused > 0) edtDamageCaused.setText(damageCaused.toString())
+        if (damageCaused > 0) binding.edtDamageCaused.setText(damageCaused.toString())
         homeAsUp(true)
         setupButtons()
     }
@@ -68,22 +70,22 @@ class CriticalHitActivity : AppCompatActivity() {
         val physicalRes = physicalResistance + rollResistance
         val critLevel = calculateCriticLevel(damageCaused + criticalHitRoll)
 
-        txtTotalResistance.text = getString(R.string.total_phys_res, physicalRes)
-        txtCritLevel.text = getString(R.string.crit_level, critLevel)
+        binding.txtTotalResistance.text = getString(R.string.total_phys_res, physicalRes)
+        binding.txtCritLevel.text = getString(R.string.crit_level, critLevel)
 
         if (rollResistance == 100) {
-            txtMainHeader.text = getString(R.string.defender_rolled_a_natural_100)
-            txtSecondaryHeader.text = getString(R.string.defender_endures_critical)
+            binding.txtMainHeader.text = getString(R.string.defender_rolled_a_natural_100)
+            binding.txtSecondaryHeader.text = getString(R.string.defender_endures_critical)
             return
         }
 
 
         if (physicalRes >= critLevel) {
-            txtMainHeader.text = ""
-            txtSecondaryHeader.text = getString(R.string.defender_endures_critical)
+            binding.txtMainHeader.text = ""
+            binding.txtSecondaryHeader.text = getString(R.string.defender_endures_critical)
         } else {
-            txtMainHeader.text = getString(R.string.difference_, critLevel - physicalRes)
-            txtSecondaryHeader.text = getString(R.string.attacker_critical_hits)
+            binding.txtMainHeader.text = getString(R.string.difference_, critLevel - physicalRes)
+            binding.txtSecondaryHeader.text = getString(R.string.attacker_critical_hits)
         }
     }
 
@@ -96,11 +98,11 @@ class CriticalHitActivity : AppCompatActivity() {
     }
 
     private fun setupButtons() {
-        btnRollCritic.setOnClickListener {
-            onDiceRoll(getString(R.string.critical_hit_roll), edtCriticRoll, it)
+        binding.btnRollCritic.setOnClickListener {
+            onDiceRoll(getString(R.string.critical_hit_roll), binding.edtCriticRoll, it)
         }
-        btnRollResistance.setOnClickListener {
-            onDiceRoll(getString(R.string.phys_res_roll), edtRollResistance, it)
+        binding.btnRollResistance.setOnClickListener {
+            onDiceRoll(getString(R.string.phys_res_roll), binding.edtRollResistance, it)
         }
     }
 
@@ -113,49 +115,49 @@ class CriticalHitActivity : AppCompatActivity() {
     }
 
     private fun bindTextWatchers() {
-        edtDamageCaused.addTextChangedListener(damageCausedTextWatcher)
-        edtCriticRoll.addTextChangedListener(criticRollTextWatcher)
-        edtPhysicalResistance.addTextChangedListener(physicalResistanceTextWatcher)
-        edtRollResistance.addTextChangedListener(rollResistanceTextWatcher)
-        chkWithDamageResistance.setOnCheckedChangeListener { _, b -> hasDamageResistance = b }
+        binding.edtDamageCaused.addTextChangedListener(damageCausedTextWatcher)
+        binding.edtCriticRoll.addTextChangedListener(criticRollTextWatcher)
+        binding.edtPhysicalResistance.addTextChangedListener(physicalResistanceTextWatcher)
+        binding.edtRollResistance.addTextChangedListener(rollResistanceTextWatcher)
+        binding.chkWithDamageResistance.setOnCheckedChangeListener { _, b -> hasDamageResistance = b }
     }
 
     private fun unbindTextWatchers() {
-        edtDamageCaused.removeTextChangedListener(damageCausedTextWatcher)
-        edtCriticRoll.removeTextChangedListener(criticRollTextWatcher)
-        edtPhysicalResistance.removeTextChangedListener(physicalResistanceTextWatcher)
-        edtRollResistance.removeTextChangedListener(rollResistanceTextWatcher)
-        chkWithDamageResistance.setOnCheckedChangeListener(null)
+        binding.edtDamageCaused.removeTextChangedListener(damageCausedTextWatcher)
+        binding.edtCriticRoll.removeTextChangedListener(criticRollTextWatcher)
+        binding.edtPhysicalResistance.removeTextChangedListener(physicalResistanceTextWatcher)
+        binding.edtRollResistance.removeTextChangedListener(rollResistanceTextWatcher)
+        binding.chkWithDamageResistance.setOnCheckedChangeListener(null)
     }
 
     private val damageCausedTextWatcher by lazy {
         createSimpleTextWatcher {
-            damageCaused = if (edtDamageCaused.text.isNotEmpty())
-                MathEvaluator.evaluate(edtDamageCaused.text.toString())
+            damageCaused = if (binding.edtDamageCaused.text.isNotEmpty())
+                MathEvaluator.evaluate(binding.edtDamageCaused.text.toString())
             else
                 0
         }
     }
     private val criticRollTextWatcher by lazy {
         createSimpleTextWatcher {
-            criticalHitRoll = if (edtCriticRoll.text.isNotEmpty())
-                MathEvaluator.evaluate(edtCriticRoll.text.toString())
+            criticalHitRoll = if (binding.edtCriticRoll.text.isNotEmpty())
+                MathEvaluator.evaluate(binding.edtCriticRoll.text.toString())
             else
                 0
         }
     }
     private val physicalResistanceTextWatcher by lazy {
         createSimpleTextWatcher {
-            physicalResistance = if (edtPhysicalResistance.text.isNotEmpty())
-                MathEvaluator.evaluate(edtPhysicalResistance.text.toString())
+            physicalResistance = if (binding.edtPhysicalResistance.text.isNotEmpty())
+                MathEvaluator.evaluate(binding.edtPhysicalResistance.text.toString())
             else
                 0
         }
     }
     private val rollResistanceTextWatcher by lazy {
         createSimpleTextWatcher {
-            rollResistance = if (edtRollResistance.text.isNotEmpty())
-                MathEvaluator.evaluate(edtRollResistance.text.toString())
+            rollResistance = if (binding.edtRollResistance.text.isNotEmpty())
+                MathEvaluator.evaluate(binding.edtRollResistance.text.toString())
             else
                 0
         }

@@ -122,18 +122,22 @@ class InitiativeCharacter(name: String, base: Int, enemy: Boolean, uroboros: Boo
 
     // Observer logic
 
+    @Deprecated("Deprecated in Java")
     override fun addObserver(o: Observer) {
         observers.add(o)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun deleteObserver(o: Observer?) {
         observers.remove(o)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun deleteObservers() {
         observers.clear()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun notifyObservers() {
         if (observers.isEmpty()) return
         observers.forEach { observer -> observer.update(this, null) }

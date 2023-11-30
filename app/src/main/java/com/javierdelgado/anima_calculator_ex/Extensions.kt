@@ -16,7 +16,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.javierdelgado.anima_calculator_ex.domain.DiceRollComposer
 import com.javierdelgado.anima_calculator_ex.models.DiceRoll
 import com.javierdelgado.anima_calculator_ex.ui.LogActivity
-import kotlinx.android.synthetic.main.activity_main.*
 
 fun Int.isPalindrome(): Boolean {
     return this == this.reverse()

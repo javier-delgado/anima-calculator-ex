@@ -187,6 +187,7 @@ class CharacterInitiativeViewHolder(itemView: View) : RecyclerView.ViewHolder(it
     }
 
     // When character data changes
+    @Deprecated("Deprecated in Java")
     override fun update(p0: Observable?, p1: Any?) {
         updateUI()
     }

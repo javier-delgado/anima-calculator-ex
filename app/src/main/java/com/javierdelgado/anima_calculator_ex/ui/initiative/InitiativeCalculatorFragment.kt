@@ -8,19 +8,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.javierdelgado.anima_calculator_ex.BuildConfig
 import com.javierdelgado.anima_calculator_ex.R
+import com.javierdelgado.anima_calculator_ex.databinding.FragmentCombatCalculatorBinding
+import com.javierdelgado.anima_calculator_ex.databinding.FragmentInitiativeCalculatorBinding
 import com.javierdelgado.anima_calculator_ex.models.InitiativeCharacter
 import com.javierdelgado.anima_calculator_ex.models.Party
 import com.javierdelgado.anima_calculator_ex.snackbar
 import com.raizlabs.android.dbflow.kotlinextensions.delete
 import com.raizlabs.android.dbflow.kotlinextensions.save
-import kotlinx.android.synthetic.main.fragment_initiative_calculator.*
 
 class InitiativeCalculatorFragment : Fragment() {
-    private val modals by lazy { InitiativeCalculatorModals(context!!) }
+    private val modals by lazy { InitiativeCalculatorModals(requireContext()) }
     private var loadedParty: Party? = null // This keeps the persisted party (if it is persisted)
     private lateinit var characters: MutableList<InitiativeCharacter>
     private var charactersCopyForUndo: List<InitiativeCharacter>? = null
     private val adapter by lazy { CharactersInitiativeAdapter(characters) }
+    private var _binding: FragmentInitiativeCalculatorBinding? = null
+    private val binding get() = _binding!!
 
     companion object {
         fun newInstance(): InitiativeCalculatorFragment {
@@ -32,7 +35,8 @@ class InitiativeCalculatorFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_initiative_calculator, container, false)
+        _binding = FragmentInitiativeCalculatorBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,14 +44,14 @@ class InitiativeCalculatorFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        txtVersion.text = getString(R.string.v_, BuildConfig.VERSION_NAME)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.txtVersion.text = getString(R.string.v_, BuildConfig.VERSION_NAME)
         val quickSavedParty = Party.loadQuickSaveParty()
         characters = quickSavedParty.characters?.toMutableList() ?: mutableListOf()
         if (quickSavedParty.persisted()) {
             loadedParty = quickSavedParty
-            txtPartyName.apply {
+            binding.txtPartyName.apply {
                 text = quickSavedParty.name
                 visibility = View.VISIBLE
             }
@@ -55,12 +59,12 @@ class InitiativeCalculatorFragment : Fragment() {
         setupCharacterList()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.initiative_menu, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.initiative_menu, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.menuSaveParty -> modals.showSavePartyForm(loadedParty?.name ?: "") { name ->
                 saveNewParty(name)
             }
@@ -98,10 +102,10 @@ class InitiativeCalculatorFragment : Fragment() {
     }
 
     private fun setupCharacterList() {
-        recCharactersInitiative.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        recCharactersInitiative.isNestedScrollingEnabled = false
+        binding.recCharactersInitiative.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        binding.recCharactersInitiative.isNestedScrollingEnabled = false
         adapter.sort()
-        recCharactersInitiative.adapter = adapter
+        binding.recCharactersInitiative.adapter = adapter
     }
 
     private fun saveNewParty(name: String) {
@@ -111,7 +115,7 @@ class InitiativeCalculatorFragment : Fragment() {
             this.characters = this@InitiativeCalculatorFragment.characters
             save()
         }
-        txtPartyName.apply {
+        binding.txtPartyName.apply {
             text = name
             visibility = View.VISIBLE
         }
@@ -122,7 +126,7 @@ class InitiativeCalculatorFragment : Fragment() {
         characters.clear()
         adapter.notifyDataSetChanged()
         loadedParty = null
-        txtPartyName.visibility = View.GONE
+        binding.txtPartyName.visibility = View.GONE
     }
 
     private fun loadParty(party: Party) {
@@ -130,7 +134,7 @@ class InitiativeCalculatorFragment : Fragment() {
         characters.clear()
         characters.addAll(party.characters?.toMutableList() ?: mutableListOf())
         adapter.notifyDataSetChanged()
-        txtPartyName.apply {
+        binding.txtPartyName.apply {
             text = party.name
             visibility = View.VISIBLE
         }
@@ -142,16 +146,16 @@ class InitiativeCalculatorFragment : Fragment() {
     }
 
     private fun bindListeners() {
-        btnAddPlayer.setOnClickListener {
+        binding.btnAddPlayer.setOnClickListener {
             modals.showNewCharacterForm { character ->
                 characters.add(character)
                 adapter.notifyItemInserted(characters.size - 1)
             }
         }
-        btnRollForInitiative.setOnClickListener {
+        binding.btnRollForInitiative.setOnClickListener {
             rollInitiativeForAll()
         }
-        btnSort.setOnClickListener {
+        binding.btnSort.setOnClickListener {
             adapter.sort()
             adapter.notifyDataSetChanged()
         }
@@ -179,9 +183,9 @@ class InitiativeCalculatorFragment : Fragment() {
     }
 
     private fun unbindListeners() {
-        btnAddPlayer.setOnClickListener(null)
-        btnRollForInitiative.setOnClickListener(null)
-        btnSort.setOnClickListener(null)
+        binding.btnAddPlayer.setOnClickListener(null)
+        binding.btnRollForInitiative.setOnClickListener(null)
+        binding.btnSort.setOnClickListener(null)
     }
 
 }

@@ -84,18 +84,22 @@ class Combat: Observable() {
     // Observer logic
     private val observers: MutableList<Observer> = mutableListOf<Observer>()
 
+    @Deprecated("Deprecated in Java")
     override fun addObserver(o: Observer) {
         observers.add(o)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun deleteObserver(o: Observer?) {
         observers.remove(o)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun deleteObservers() {
         observers.clear()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun notifyObservers() {
         observers.forEach { observer -> observer.update(this, null) }
     }

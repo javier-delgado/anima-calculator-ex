@@ -10,13 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.javierdelgado.anima_calculator_ex.R
+import com.javierdelgado.anima_calculator_ex.databinding.ActivityLogBinding
 import com.javierdelgado.anima_calculator_ex.domain.DiceRollComposer
 import com.javierdelgado.anima_calculator_ex.homeAsUp
 import com.javierdelgado.anima_calculator_ex.inflate
 import com.javierdelgado.anima_calculator_ex.models.DiceRoll
 import com.javierdelgado.anima_calculator_ex.models.DiceRoll_Table.updatedAt
 import com.raizlabs.android.dbflow.kotlinextensions.*
-import kotlinx.android.synthetic.main.activity_log.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -26,11 +26,13 @@ class LogActivity: AppCompatActivity() {
             context.startActivity(Intent(context, LogActivity::class.java))
         }
     }
+    private lateinit var binding: ActivityLogBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_log)
-        setSupportActionBar(toolbar)
+        binding = ActivityLogBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         homeAsUp(true)
 
         doAsync {
@@ -48,8 +50,8 @@ class LogActivity: AppCompatActivity() {
 
     private fun setupAdapter(rollList: MutableList<DiceRoll>) {
         val adapter = LogAdapter(rollList)
-        recLog.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        recLog.adapter = adapter
+        binding.recLog.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        binding.recLog.adapter = adapter
     }
 }
 
